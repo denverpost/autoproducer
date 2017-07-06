@@ -1,5 +1,5 @@
 (function() {
-    var APversion = ' v1.1.1';
+    var APversion = ' v1.1.2';
     function getDPOtip() {
         //return a random DPO production tip
         var tips = Array(
