@@ -8,7 +8,10 @@
             '7-8 p.m. is a great time to post strong content on Facebook as we have a lot of fans active at that time.',
             'When you check a child section in Wordpress, always check the parent, too. Example: If you use <strong>Colorado News</strong>, also use <strong>News</strong>.',
             'Don\'t forget to check partner and sister sites for great content.',
-            'Be sure to put all Entertianment, Lifestyle and Outdoors stories in the <strong>Entertianment / Lifestyle</strong> section so they get fed to The Know.'
+            'Be sure to put all Entertianment, Lifestyle and Outdoors stories in the <strong>Entertianment / Lifestyle</strong> section so they get fed to The Know.',
+            'Only use the "Slideshow" designation for standalone slideshows (with "PHOTOS" in the headline). Stories with the "Slideshow" designation DO NOT APPEAR in normal zones (only the Video/Photo rotator).',
+            'Reminder: Only use <strong>@channel</strong> in Slack when you really need everyone in the channel to get a notification on their phone. Use <strong>@here</strong> first.',
+            'Don\'t forget about <strong>Don\'t Miss</strong>! Add 1A and other interesting/longreads stories throughout the week.'
             );
         var ceiling = tips.length;
         var index = Math.floor(Math.random() * ceiling);
