@@ -1,5 +1,5 @@
 (function() {
-    var APversion = ' v1.1.2';
+    var APversion = ' v1.1.3';
     function getDPOtip() {
         //return a random DPO production tip
         var tips = Array(
@@ -685,6 +685,10 @@
                     '6': {
                         'which': 'techplus',
                         'name': 'Tech+ newsletter'
+                    },
+                    '7': {
+                        'which': 'politicsrdup',
+                        'name': 'Politics (and beyond) newsletter'
                     }
                 };
                 var newsletterPromptText = 'Which newsletter do you want to plug? (Hit ENTER for the Roundup)\n\n' +
