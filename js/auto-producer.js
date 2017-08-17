@@ -1,5 +1,5 @@
 (function() {
-    var APversion = ' v1.1.3';
+    var APversion = ' v1.1.7';
     function getDPOtip() {
         //return a random DPO production tip
         var tips = Array(
@@ -212,14 +212,22 @@
             document.getElementById('in-category-1').checked = false;
         }
 
-        function checkAppleNewsBoxes(boxes){
+        function uncheckLatestSection() {
+            document.getElementById('in-category-48').checked = false;
+        }
+
+        function checkAppleNewsBoxes(boxes) {
             for (var i=0,len=boxes.length;i<len;i++){
                 document.getElementById(appleNewsSections[boxes[i]]).checked = true;
             }
         }
 
-        function primaryOptions(sectionPrimary,tagPrimary){
-            if ( (typeof sectionPrimary != 'undefined' && sectionPrimary !== '') && document.getElementById(sectionSelect).value === '' )  {
+        function uncheckAppleNewsNews() {
+            document.getElementById('apple-news-section-0ca35a0e-e4ed-3ff0-b73b-1bee2bc33390').checked = false;
+        }
+
+        function primaryOptions(sectionPrimary,tagPrimary) {
+            if ( (typeof sectionPrimary != 'undefined' && sectionPrimary !== '') && document.getElementById(sectionSelect).value === '' ) {
                 document.getElementById(sectionSelect).value = sectionPrimary;
             }
             if ( (typeof tagPrimary != 'undefined' && tagPrimary !== '') && document.getElementById(tagSelect).value === '' ) {
@@ -227,28 +235,38 @@
             }
         }
 
-        function addTag(newTags){
-            for(var i=0,len=newTags.length;i<len;i++){
+        function addTag(newTags) {
+            for(var i=0,len=newTags.length;i<len;i++) {
                 document.getElementById('new-tag-post_tag').value = newTags[i];
                 jQuery('#post_tag .ajaxtag input.button.tagadd').click();
             }
         }
 
-        function addFeatures(newFeatures){
-            for(var i=0,len=newFeatures.length;i<len;i++){
+        function addFeatures(newFeatures) {
+            for(var i=0,len=newFeatures.length;i<len;i++) {
                 document.getElementById('new-tag-feature').value = newFeatures[i];
                 jQuery('#feature .ajaxtag input.button.tagadd').click();
             }
         }
 
-        function addAPauthor(){
+        function addAPauthor() {
             jQuery('#coauthors_hidden_input').remove();
             jQuery('.suggest.coauthor-row:first-child').append('<input id="coauthors_hidden_input" name="coauthors[]" value="the-associated-press" type="hidden">');
         }
 
-        function addWaPoauthor(){
+        function addWaPoauthor() {
             jQuery('#coauthors_hidden_input').remove();
             jQuery('.suggest.coauthor-row:first-child').append('<input id="coauthors_hidden_input" name="coauthors[]" value="the-washington-post" type="hidden">');
+        }
+
+        function addEditorialauthor() {
+            jQuery('#coauthors_hidden_input').remove();
+            jQuery('.suggest.coauthor-row:first-child').append('<input id="coauthors_hidden_input" name="coauthors[]" value="the-denver-post-editorial-board" type="hidden">');
+        }
+
+        function addOpinionauthor() {
+            jQuery('#coauthors_hidden_input').remove();
+            jQuery('.suggest.coauthor-row:first-child').append('<input id="coauthors_hidden_input" name="coauthors[]" value="dp-opinion" type="hidden">');
         }
 
         function checkDPSPOnline() {
@@ -332,6 +350,17 @@
             }
             if (args.promoSelect) {
                 contentArgs.promos = true;
+            }
+            if (options.title.indexOf('Opinion') !== -1) {
+                contentArgs.opinion = true;
+                uncheckLatestSection();
+                uncheckAppleNewsNews();
+            }
+            if (options.title.indexOf('Opinion: Letter') !== -1) {
+                addOpinionauthor();
+            }
+            if (options.title.indexOf('Opinion: Editorial') !== -1) {
+                addEditorialauthor();
             }
             if (options.title == 'YourHub Crime Blotter') {
                 contentArgs['related-override'] = true;
@@ -660,6 +689,10 @@
                 var markup = ( autoPlay == 1 ) ? '[dfm_iframe src="https://www.youtube.com/embed/' + vidId + '?autoplay=' + autoPlay + '" width="100%" advanced_fields="true" allowfullscreen="yes" scrolling="no" frameborder="0"/]' : 'https://www.youtube.com/watch?v=' +  vidId;
                 grafsClean.splice(0, 0, markup);
             }
+            if (args.opinion) {
+                var markup = '<em>To send a letter to the editor about this article, submit <a href="http://www.denverpost.com/submit-letter/">online</a> or check out our <a href="http://www.denverpost.com/2013/07/09/submission-guidelines-and-contact-information/">guidelines</a> for how to submit by email or mail.</em>';
+                grafsClean.push(markup);
+            }
             if (args.newsletter) {
                 var newsletters = {
                     '1': {
@@ -689,6 +722,10 @@
                     '7': {
                         'which': 'politicsrdup',
                         'name': 'Politics (and beyond) newsletter'
+                    },
+                    '8': {
+                        'which': 'soundoff',
+                        'name': 'The Sound Off opinion newsletter'
                     }
                 };
                 var newsletterPromptText = 'Which newsletter do you want to plug? (Hit ENTER for the Roundup)\n\n' +
@@ -914,7 +951,7 @@
             output += 'Author -> WaPo <span class="blue-star">*</span> <input type="checkbox" id="WaPoauthorSelect" tabindex="9" /></p>';
             output += '</div>';
             output += '<div class="one-quarter">';
-            output += '<p>Newsletter widget <input type="checkbox" id="newsletterSelect" tabindex="4" /><br />';
+            output += '<p>Newsletter widget <input type="checkbox" id="newsletterSelect" tabindex="4" checked="checked" /><br />';
             output += 'Crime Map widget <input type="checkbox" id="crimeMapSelect" tabindex="7" /><br />';
             output += 'Homicide Report <span class="mag-star">*</span> <input type="checkbox" id="homicideSelect" tabindex="10" /></p>';
             output += '</div>';
