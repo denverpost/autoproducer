@@ -918,7 +918,7 @@ var autoProducerOptions = {
     },
     "100": {
         "title": "Outdoors Story",
-        "check-sections": ["94","111"],
+        "check-sections": ["94","111","9101"],
         "add-tags": [],
         "primary-section": "111",
         "primary-tag": "",
@@ -926,7 +926,7 @@ var autoProducerOptions = {
         "apple-news": ["sports"],
         "related": true,
         "help-primary-tag": " ",
-        "help-sections": "Sports, Outdoors",
+        "help-sections": "Sports, Outdoors, Entertainment / Lifestyle",
         "help-primary-section": "Outdoors",
         "option-set": "sports",
     },
