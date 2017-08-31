@@ -351,6 +351,9 @@
             if (args.promoSelect) {
                 contentArgs.promos = true;
             }
+            if (options.title.indexOf('Rockies Story') !== -1) {
+                contentArgs.rockies = true;
+            }
             if (options.title.indexOf('Opinion') !== -1) {
                 contentArgs.opinion = true;
                 uncheckLatestSection();
@@ -511,6 +514,9 @@
             }
             if (args.hate) {
                 grafsClean.splice(7, 0, '[cq comment="ASIDE PLACED BELOW"]\n<aside class="related left alignleft">\n<h2 class="widget-title">Documenting Hate</h2>\n<div style="width:100%;"><a href="http://extras.denverpost.com/documenting-hate/"><img src="http://www.denverpost.com/wp-content/uploads/2017/06/hate-speech-vandalism.jpg" alt="Documenting Hate project submissions" style="width:90%;margin:0 auto;"></a></div>\n<p>Share your stories of hate crimes and discrimination with The Denver Post and ProPublica <a href="http://extras.denverpost.com/documenting-hate/">through the nationwide Documenting Hate project</a>.</p>\n</aside>\n[cq comment="ASIDE PLACED ABOVE"]');
+            }
+            if(args.rockies) {
+                grafsClean.splice(4, 0, 'http://embed.sendtonews.com/oembed/?fk=5vyDixL5&cid=5163&sound=off&format=json&offsetx=0&offsety=0&floatwidth=400&floatposition=bottom-right&float=on');
             }
             if (args.crime && !args.wx) {
                 var crimemap = {
