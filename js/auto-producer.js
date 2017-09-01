@@ -1,5 +1,5 @@
 (function() {
-    var APversion = ' v1.1.7';
+    var APversion = ' v1.1.8';
     function getDPOtip() {
         //return a random DPO production tip
         var tips = Array(
@@ -347,6 +347,9 @@
             }
             if (args.newsletterSelect) {
                 contentArgs.newsletter = true;
+            }
+            if (args.appPromo) {
+                contentArgs.appPromo = true;
             }
             if (args.promoSelect) {
                 contentArgs.promos = true;
@@ -756,6 +759,13 @@
 '</aside>';
                 grafsClean.push(markup);
             }
+            if (args.appPromo) {
+                var promoLogo = (args.newsletter) ? '' : '?logo=false';
+                var markup = '<aside>\n' +
+'[dfm_iframe src="http://extras.denverpost.com/app/mailer-rules/app-promo.html' + promoLogo + '" width="100%" height="100px"]\n' +
+'</aside>';
+                grafsClean.push(markup);
+            }
             if (args.promos) {
                 var promos = [1,2,3,4,5].sort(function() { return 0.5 - Math.random(); });
                 promos.pop(); promos.pop();
@@ -946,20 +956,21 @@
             output += '<p><strong>Enter selection:</strong></p><p><input type="text" id="APoptionSelect" tabindex="1"></p>';
             output += '</div>';
             output += '<div class="one-quarter">';
-            output += '<p>Insert Related <span class="red-star">*</span> <input type="checkbox" id="relatedSelect" tabindex="2" /><br />';
-            output += 'Inform video <input type="checkbox" id="informSelect" tabindex="5" /><br />';
-            output += 'Author -> AP <span class="blue-star">*</span> <input type="checkbox" id="APauthorSelect" tabindex="8" /><br />';
-            output += 'Documenting Hate <input type="checkbox" id="hateSelect" tabindex="11" /></p>';
+            output += '<p>Insert Related <span class="red-star">*</span> <input type="checkbox" id="relatedSelect" tabindex="2" /><br />';            
+            output += 'App Promo Widget <input type="checkbox" id="appPromo" tabindex="5" checked="checked" /></p>';
+            output += 'Documenting Hate <input type="checkbox" id="hateSelect" tabindex="8" /></p>';
+            output += 'Author -> AP <span class="blue-star">*</span> <input type="checkbox" id="APauthorSelect" tabindex="11" /><br />';
             output += '</div>';
             output += '<div class="one-quarter">';
             output += '<p>Insert Promos <input type="checkbox" id="promoSelect" tabindex="3" /><br />';
-            output += 'YouTube video <input type="checkbox" id="youtubeSelect" tabindex="6" /><br />';
-            output += 'Author -> WaPo <span class="blue-star">*</span> <input type="checkbox" id="WaPoauthorSelect" tabindex="9" /></p>';
+            output += 'Inform video <input type="checkbox" id="informSelect" tabindex="6" /><br />';
+            output += 'Homicide Report <span class="mag-star">*</span> <input type="checkbox" id="homicideSelect" tabindex="9" /></p>';
+            output += 'Author -> WaPo <span class="blue-star">*</span> <input type="checkbox" id="WaPoauthorSelect" tabindex="12" /></p>';
             output += '</div>';
             output += '<div class="one-quarter">';
             output += '<p>Newsletter widget <input type="checkbox" id="newsletterSelect" tabindex="4" checked="checked" /><br />';
-            output += 'Crime Map widget <input type="checkbox" id="crimeMapSelect" tabindex="7" /><br />';
-            output += 'Homicide Report <span class="mag-star">*</span> <input type="checkbox" id="homicideSelect" tabindex="10" /></p>';
+            output += 'YouTube video <input type="checkbox" id="youtubeSelect" tabindex="7" /><br />';
+            output += 'Crime Map widget <input type="checkbox" id="crimeMapSelect" tabindex="10" /><br />';
             output += '</div>';
             output += '<div class="clear"></div>';
             output += '<p class="red-small">Items with a star insert Related by Primary Tag automatically.<br />Related items will only be inserted on articles with 6 or more paragraphs.</p>';
@@ -982,6 +993,7 @@
                 args['promoSelect'] = jQuery('#promoSelect').prop('checked') ? true : false;
                 args['informSelect'] = jQuery('#informSelect').prop('checked') ? true : false;
                 args['youtubeSelect'] = jQuery('#youtubeSelect').prop('checked') ? true : false;
+                args['appPromo'] = jQuery('#appPromo').prop('checked') ? true : false;
                 args['newsletterSelect'] = jQuery('#newsletterSelect').prop('checked') ? true : false;
                 args['hateSelect'] = jQuery('#hateSelect').prop('checked') ? true : false;
                 args['homicideSelect'] = jQuery('#homicideSelect').prop('checked') ? true : false;
