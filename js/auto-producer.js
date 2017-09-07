@@ -1,5 +1,5 @@
 (function() {
-    var APversion = ' v1.1.8';
+    var APversion = ' v1.1.9';
     function getDPOtip() {
         //return a random DPO production tip
         var tips = Array(
@@ -323,6 +323,23 @@
             }
             if (typeof options['check-sections'] != 'undefined' && options['check-sections'].indexOf('94') > -1) {
                 checkDPSPOnline();
+                contentArgs.newsletterDefault = '2';
+                contentArgs.appPromoSports = true;
+            }
+            if (typeof options['check-sections'] != 'undefined' && options['check-sections'].indexOf('97') > -1) {
+                contentArgs.newsletterDefault = '3';
+            }
+            if (typeof options['check-sections'] != 'undefined' && options['check-sections'].indexOf('53') > -1) {
+                contentArgs.newsletterDefault = '4';
+            }
+            if (typeof options['check-sections'] != 'undefined' && options['check-sections'].indexOf('9101') > -1) {
+                contentArgs.newsletterDefault = '5';
+            }
+            if (typeof options['check-sections'] != 'undefined' && options['check-sections'].indexOf('27') > -1) {
+                contentArgs.newsletterDefault = '6';
+            }
+            if (typeof options['check-sections'] != 'undefined' && options['check-sections'].indexOf('75') > -1) {
+                contentArgs.newsletterDefault = '7';
             }
             if (typeof options.title != 'undefined' && options.title == 'Weather Story') {
                 contentArgs.wx = true;
@@ -361,6 +378,7 @@
                 contentArgs.opinion = true;
                 uncheckLatestSection();
                 uncheckAppleNewsNews();
+                contentArgs.newsletterDefault = '8';
             }
             if (options.title.indexOf('Opinion: Letter') !== -1) {
                 addOpinionauthor();
@@ -745,9 +763,10 @@
                     }
                 }
                 newsletterPromptText += '\nEnter your selection:\n\n';
+                var defaultNewsletter = (typeof args.newsletterDefault !== 'undefined') ? args.newsletterDefault : '1';
                 loop:
                 while(true) {
-                    var newsletterId = prompt(newsletterPromptText,'1');
+                    var newsletterId = prompt(newsletterPromptText,defaultNewsletter);
                     if (newsletters[newsletterId].which !== 'undefined') {
                         break loop;
                     } else {
@@ -761,8 +780,10 @@
             }
             if (args.appPromo) {
                 var promoLogo = (args.newsletter) ? '' : '?logo=false';
+                var connector = (args.newsletter) ? '?' : '&';
+                var sportsPromo = (args.appPromoSports) ? connector + 'sports=true' : '';
                 var markup = '<aside>\n' +
-'[dfm_iframe src="http://extras.denverpost.com/app/mailer-rules/app-promo.html' + promoLogo + '" width="100%" height="100px"]\n' +
+'[dfm_iframe src="http://extras.denverpost.com/app/mailer-rules/app-promo.html' + promoLogo + sportsPromo + '" width="100%" height="100px"]\n' +
 '</aside>';
                 grafsClean.push(markup);
             }

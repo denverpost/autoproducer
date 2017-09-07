@@ -530,7 +530,7 @@ var autoProducerOptions = {
         "add-tags": ["More Rockies News"],
         "primary-section": "114",
         "primary-tag": "9321",
-        "features": [],
+        "features": ["Outstream"],
         "apple-news": ["sports"],
         "related": true,
         "help-primary-tag": "More Rockies News",
