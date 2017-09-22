@@ -3,7 +3,7 @@
     function getDPOtip() {
         //return a random DPO production tip
         var tips = Array(
-            'Overnight online shift? Don\'t forget the Front Page PDF! <a href="http://denverpostplus.com/frontpages/">Upload it here.</a>',
+            'Overnight online shift? Don\'t forget the Front Page PDF! <a href="//denverpostplus.com/frontpages/">Upload it here.</a>',
             'The #justposted-all channel in Slack is a great place to catch up on everything that has been posted recently.',
             '7-8 p.m. is a great time to post strong content on Facebook as we have a lot of fans active at that time.',
             'When you check a child section in Wordpress, always check the parent, too. Example: If you use <strong>Colorado News</strong>, also use <strong>News</strong>.',
@@ -530,14 +530,14 @@
                 }
             }
             if (args.wx) {
-                grafsClean.splice(3, 0, '[cq comment="ASIDE PLACED BELOW"]\n<aside class=\'related alignright\'> [dfm_iframe src=\'http://extras.denverpost.com/weather/widget-iframe.html\' width=\'300px\' height=\'590px\'] </aside>[cq comment="ASIDE PLACED ABOVE"]');
+                grafsClean.splice(3, 0, '[cq comment="ASIDE PLACED BELOW"]\n<aside class=\'related alignright\'> [dfm_iframe src=\'https://extras.denverpost.com/weather/widget-iframe.html\' width=\'300px\' height=\'590px\'] </aside>[cq comment="ASIDE PLACED ABOVE"]');
                 grafsClean.push('<a href="http://www.thedenverchannel.com/weather">Click here for more Denver7 weather coverage</a>.');
             }
             if (args.hate) {
-                grafsClean.splice(7, 0, '[cq comment="ASIDE PLACED BELOW"]\n<aside class="related left alignleft">\n<h2 class="widget-title">Documenting Hate</h2>\n<div style="width:100%;"><a href="http://extras.denverpost.com/documenting-hate/"><img src="http://www.denverpost.com/wp-content/uploads/2017/06/hate-speech-vandalism.jpg" alt="Documenting Hate project submissions" style="width:90%;margin:0 auto;"></a></div>\n<p>Share your stories of hate crimes and discrimination with The Denver Post and ProPublica <a href="http://extras.denverpost.com/documenting-hate/">through the nationwide Documenting Hate project</a>.</p>\n</aside>\n[cq comment="ASIDE PLACED ABOVE"]');
+                grafsClean.splice(7, 0, '[cq comment="ASIDE PLACED BELOW"]\n<aside class="related left alignleft">\n<h2 class="widget-title">Documenting Hate</h2>\n<div style="width:100%;"><a href="https://extras.denverpost.com/documenting-hate/"><img src="https://www.denverpost.com/wp-content/uploads/2017/06/hate-speech-vandalism.jpg" alt="Documenting Hate project submissions" style="width:90%;margin:0 auto;"></a></div>\n<p>Share your stories of hate crimes and discrimination with The Denver Post and ProPublica <a href="https://extras.denverpost.com/documenting-hate/">through the nationwide Documenting Hate project</a>.</p>\n</aside>\n[cq comment="ASIDE PLACED ABOVE"]');
             }
             if(args.rockies) {
-                grafsClean.splice(4, 0, 'http://embed.sendtonews.com/oembed/?fk=5vyDixL5&cid=5163&sound=off&format=json&offsetx=0&offsety=0&floatwidth=400&floatposition=bottom-right&float=on');
+                grafsClean.splice(4, 0, 'https://embed.sendtonews.com/oembed/?fk=5vyDixL5&cid=5163&sound=off&format=json&offsetx=0&offsety=0&floatwidth=400&floatposition=bottom-right&float=on');
             }
             if (args.crime && !args.wx) {
                 var crimemap = {
@@ -559,7 +559,7 @@
                             '</aside>[cq comment="ASIDE PLACED ABOVE"]';
                         }
                     },
-                    image_list: ['http://www.denverpost.com/wp-content/uploads/2017/01/denver-crime-map11.png', 'http://www.denverpost.com/wp-content/uploads/2017/01/denver-crime-map4.png', 'http://www.denverpost.com/wp-content/uploads/2017/01/denver-crime-map3.png', 'http://www.denverpost.com/wp-content/uploads/2017/01/denver-crime-map2.png', 'http://www.denverpost.com/wp-content/uploads/2016/10/denver-crime-map.png'],
+                    image_list: ['https://www.denverpost.com/wp-content/uploads/2017/01/denver-crime-map11.png', 'https://www.denverpost.com/wp-content/uploads/2017/01/denver-crime-map4.png', 'https://www.denverpost.com/wp-content/uploads/2017/01/denver-crime-map3.png', 'https://www.denverpost.com/wp-content/uploads/2017/01/denver-crime-map2.png', 'https://www.denverpost.com/wp-content/uploads/2016/10/denver-crime-map.png'],
                     get_random_image: function() {
                         var ceiling = this.image_list.length;
                         var index = Math.floor(Math.random() * ceiling);
@@ -717,7 +717,7 @@
                 grafsClean.splice(0, 0, markup);
             }
             if (args.opinion) {
-                var markup = '<em>To send a letter to the editor about this article, submit <a href="http://www.denverpost.com/submit-letter/">online</a> or check out our <a href="http://www.denverpost.com/2013/07/09/submission-guidelines-and-contact-information/">guidelines</a> for how to submit by email or mail.</em>';
+                var markup = '<em>To send a letter to the editor about this article, submit <a href="https://www.denverpost.com/submit-letter/">online</a> or check out our <a href="https://www.denverpost.com/2013/07/09/submission-guidelines-and-contact-information/">guidelines</a> for how to submit by email or mail.</em>';
                 grafsClean.push(markup);
             }
             if (args.newsletter) {
@@ -774,7 +774,7 @@
                     }
                 }
                 var markup = '<aside>\n' +
-'[dfm_iframe src="http://extras.denverpost.com/app/mailer-rules/email-signup.html?which=' + newsletters[newsletterId].which + '&name=' + encodeURIComponent(newsletters[newsletterId].name) + '" width="100%" height="120px"]\n' +
+'[dfm_iframe src="https://extras.denverpost.com/app/mailer-rules/email-signup.html?which=' + newsletters[newsletterId].which + '&name=' + encodeURIComponent(newsletters[newsletterId].name) + '" width="100%" height="120px"]\n' +
 '</aside>';
                 grafsClean.push(markup);
             }
@@ -783,7 +783,7 @@
                 var connector = (args.newsletter) ? '?' : '&';
                 var sportsPromo = (args.appPromoSports) ? connector + 'sports=true' : '';
                 var markup = '<aside>\n' +
-'[dfm_iframe src="http://extras.denverpost.com/app/mailer-rules/app-promo.html' + promoLogo + sportsPromo + '" width="100%" height="100px"]\n' +
+'[dfm_iframe src="https://extras.denverpost.com/app/mailer-rules/app-promo.html' + promoLogo + sportsPromo + '" width="100%" height="100px"]\n' +
 '</aside>';
                 grafsClean.push(markup);
             }
@@ -854,7 +854,7 @@
             }
             if (args.homicide && !(args.crime || args.wx)) {
                 grafsClean.splice(3, 0, '[cq comment="ASIDE PLACED BELOW"]\n<aside class=\'related alignright\'> <h2 class=\'widget-title\'><a href=\'/denver-homicides/\'>Homicide Report</a></h2>\n' +
-'<div style="width:100%;height: 150px;overflow:hidden"><a href=\'/denver-homicides/\'><img src=\'http://www.denverpost.com/wp-content/uploads/2016/10/homicide-map-denver.png\' alt=\'Denver Homicide Map\' border=\'0\'></a></div> <p>Follow this year\'s <a href=\'/denver-homicides/\'>homicides in Denver</a>, and track the city\'s homicide rate. See also: <a href="http://crime.denverpost.com/map/">Denver crime map</a>.</p> </aside>\n[cq comment="ASIDE PLACED ABOVE"]');
+'<div style="width:100%;height: 150px;overflow:hidden"><a href=\'/denver-homicides/\'><img src=\'https://www.denverpost.com/wp-content/uploads/2016/10/homicide-map-denver.png\' alt=\'Denver Homicide Map\' border=\'0\'></a></div> <p>Follow this year\'s <a href=\'/denver-homicides/\'>homicides in Denver</a>, and track the city\'s homicide rate. See also: <a href="http://crime.denverpost.com/map/">Denver crime map</a>.</p> </aside>\n[cq comment="ASIDE PLACED ABOVE"]');
             }
             document.getElementById('content').value = grafsClean.join('\n\n');
             return suggestedTags;
