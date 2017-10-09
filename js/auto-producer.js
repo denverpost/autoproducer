@@ -1,5 +1,5 @@
 (function() {
-    var APversion = ' v1.1.9';
+    var APversion = ' v1.2.0';
     function getDPOtip() {
         //return a random DPO production tip
         var tips = Array(
@@ -79,6 +79,12 @@
         str = str.replace(/\\\\/g, '\\');
         return str;
     }
+
+    function findOne(haystack, arr) {
+        return arr.some(function (v) {
+            return haystack.indexOf(v) >= 0;
+        });
+    };
 
     function createCookie(name,value,days) {
         var expires = "";
@@ -341,6 +347,13 @@
             if (typeof options['check-sections'] != 'undefined' && options['check-sections'].indexOf('75') > -1) {
                 contentArgs.newsletterDefault = '7';
             }
+            if (typeof options['check-sections'] != 'undefined' && options['check-sections'].indexOf('112') > -1) {
+                contentArgs.newsletterDefault = '9';
+                contentArgs.prepSider = true;
+            }
+            if (typeof options['check-sections'] != 'undefined' && options['check-sections'].indexOf('114') > -1) {
+                contentArgs.newsletterDefault = '10';
+            }
             if (typeof options.title != 'undefined' && options.title == 'Weather Story') {
                 contentArgs.wx = true;
             }
@@ -379,6 +392,10 @@
                 uncheckLatestSection();
                 uncheckAppleNewsNews();
                 contentArgs.newsletterDefault = '8';
+            }
+            var sportsVideoSections = ['Broncos Story','Nuggets Story','Avalanche Story','Golf Story','NASCAR Story','CU Buffs Football','NFL Wire Story','NBA Wire Story','NHL Wire Story','College Hoops Wire Story','College Football Story'];
+            if (sportsVideoSections.indexOf(options.title) > -1) {
+                contentArgs.sportsVideo = true;
             }
             if (options.title.indexOf('Opinion: Letter') !== -1) {
                 addOpinionauthor();
@@ -538,6 +555,12 @@
             }
             if(args.rockies) {
                 grafsClean.splice(4, 0, 'https://embed.sendtonews.com/oembed/?fk=5vyDixL5&cid=5163&sound=off&format=json&offsetx=0&offsety=0&floatwidth=400&floatposition=bottom-right&float=on');
+            }
+            if (args.sportsVideo) {
+                grafsClean.splice(4, 0, 'https://embed.sendtonews.com/oembed/?fk=5vyDixL5&amp;cid=5163&amp;sound=off&amp;format=json&amp;offsetx=0&amp;offsety=0&amp;floatwidth=400&amp;floatposition=bottom-right&amp;float=on');
+            }
+            if (args.prepSider) {
+                grafsClean.splice(4, 0, '<aside class="related right"> <h2 class="widget-title"><a href="http://preps.denverpost.com/"">Colorado Prep Stats</a></h2>[dfm_iframe src="http://preps.denverpost.com/sidebar.html" width="300px" height="250px" scrolling="no"]</aside>');
             }
             if (args.crime && !args.wx) {
                 var crimemap = {
@@ -753,6 +776,14 @@
                     '8': {
                         'which': 'soundoff',
                         'name': 'The Sound Off opinion newsletter'
+                    },
+                    '9': {
+                        'which': 'bnpreps',
+                        'name': 'Prep Tally newsletter'
+                    },
+                    '10': {
+                        'which': 'bnrockies',
+                        'name': 'Rockies Insider'
                     }
                 };
                 var newsletterPromptText = 'Which newsletter do you want to plug? (Hit ENTER for the Roundup)\n\n' +
