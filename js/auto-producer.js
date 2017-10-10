@@ -363,6 +363,9 @@
             if (args.crimeMapSelect && !args.homicideSelect) {
                 contentArgs.crime = true;
             }
+            if (args.closureSelect) {
+                contentArgs.closures = true;
+            }
             if (args.homicideSelect) {
                 contentArgs.homicide = true;
             }
@@ -561,6 +564,9 @@
             }
             if (args.prepSider) {
                 grafsClean.splice(4, 0, '<aside class="related right"> <h2 class="widget-title"><a href="http://preps.denverpost.com/"">Colorado Prep Stats</a></h2>[dfm_iframe src="http://preps.denverpost.com/sidebar.html" width="300px" height="250px" scrolling="no"]</aside>');
+            }
+            if (args.closures) {
+                grafsClean.splice(2, 0, '<aside class="related alignright">[dfm_iframe src="http://extras.denverpost.com/weather-closures/school-closures.html#iframe" width="100%" height="500px"]</aside>');
             }
             if (args.crime && !args.wx) {
                 var crimemap = {
@@ -1009,20 +1015,21 @@
             output += '</div>';
             output += '<div class="one-quarter">';
             output += '<p>Insert Related <span class="red-star">*</span> <input type="checkbox" id="relatedSelect" tabindex="2" /><br />';            
-            output += 'App Promo Widget <input type="checkbox" id="appPromo" tabindex="5" checked="checked" /></p>';
-            output += 'Documenting Hate <input type="checkbox" id="hateSelect" tabindex="8" /></p>';
-            output += 'Author -> AP <span class="blue-star">*</span> <input type="checkbox" id="APauthorSelect" tabindex="11" /><br />';
+            output += 'App Promo Widget <input type="checkbox" id="appPromo" tabindex="5" checked="checked" /><br />';
+            output += 'Documenting Hate <input type="checkbox" id="hateSelect" tabindex="8" /><br />';
+            output += 'School Closures <input type="checkbox" id="closureSelect" tabindex="11" /></p>';
             output += '</div>';
             output += '<div class="one-quarter">';
             output += '<p>Insert Promos <input type="checkbox" id="promoSelect" tabindex="3" /><br />';
             output += 'Inform video <input type="checkbox" id="informSelect" tabindex="6" /><br />';
-            output += 'Homicide Report <span class="mag-star">*</span> <input type="checkbox" id="homicideSelect" tabindex="9" /></p>';
-            output += 'Author -> WaPo <span class="blue-star">*</span> <input type="checkbox" id="WaPoauthorSelect" tabindex="12" /></p>';
+            output += 'Homicide Report <span class="mag-star">*</span> <input type="checkbox" id="homicideSelect" tabindex="9" /><br />';
+            output += 'Author -> AP <span class="blue-star">*</span> <input type="checkbox" id="APauthorSelect" tabindex="12" /></p>';
             output += '</div>';
             output += '<div class="one-quarter">';
             output += '<p>Newsletter widget <input type="checkbox" id="newsletterSelect" tabindex="4" checked="checked" /><br />';
             output += 'YouTube video <input type="checkbox" id="youtubeSelect" tabindex="7" /><br />';
             output += 'Crime Map widget <input type="checkbox" id="crimeMapSelect" tabindex="10" /><br />';
+            output += 'Author -> WaPo <span class="blue-star">*</span> <input type="checkbox" id="WaPoauthorSelect" tabindex="13" /></p>';
             output += '</div>';
             output += '<div class="clear"></div>';
             output += '<p class="red-small">Items with a star insert Related by Primary Tag automatically.<br />Related items will only be inserted on articles with 6 or more paragraphs.</p>';
@@ -1049,6 +1056,7 @@
                 args['newsletterSelect'] = jQuery('#newsletterSelect').prop('checked') ? true : false;
                 args['hateSelect'] = jQuery('#hateSelect').prop('checked') ? true : false;
                 args['homicideSelect'] = jQuery('#homicideSelect').prop('checked') ? true : false;
+                args['closureSelect'] = jQuery('#closureSelect').prop('checked') ? true : false;
                 args['crimeMapSelect'] = jQuery('#crimeMapSelect').prop('checked') ? true : false;
                 if (validOptions.indexOf(String(selectFunction)) !== -1) {
                     jQuery('#auto-producer').html(APsuccessText);
