@@ -504,7 +504,7 @@ var autoProducerOptions = {
         "primary-tag": "",
         "features": [],
         "apple-news": ["opinion"],
-        "related": true,
+        "related": false,
         "help-primary-tag": "",
         "help-sections": "Opinion, Opinion Columnists",
         "help-primary-section": "Opinion Columnists",
