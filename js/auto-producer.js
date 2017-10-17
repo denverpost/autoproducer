@@ -1,5 +1,5 @@
 (function() {
-    var APversion = ' v1.2.0';
+    var APversion = ' v1.2.1';
     function getDPOtip() {
         //return a random DPO production tip
         var tips = Array(
@@ -331,6 +331,7 @@
                 checkDPSPOnline();
                 contentArgs.newsletterDefault = '2';
                 contentArgs.appPromoSports = true;
+                contentArgs.noDates = true;
             }
             if (typeof options['check-sections'] != 'undefined' && options['check-sections'].indexOf('97') > -1) {
                 contentArgs.newsletterDefault = '3';
@@ -353,6 +354,7 @@
             }
             if (typeof options['check-sections'] != 'undefined' && options['check-sections'].indexOf('114') > -1) {
                 contentArgs.newsletterDefault = '10';
+                contentArgs.rockies = true;
             }
             if (typeof options.title != 'undefined' && options.title == 'Weather Story') {
                 contentArgs.wx = true;
@@ -386,9 +388,6 @@
             }
             if (args.promoSelect) {
                 contentArgs.promos = true;
-            }
-            if (options.title.indexOf('Rockies Story') !== -1) {
-                contentArgs.rockies = true;
             }
             if (options.title.indexOf('Opinion') !== -1) {
                 contentArgs.opinion = true;
@@ -542,11 +541,12 @@
                 }
             }
             if (args.related && !relExists) {
+                var relDates = ( args.noDates  ) ? 'false' : 'true';
                 var relPlace = (grafsClean.length-4 < 2) ? 2 : ((grafsClean.length > 24) ? 11 : grafsClean.length-4);
                 if (grafsClean.length >= 6 || args['related-override']) {
-                    grafsClean.splice(relPlace, 0, '[related_articles location="right" show_article_date="true" article_type="automatic-primary-tag"]');
+                    grafsClean.splice(relPlace, 0, '[related_articles location="right" show_article_date="' + relDates + '" article_type="automatic-primary-tag"]');
                 } else if (args['rel-section']) {
-                    grafsClean.splice(relPlace, 0, '[related_articles location="right" show_article_date="true" article_type="automatic-primary-section"]');
+                    grafsClean.splice(relPlace, 0, '[related_articles location="right" show_article_date="' + relDates + '" article_type="automatic-primary-section"]');
                 }
             }
             if (args.wx) {
