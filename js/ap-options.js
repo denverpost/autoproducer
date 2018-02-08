@@ -735,7 +735,7 @@ var autoProducerOptions = {
         "option-set": "sports"
     },
     "84": {
-        "title": "Denver Pioneers Hockey",
+        "title": "DU Hockey",
         "check-sections": ["48","94","100","103"],
         "add-tags": ["college hockey","Denver Pioneers hockey"],
         "primary-section": "103",
@@ -749,7 +749,7 @@ var autoProducerOptions = {
         "option-set": "sports"
     },
     "85": {
-        "title": "Denver Pioneers Basketball",
+        "title": "DU Basketball",
         "check-sections": ["48","94","100","103"],
         "add-tags": ["college basketball","Denver Pioneers basketball"],
         "primary-section": "103",
@@ -763,7 +763,7 @@ var autoProducerOptions = {
         "option-set": "sports"
     },
     "86": {
-        "title": "Denver Pioneers Soccer",
+        "title": "DU Soccer",
         "check-sections": ["48","94","100","103","6574"],
         "add-tags": ["college soccer","Denver Pioneers soccer"],
         "primary-section": "103",
@@ -777,7 +777,7 @@ var autoProducerOptions = {
         "option-set": "sports"
     },
     "87": {
-        "title": "Denver Pioneers Lacrosse",
+        "title": "DU Lacrosse",
         "check-sections": ["48","94","100","103"],
         "add-tags": ["college lacrosse","Denver Pioneers Lacrosse"],
         "primary-section": "103",
@@ -875,7 +875,7 @@ var autoProducerOptions = {
         "option-set": "sports"
     },
     "94": {
-        "title": "College Hoops Wire Story",
+        "title": "College Hoops Wire",
         "check-sections": ["48","94","100"],
         "add-tags": ["college basketball"],
         "primary-section": "100",
@@ -973,7 +973,7 @@ var autoProducerOptions = {
         "option-set": "sports",
     },
     "101": {
-        "title": "CSU Rams Track & Field",
+        "title": "CSU Track & Field",
         "check-sections": ["94","100","101","5455"],
         "add-tags": ["college running","college track and field","Colorado State track and field"],
         "primary-section": "101",
@@ -987,7 +987,7 @@ var autoProducerOptions = {
         "option-set": "sports",
     },
     "102": {
-        "title": "CU Buffs Cross Country",
+        "title": "CU Cross Country",
         "check-sections": ["94","100","102","5455"],
         "add-tags": ["college cross country","college running","CU Buffs cross country"],
         "primary-section": "102",
@@ -1001,7 +1001,7 @@ var autoProducerOptions = {
         "option-set": "sports",
     },
     "103": {
-        "title": "CU Buffs Track & Field",
+        "title": "CU Track & Field",
         "check-sections": ["94","100","102"],
         "add-tags": ["college football","CU Buffs track and field"],
         "primary-section": "102",
@@ -1015,7 +1015,7 @@ var autoProducerOptions = {
         "option-set": "sports",
     },
     "104": {
-        "title": "Air Force football",
+        "title": "AFA football",
         "check-sections": ["94","100","104"],
         "add-tags": ["Air Force football","college football"],
         "primary-section": "104",
@@ -1153,5 +1153,61 @@ var autoProducerOptions = {
         "help-sections": "Sports, Running",
         "help-primary-section": "Running",
         "option-set": "sports",
+    },
+    "121": {
+        "title": "Blog: Field House",
+        "check-sections": ["48","94","100"],
+        "add-tags": ["The Field House"],
+        "primary-section": "100",
+        "primary-tag": "15947",
+        "features": [],
+        "apple-news": ["sports"],
+        "related": true,
+        "help-primary-tag": "The Field House",
+        "help-sections": "Latest News, Sports, College Sports",
+        "help-primary-section": "College Sports",
+        "option-set": "sports"
+    },
+    "122": {
+        "title": "Insider: Basketball",
+        "check-sections": ["48","94","112"],
+        "add-tags": ["Prep basketball"],
+        "primary-section": "112",
+        "primary-tag": "15872",
+        "features": [],
+        "apple-news": ["sports"],
+        "related": true,
+        "help-primary-tag": "Post Preps Insider",
+        "help-sections": "Latest News, Sports, Preps",
+        "help-primary-section": "Preps",
+        "option-set": "sports"
+    },
+    "123": {
+        "title": "Insider: Football",
+        "check-sections": ["48","94","112"],
+        "add-tags": ["Prep football"],
+        "primary-section": "112",
+        "primary-tag": "15872",
+        "features": [],
+        "apple-news": ["sports"],
+        "related": true,
+        "help-primary-tag": "Post Preps Insider",
+        "help-sections": "Latest News, Sports, Preps",
+        "help-primary-section": "Preps",
+        "option-set": "sports"
+    },
+    "124": {
+        "title": "Insider: Baseball",
+        "check-sections": ["48","94","112"],
+        "add-tags": ["Prep baseball"],
+        "primary-section": "112",
+        "primary-tag": "15872",
+        "features": [],
+        "apple-news": ["sports"],
+        "related": true,
+        "help-primary-tag": "Post Preps Insider",
+        "help-sections": "Latest News, Sports, Preps",
+        "help-primary-section": "Preps",
+        "option-set": "sports"
     },
 };

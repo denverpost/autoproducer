@@ -318,6 +318,7 @@
         function trumpThatBitch(options,args) {
             var contentArgs = [];
             contentArgs.wire = true;
+            contentArgs.topGrafAdd = false;
             if (typeof args.WaPoauthorSelect != 'undefined' && args.WaPoauthorSelect === true) {
                 addWaPoauthor();
             }
@@ -407,6 +408,34 @@
             }
             if (options.title == 'YourHub Crime Blotter') {
                 contentArgs['related-override'] = true;
+                document.getElementById('fm-mason_post_settings-0-schema-0-featured_image_settings-0').value = 'hide';
+            }
+            if (typeof options['check-sections'] != 'undefined' && options['check-sections'].indexOf('110') > -1) {
+                contentArgs.olymPlug = true;
+            }
+            if (options['primary-tag'] == '15947') {
+                // ADD TOPPER STUFF
+                contentArgs.topGrafAdd = '<img class="aligncenter lazyload size-article_inline" alt="The Field House. College Sports coverage from The Denver Post." data-sizes="auto" data-src="https://i2.wp.com/www.denverpost.com/wp-content/uploads/2018/01/field-house-banner.jpg?w=620&amp;crop=0%2C0px%2C100%2C9999px&amp;ssl=1" data-srcset="https://i2.wp.com/www.denverpost.com/wp-content/uploads/2018/01/field-house-banner.jpg?w=620&amp;crop=0%2C0px%2C100%2C9999px&amp;ssl=1 620w,https://i2.wp.com/www.denverpost.com/wp-content/uploads/2018/01/field-house-banner.jpg?w=780&amp;crop=0%2C0px%2C100%2C9999px&amp;ssl=1 780w,https://i2.wp.com/www.denverpost.com/wp-content/uploads/2018/01/field-house-banner.jpg?w=810&amp;crop=0%2C0px%2C100%2C9999px&amp;ssl=1 810w,https://i2.wp.com/www.denverpost.com/wp-content/uploads/2018/01/field-house-banner.jpg?w=630&amp;crop=0%2C0px%2C100%2C9999px&amp;ssl=1 630w" />' +
+                    '<em><strong><a href="https://www.denverpost.com/tag/the-field-house/"> The Field House</a>.</strong> College Sports coverage from The Denver Post\'s Kyle Fredrickson.</em>'+
+                    '<hr>';
+                document.getElementById('fm-mason_post_settings-0-schema-0-featured_image_settings-0').value = 'hide';   
+            }
+            if (options.title.indexOf('Insider: Basketball') !== -1) {
+                contentArgs.topGrafAdd = '<a href="https://www.denverpost.com/tag/post-preps-insider/"><img class="aligncenter lazyload size-article_inline" alt="Post Preps Insider" data-src="https://i2.wp.com/www.denverpost.com/wp-content/uploads/2018/01/post-preps-insider.jpg?w=620&amp;crop=0%2C0px%2C100%2C9999px&amp;ssl=1" data-srcset="https://i2.wp.com/www.denverpost.com/wp-content/uploads/2018/01/post-preps-insider.jpg?w=620&amp;crop=0%2C0px%2C100%2C9999px&amp;ssl=1 620w,https://i2.wp.com/www.denverpost.com/wp-content/uploads/2018/01/post-preps-insider.jpg?w=780&amp;crop=0%2C0px%2C100%2C9999px&amp;ssl=1 780w,https://i2.wp.com/www.denverpost.com/wp-content/uploads/2018/01/post-preps-insider.jpg?w=810&amp;crop=0%2C0px%2C100%2C9999px&amp;ssl=1810w,https://i2.wp.com/www.denverpost.com/wp-content/uploads/2018/01/post-preps-insider.jpg?w=630&amp;crop=0%2C0px%2C100%2C9999px&amp;ssl=1 630w" /></a>' +
+                    '<em><a href="https://www.denverpost.com/tag/post-preps-insider/">Post Preps Insider</a> is your daily source for news, story lines, top games and more information on Colorado high school sports -- brought to you by Denver Post preps editor Kyle Newman.</em>'+
+                    '<hr>';
+                document.getElementById('fm-mason_post_settings-0-schema-0-featured_image_settings-0').value = 'hide';
+            }
+            if (options.title.indexOf('Insider: Football') !== -1) {
+                contentArgs.topGrafAdd = '<a href="https://www.denverpost.com/tag/post-preps-insider/"><img class="aligncenter lazyload size-article_inline" alt="Post Preps Insider" data-src="https://i0.wp.com/www.denverpost.com/wp-content/uploads/2018/01/post-preps-insider-football.jpg?w=620&amp;crop=0%2C0px%2C100%2C9999px&amp;ssl=1" data-srcset="https://i0.wp.com/www.denverpost.com/wp-content/uploads/2018/01/post-preps-insider-football.jpg?w=620&amp;crop=0%2C0px%2C100%2C9999px&amp;ssl=1 620w,https://i0.wp.com/www.denverpost.com/wp-content/uploads/2018/01/post-preps-insider-football.jpg?w=780&amp;crop=0%2C0px%2C100%2C9999px&amp;ssl=1 780w,https://i0.wp.com/www.denverpost.com/wp-content/uploads/2018/01/post-preps-insider-football.jpg?w=810&amp;crop=0%2C0px%2C100%2C9999px&amp;ssl=1 810w,https://i0.wp.com/www.denverpost.com/wp-content/uploads/2018/01/post-preps-insider-football.jpg?w=630&amp;crop=0%2C0px%2C100%2C9999px&amp;ssl=1 630w" /></a>' +
+                    '<em><a href="https://www.denverpost.com/tag/post-preps-insider/">Post Preps Insider</a> is your daily source for news, story lines, top games and more information on Colorado high school sports -- brought to you by Denver Post preps editor Kyle Newman.</em>'+
+                    '<hr>';
+                document.getElementById('fm-mason_post_settings-0-schema-0-featured_image_settings-0').value = 'hide';
+            }
+            if (options.title.indexOf('Insider: Baseball') !== -1) {
+                contentArgs.topGrafAdd = '<a href="https://www.denverpost.com/tag/post-preps-insider/"><img alt="Post Preps Insider" class="aligncenter lazyload size-article_inline" data-src="https://i0.wp.com/www.denverpost.com/wp-content/uploads/2018/01/post-preps-insider-baseball-softball.jpg?w=620&#038;crop=0%2C0px%2C100%2C9999px&#038;ssl=1" data-srcset="https://i0.wp.com/www.denverpost.com/wp-content/uploads/2018/01/post-preps-insider-baseball-softball.jpg?w=620&#038;crop=0%2C0px%2C100%2C9999px&#038;ssl=1 620w,https://i0.wp.com/www.denverpost.com/wp-content/uploads/2018/01/post-preps-insider-baseball-softball.jpg?w=780&#038;crop=0%2C0px%2C100%2C9999px&#038;ssl=1 780w,https://i0.wp.com/www.denverpost.com/wp-content/uploads/2018/01/post-preps-insider-baseball-softball.jpg?w=810&#038;crop=0%2C0px%2C100%2C9999px&#038;ssl=1 810w,https://i0.wp.com/www.denverpost.com/wp-content/uploads/2018/01/post-preps-insider-baseball-softball.jpg?w=630&#038;crop=0%2C0px%2C100%2C9999px&#038;ssl=1 630w"></a>' +
+                    '<em><a href="https://www.denverpost.com/tag/post-preps-insider/">Post Preps Insider</a> is your daily source for news, story lines, top games and more information on Colorado high school sports -- brought to you by Denver Post preps editor Kyle Newman.</em>'+
+                    '<hr>';
                 document.getElementById('fm-mason_post_settings-0-schema-0-featured_image_settings-0').value = 'hide';
             }
             if (typeof options['check-sections'] != 'undefined') {
@@ -564,8 +593,19 @@
             if (args.prepSider) {
                 grafsClean.splice(4, 0, '<aside class="related right"> <h2 class="widget-title"><a href="http://preps.denverpost.com/"">Colorado Prep Stats</a></h2>[dfm_iframe src="http://preps.denverpost.com/sidebar.html" width="300px" height="250px" scrolling="no"]</aside>');
             }
+            if (args.olymPlug) {
+                var olyPlug = '<aside class="related left alignleft">' +
+                    '<h2 class="widget-title">Let\'s Talk Olympics</h2>' +
+                    '<p><a href="https://www.facebook.com/groups/dpolympics"><img src="https://www.denverpost.com/wp-content/uploads/2018/02/olympic-fb-tease.jpg" style="width: 94%;margin-left: 3%"></a></p>' +
+                    '<p>Do you love watching the Olympics? Come <a href="https://www.facebook.com/groups/dpolympics">talk about the Games with us on our exclusive Facebook group</a>.</p>' +
+                    '</aside>';
+                grafsClean.splice(7, 0, olyPlug);
+            }
             if (args.closures) {
-                grafsClean.splice(2, 0, '<aside class="related alignright">[dfm_iframe src="http://extras.denverpost.com/weather-closures/school-closures.html#iframe" width="100%" height="500px"]</aside>');
+                grafsClean.splice(2, 0, '<aside class="related alignright">[dfm_iframe src="https://extras.denverpost.com/weather-closures/school-closures.html#iframe" width="100%" height="500px"]</aside>');
+            }
+            if (args.topGrafAdd) {
+                grafsClean.splice(0, 0, args.topGrafAdd);
             }
             if (args.crime && !args.wx) {
                 var crimemap = {
@@ -573,16 +613,16 @@
                     get_markup: function() {
                         if ( this.type == '1' ) {
                             return '[cq comment="ASIDE PLACED BELOW"]\n<aside class="related right alignright">\n' +
-                            '<h2 class="widget-title"><a href="http://crime.denverpost.com/">Denver Crime</a></h2>\n' +
-                            '<p>See our <a href="http://crime.denverpost.com/neighborhood/' + this.slug + '/">index of reported crimes in Denver\'s ' + this.neighborhood + ' neighborhood</a>.</p>\n' +
+                            '<h2 class="widget-title"><a href="https://crime.denverpost.com/">Denver Crime</a></h2>\n' +
+                            '<p>See our <a href="https://crime.denverpost.com/neighborhood/' + this.slug + '/">index of reported crimes in Denver\'s ' + this.neighborhood + ' neighborhood</a>.</p>\n' +
                             '<p><strong>Also,</strong> ' + this.get_random_feature() + '.</p>\n' +
                             '</aside>[cq comment="ASIDE PLACED ABOVE"]';
                         }
                         else if ( this.type === '' ) {
                             return '[cq comment="ASIDE PLACED BELOW"]\n<aside class="related right alignright">\n' +
-                            '<h2 class="widget-title"><a href="http://crime.denverpost.com/">Denver Crime</a></h2>\n' +
-                            '<div style="width:100%;height: 150px;overflow:hidden"><a href="http://crime.denverpost.com/crime/' + this.slug + '/"><img src="' + this.get_random_image() + '" alt="Denver crime map" width="100%" style="width:100%;margin-top:-40px"></a></div>\n' +
-                            '<p>See our <a href="http://crime.denverpost.com/crime/' + this.slug + '/">map, report and neighborhood rankings of ' + this.crime + ' in Denver</a>.</p>\n' +
+                            '<h2 class="widget-title"><a href="https://crime.denverpost.com/">Denver Crime</a></h2>\n' +
+                            '<div style="width:100%;height: 150px;overflow:hidden"><a href="https://crime.denverpost.com/crime/' + this.slug + '/"><img src="' + this.get_random_image() + '" alt="Denver crime map" width="100%" style="width:100%;margin-top:-40px"></a></div>\n' +
+                            '<p>See our <a href="https://crime.denverpost.com/crime/' + this.slug + '/">map, report and neighborhood rankings of ' + this.crime + ' in Denver</a>.</p>\n' +
                             '<p><strong>Also,</strong> ' + this.get_random_feature() + '.</p>\n' +
                             '</aside>[cq comment="ASIDE PLACED ABOVE"]';
                         }
@@ -593,7 +633,7 @@
                         var index = Math.floor(Math.random() * ceiling);
                         return this.image_list[index];
                     },
-                    feature_list: [{'compare crime rates across Denver neighborhoods': 'http://crime.denverpost.com/neighborhood/compare/'}, {'see our Denver crime map': 'http://crime.denverpost.com/map/'}, {'see the Denver-city crime report': 'http://crime.denverpost.com/city/'}, {'see our list of neighborhood crime reports': 'http://crime.denverpost.com/neighborhood/'}],
+                    feature_list: [{'compare crime rates across Denver neighborhoods': 'https://crime.denverpost.com/neighborhood/compare/'}, {'see our Denver crime map': 'https://crime.denverpost.com/map/'}, {'see the Denver-city crime report': 'https://crime.denverpost.com/city/'}, {'see our list of neighborhood crime reports': 'https://crime.denverpost.com/neighborhood/'}],
                     get_random_feature: function () {
                         // Pull a random item from this.feature_list
                         var ceiling = this.feature_list.length;
@@ -890,7 +930,7 @@
             }
             if (args.homicide && !(args.crime || args.wx)) {
                 grafsClean.splice(3, 0, '[cq comment="ASIDE PLACED BELOW"]\n<aside class=\'related alignright\'> <h2 class=\'widget-title\'><a href=\'/denver-homicides/\'>Homicide Report</a></h2>\n' +
-'<div style="width:100%;height: 150px;overflow:hidden"><a href=\'/denver-homicides/\'><img src=\'https://www.denverpost.com/wp-content/uploads/2016/10/homicide-map-denver.png\' alt=\'Denver Homicide Map\' border=\'0\'></a></div> <p>Follow this year\'s <a href=\'/denver-homicides/\'>homicides in Denver</a>, and track the city\'s homicide rate. See also: <a href="http://crime.denverpost.com/map/">Denver crime map</a>.</p> </aside>\n[cq comment="ASIDE PLACED ABOVE"]');
+'<div style="width:100%;height: 150px;overflow:hidden"><a href=\'/denver-homicides/\'><img src=\'https://www.denverpost.com/wp-content/uploads/2016/10/homicide-map-denver.png\' alt=\'Denver Homicide Map\' border=\'0\'></a></div> <p>Follow this year\'s <a href=\'/denver-homicides/\'>homicides in Denver</a>, and track the city\'s homicide rate. See also: <a href="https://crime.denverpost.com/map/">Denver crime map</a>.</p> </aside>\n[cq comment="ASIDE PLACED ABOVE"]');
             }
             document.getElementById('content').value = grafsClean.join('\n\n');
             return suggestedTags;
