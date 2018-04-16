@@ -160,6 +160,20 @@ var autoProducerOptions = {
         "help-primary-section": "National Politics",
         "option-set": "news"
     },
+    "33": {
+        "title": "Denver Politics",
+        "check-sections": ["39","47","48","75","76","80"],
+        "add-tags": [],
+        "primary-section": "76",
+        "primary-tag": "",
+        "features": [],
+        "apple-news": ["politics"],
+        "related": true,
+        "help-primary-tag": "",
+        "help-sections": "News, Colorado News, Latest News, Politics, Local Politics, Denver Politics",
+        "help-primary-section": "Denver Politics",
+        "option-set": "news"
+    },
     "40": {
         "title": "Business Story",
         "check-sections": ["48","15"],

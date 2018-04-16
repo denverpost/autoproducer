@@ -7,6 +7,9 @@
 	z-index:99999999;
 	top:5%;
 }
+#auto-producer {
+	max-height: 580px!important;
+}
 #auto-producer .ui-widget-content,
 .ui-dialog[aria-describedby="auto-producer"] .ui-widget-content {
 	background:#fff;

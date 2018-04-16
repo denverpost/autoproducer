@@ -1,5 +1,5 @@
 (function() {
-    var APversion = ' v1.2.1';
+    var APversion = ' v1.2.2';
     function getDPOtip() {
         //return a random DPO production tip
         var tips = Array(
@@ -332,7 +332,6 @@
                 checkDPSPOnline();
                 contentArgs.newsletterDefault = '2';
                 contentArgs.appPromoSports = true;
-                contentArgs.noDates = true;
             }
             if (typeof options['check-sections'] != 'undefined' && options['check-sections'].indexOf('97') > -1) {
                 contentArgs.newsletterDefault = '3';
@@ -375,8 +374,8 @@
             if (args.hateSelect) {
                 contentArgs.hate = true;
             }
-            if (args.informSelect) {
-                contentArgs.inform = true;
+            if (args.supportSelect) {
+                contentArgs.support = true;
             }
             if (args.youtubeSelect) {
                 contentArgs.youtube = true;
@@ -570,12 +569,11 @@
                 }
             }
             if (args.related && !relExists) {
-                var relDates = ( args.noDates  ) ? 'false' : 'true';
                 var relPlace = (grafsClean.length-4 < 2) ? 2 : ((grafsClean.length > 24) ? 11 : grafsClean.length-4);
                 if (grafsClean.length >= 6 || args['related-override']) {
-                    grafsClean.splice(relPlace, 0, '[related_articles location="right" show_article_date="' + relDates + '" article_type="automatic-primary-tag"]');
+                    grafsClean.splice(relPlace, 0, '[related_articles location="right" show_article_date="false" article_type="automatic-primary-tag"]');
                 } else if (args['rel-section']) {
-                    grafsClean.splice(relPlace, 0, '[related_articles location="right" show_article_date="' + relDates + '" article_type="automatic-primary-section"]');
+                    grafsClean.splice(relPlace, 0, '[related_articles location="right" show_article_date="false" article_type="automatic-primary-section"]');
                 }
             }
             if (args.wx) {
@@ -709,53 +707,10 @@
                     };
                     crimemap.init();
                 }
-            if (args.inform) {
-                loop:
-                while(true) {
-                    var vidId = prompt('What is the Inform ID of the video you want to embed?\n\nNote: Embeds always appear at the top of a story, but can be moved with CTRL+X and CTRL+V\n\n','');
-                    if (vidId.length == 8 && vidId.match(/^[0-9]+$/) !== null) {
-                        break loop;
-                    } else {
-                        alert('You must enter an 8-digit number.');
-                    }
-                }
-                loop:
-                while(true) {
-                    var listId = prompt('What is the Inform ID of the video you want to embed? (Hit ENTER for "News")\n\n' +
-                        'Here are some of the most common playlist IDs:\n\n' +
-                            'Business: 18444\n' +
-                            'The Cannabist: 18445\n' +
-                            'DPTV - Up To Date: 18457\n' +
-                            'News: 18464 (default)\n' +
-                            'News - Guns: 18548\n' +
-                            'Politics: 18470\n' +
-                            'Politics - Elections: 18471\n' +
-                            'Sports: 18474\n' +
-                            'Sports - Broncos: 18477\n' +
-                            'Movie trailers: 10658\n\n','18464');
-                    if (listId.length == 5 && listId.match(/^[0-9]+$/) !== null) {
-                        break loop;
-                    } else {
-                        alert('You must enter an 5-digit number.');
-                    }
-                }
-                loop:
-                while(true) {
-                    var autoPlay = prompt('Should it Autoplay? (Hit ENTER for "NO")\n\n' +
-                        'Options:\n\n' +
-                            'No Autoplay: 0 (default)\n' +
-                            'Autoplay: 1\n' +
-                            'Play on mouse-over: 3\n' +
-                            'Play when scrolled into view: 7\n','0');
-                    if (autoPlay === '0' || autoPlay === '1' || autoPlay === '7' || autoPlay === '3') {
-                        break loop;
-                    } else {
-                        alert('You must enter a 1-digit number.');
-                    }
-                }
-                var markup = '[cq  comment="VIDEO PLACED BELOW"]\n' +
-'<div class="ndn_embed" style="width:100%;" data-config-pb="0" data-config-widget-id="' + autoPlay + '" data-config-type="VideoPlayer/Single" data-config-tracking-group="90115" data-config-playlist-id="' + listId + '" data-config-video-id="' + vidId + '" data-config-site-section="denverpost" data-config-width="100%" data-config-height="9/16w"></div> \n' +
-'[cq  comment="VIDEO PLACED ABOVE"]';
+            if (args.support) {
+                var markup = '<div style="padding:.75em 1em;background-color:#e5eff5;text-align:center">\n' +
+'<p><strong><em>The Denver Post needs your support.<br /><a href="http://dpo.st/subscribe-article">Subscribe now for just 99 cents for the first month</a>.</em><strong></p>\n' +
+'</div>';
                 grafsClean.splice(0, 0, markup);
             }
             if (args.youtube) {
@@ -787,7 +742,7 @@
             if (args.opinion) {
                 var markup = '<em>To send a letter to the editor about this article, submit <a href="https://www.denverpost.com/submit-letter/">online</a> or check out our <a href="https://www.denverpost.com/2013/07/09/submission-guidelines-and-contact-information/">guidelines</a> for how to submit by email or mail.</em>';
                 grafsClean.push(markup);
-            }
+            } /*
             if (args.newsletter) {
                 var newsletters = {
                     '1': {
@@ -853,9 +808,9 @@
 '[dfm_iframe src="https://extras.denverpost.com/app/mailer-rules/email-signup.html?which=' + newsletters[newsletterId].which + '&name=' + encodeURIComponent(newsletters[newsletterId].name) + '" width="100%" height="120px"]\n' +
 '</aside>';
                 grafsClean.push(markup);
-            }
+            } */
             if (args.appPromo) {
-                var promoLogo = (args.newsletter) ? '' : '?logo=false';
+                /* var promoLogo = (args.newsletter) ? '' : '?logo=false';
                 var connector = (args.newsletter) ? '?' : '&';
                 var sportsPromo = (args.appPromoSports) ? connector + 'sports=true' : '';
                 var markup = '<aside>\n' +
@@ -926,7 +881,7 @@
                 }
                 if ( typeof item !== 'undefined' && grafsClean[grafsClean.length-1].indexOf('in-article') === -1 && !(args.newsletter) ) {
                     grafsClean.splice(grafsClean.length, 0, '[dfm_iframe src=\'https://extras.denverpost.com/app/in-article-promo/' + section + '-' + item + '.html\' width=\'100%\' height=\'100px\' scrolling=\'no\']');
-                }
+                } */
             }
             if (args.homicide && !(args.crime || args.wx)) {
                 grafsClean.splice(3, 0, '[cq comment="ASIDE PLACED BELOW"]\n<aside class=\'related alignright\'> <h2 class=\'widget-title\'><a href=\'/denver-homicides/\'>Homicide Report</a></h2>\n' +
@@ -1053,19 +1008,19 @@
             output += '<p><strong>Enter selection:</strong></p><p><input type="text" id="APoptionSelect" tabindex="1"></p>';
             output += '</div>';
             output += '<div class="one-quarter">';
-            output += '<p>Insert Related <span class="red-star">*</span> <input type="checkbox" id="relatedSelect" tabindex="2" /><br />';            
-            output += 'App Promo Widget <input type="checkbox" id="appPromo" tabindex="5" checked="checked" /><br />';
+            output += '<p>Insert Related <span class="red-star">*</span> <input type="checkbox" id="relatedSelect" tabindex="2" /><br />';
+            output += 'Newsletter widget <input type="checkbox" id="newsletterSelect" tabindex="5" disabled /><br />';
             output += 'Documenting Hate <input type="checkbox" id="hateSelect" tabindex="8" /><br />';
             output += 'School Closures <input type="checkbox" id="closureSelect" tabindex="11" /></p>';
             output += '</div>';
             output += '<div class="one-quarter">';
-            output += '<p>Insert Promos <input type="checkbox" id="promoSelect" tabindex="3" /><br />';
-            output += 'Inform video <input type="checkbox" id="informSelect" tabindex="6" /><br />';
+            output += '<p>Support Message <input type="checkbox" id="supportSelect" tabindex="3" /><br />';
+            output += 'App Promo Widget <input type="checkbox" id="appPromo" tabindex="6" disabled /><br />';
             output += 'Homicide Report <span class="mag-star">*</span> <input type="checkbox" id="homicideSelect" tabindex="9" /><br />';
             output += 'Author -> AP <span class="blue-star">*</span> <input type="checkbox" id="APauthorSelect" tabindex="12" /></p>';
             output += '</div>';
             output += '<div class="one-quarter">';
-            output += '<p>Newsletter widget <input type="checkbox" id="newsletterSelect" tabindex="4" checked="checked" /><br />';
+            output += '<p>Insert Promos <input type="checkbox" id="promoSelect" tabindex="4" /><br />';
             output += 'YouTube video <input type="checkbox" id="youtubeSelect" tabindex="7" /><br />';
             output += 'Crime Map widget <input type="checkbox" id="crimeMapSelect" tabindex="10" /><br />';
             output += 'Author -> WaPo <span class="blue-star">*</span> <input type="checkbox" id="WaPoauthorSelect" tabindex="13" /></p>';
@@ -1089,7 +1044,7 @@
                 args['APauthorSelect'] = jQuery('#APauthorSelect').prop('checked');
                 args['WaPoauthorSelect'] = jQuery('#WaPoauthorSelect').prop('checked');
                 args['promoSelect'] = jQuery('#promoSelect').prop('checked') ? true : false;
-                args['informSelect'] = jQuery('#informSelect').prop('checked') ? true : false;
+                args['supportSelect'] = jQuery('#supportSelect').prop('checked') ? true : false;
                 args['youtubeSelect'] = jQuery('#youtubeSelect').prop('checked') ? true : false;
                 args['appPromo'] = jQuery('#appPromo').prop('checked') ? true : false;
                 args['newsletterSelect'] = jQuery('#newsletterSelect').prop('checked') ? true : false;
