@@ -711,7 +711,7 @@
                 var markup = '<div style="padding:.75em 1em;background-color:#e5eff5;text-align:center">\n' +
 '<p><strong><em>The Denver Post needs your support.<br /><a href="http://dpo.st/subscribe-article">Subscribe now for just 99 cents for the first month</a>.</em><strong></p>\n' +
 '</div>';
-                grafsClean.splice(0, 0, markup);
+                grafsClean.push(markup);
             }
             if (args.youtube) {
                 loop:
