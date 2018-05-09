@@ -1,5 +1,5 @@
 (function() {
-    var APversion = ' v1.2.2';
+    var APversion = ' v1.2.3';
     function getDPOtip() {
         //return a random DPO production tip
         var tips = Array(
@@ -569,8 +569,8 @@
                 }
             }
             if (args.related && !relExists) {
-                var relPlace = (grafsClean.length-4 < 2) ? 2 : ((grafsClean.length > 24) ? 11 : grafsClean.length-4);
-                if (grafsClean.length >= 6 || args['related-override']) {
+                var relPlace = (grafsClean.length-4 < 2) ? 1 : ((grafsClean.length > 24) ? 11 : grafsClean.length-4);
+                if (grafsClean.length >= 4 || args['related-override']) {
                     grafsClean.splice(relPlace, 0, '[related_articles location="right" show_article_date="false" article_type="automatic-primary-tag"]');
                 } else if (args['rel-section']) {
                     grafsClean.splice(relPlace, 0, '[related_articles location="right" show_article_date="false" article_type="automatic-primary-section"]');
@@ -708,10 +708,30 @@
                     crimemap.init();
                 }
             if (args.support) {
-                var markup = '<div style="padding:.75em 1em;background-color:#e5eff5;text-align:center">\n' +
-'<p><strong><em>The Denver Post needs your support.<br /><a href="http://dpo.st/subscribe-article">Subscribe now for just 99 cents for the first month</a>.</em><strong></p>\n' +
-'</div>';
-                grafsClean.push(markup);
+                var msgNum = Math.floor(Math.random() * 6) + 1;
+                var markup = new Array();
+                markup[1] = '<div style="padding:1em;background-color:#f6e8e9;border-bottom:1px solid black;border-top:10px solid #8e1024;text-align:left;clear:both;">\n' +
+                '<p><strong><em>The Denver Post needs your support.<br /><a style="color:#590a17;" href="https://plus.denverpost.com/link-tracker/subscribe-article.php?msg=1">Subscribe now for just 99 cents for the first month</a>.</em><strong></p>\n' +
+                '</div>';
+                markup[2] = '<div style="padding:1em;background-color:#f6e8e9;border-bottom:1px solid black;border-top:10px solid #8e1024;text-align:left;clear:both;">\n' +
+                '<p><strong><em>Democracy depends on journalism, and journalists need your support. Support The Denver Post and get unlimited digital access &mdash; <br /><a style="color:#590a17;" href="https://plus.denverpost.com/link-tracker/subscribe-article.php?msg=2">the first month is just 99 cents</a>.</em><strong></p>\n' +
+                '</div>';
+                markup[3] = '<div style="padding:1em;background-color:#f6e8e9;border-bottom:1px solid black;border-top:10px solid #8e1024;text-align:left;clear:both;">\n' +
+                '<p><strong><em>&ldquo;I never quarrel with a man who buys ink by the barrel,&rdquo; former Indiana Rep. Charles Brownson said of the press. But we need your help to keep up with the rising cost of ink.<br /><a style="color:#590a17;" href="https://plus.denverpost.com/link-tracker/subscribe-article.php?msg=3">Get your first month for just 99 cents when you subscribe to The Post</a>.</em><strong></p>\n' +
+                '</div>';
+                markup[4] = '<div style="padding:1em;background-color:#f6e8e9;border-bottom:1px solid black;border-top:10px solid #8e1024;text-align:left;clear:both;">\n' +
+                '<p><strong><em>Like this story? Help support more local  journalism.<br /><a style="color:#590a17;" href="https://plus.denverpost.com/link-tracker/subscribe-article.php?msg=4">Become a subscriber for only 99 cents for the first month</a>.</em><strong></p>\n' +
+                '</div>';
+                markup[5] = '<div style="padding:1em;background-color:#f6e8e9;border-bottom:1px solid black;border-top:10px solid #8e1024;text-align:left;clear:both;">\n' +
+                '<p><strong><em>Reader support helps bring you quality local journalism like this. Please consider becoming a subscriber.<br /><a style="color:#590a17;" href="https://plus.denverpost.com/link-tracker/subscribe-article.php?msg=5">Your first month is only 99 cents</a>.</em><strong></p>\n' +
+                '</div>';
+                markup[6] = '<div style="padding:1em;background-color:#f6e8e9;border-bottom:1px solid black;border-top:10px solid #8e1024;text-align:left;clear:both;">\n' +
+                '<p><strong><em>Journalism doesn’t grow on trees. Please support The Denver Post.<br /><a style="color:#590a17;" href="https://plus.denverpost.com/link-tracker/subscribe-article.php?msg=6">Become a subscriber for only 99 cents for the first month</a>.</em><strong></p>\n' +
+                '</div>';
+                markup[7] = '<div style="padding:1em;background-color:#f6e8e9;border-bottom:1px solid black;border-top:10px solid #8e1024;text-align:left;clear:both;">\n' +
+                '<p><strong><em>Journalism isn’t free. Show your support of local news coverage by becoming a subscriber.<br /><a style="color:#590a17;" href="https://plus.denverpost.com/link-tracker/subscribe-article.php?msg=7">Your first month is only 99 cents</a>.</em><strong></p>\n' +
+                '</div>';
+                grafsClean.push(markup[msgNum]);
             }
             if (args.youtube) {
                 loop:
