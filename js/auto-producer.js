@@ -708,13 +708,13 @@
                     crimemap.init();
                 }
             if (args.support) {
-                var msgNum = Math.floor(Math.random() * 6) + 1;
+                var msgNum = Math.floor(Math.random() * 7) + 1;
                 var markup = new Array();
                 markup[1] = '<div style="padding:1em;background-color:#f6e8e9;border-bottom:1px solid black;border-top:10px solid #8e1024;text-align:left;clear:both;">\n' +
                 '<p><strong><em>The Denver Post needs your support.<br /><a style="color:#590a17;" href="https://plus.denverpost.com/link-tracker/subscribe-article.php?msg=1">Subscribe now for just 99 cents for the first month</a>.</em><strong></p>\n' +
                 '</div>';
                 markup[2] = '<div style="padding:1em;background-color:#f6e8e9;border-bottom:1px solid black;border-top:10px solid #8e1024;text-align:left;clear:both;">\n' +
-                '<p><strong><em>Democracy depends on journalism, and journalists need your support. Support The Denver Post and get unlimited digital access &mdash; <br /><a style="color:#590a17;" href="https://plus.denverpost.com/link-tracker/subscribe-article.php?msg=2">the first month is just 99 cents</a>.</em><strong></p>\n' +
+                '<p><strong><em>Democracy depends on journalism, and journalists need your help. Support The Denver Post and get unlimited digital access &mdash; <br /><a style="color:#590a17;" href="https://plus.denverpost.com/link-tracker/subscribe-article.php?msg=2">the first month is just 99 cents</a>.</em><strong></p>\n' +
                 '</div>';
                 markup[3] = '<div style="padding:1em;background-color:#f6e8e9;border-bottom:1px solid black;border-top:10px solid #8e1024;text-align:left;clear:both;">\n' +
                 '<p><strong><em>&ldquo;I never quarrel with a man who buys ink by the barrel,&rdquo; former Indiana Rep. Charles Brownson said of the press. But we need your help to keep up with the rising cost of ink.<br /><a style="color:#590a17;" href="https://plus.denverpost.com/link-tracker/subscribe-article.php?msg=3">Get your first month for just 99 cents when you subscribe to The Post</a>.</em><strong></p>\n' +
