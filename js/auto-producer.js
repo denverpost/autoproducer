@@ -1,5 +1,5 @@
 (function() {
-    var APversion = ' v1.2.3';
+    var APversion = ' v1.2.4';
     function getDPOtip() {
         //return a random DPO production tip
         var tips = Array(
@@ -77,6 +77,18 @@
         str = str.replace(/\\"/g, '"');
         str = str.replace(/\\0/g, '\0');
         str = str.replace(/\\\\/g, '\\');
+        return str;
+    }
+
+    function fixPounds(str) {
+        str = 
+        str = str.replace(/&#8212;/g, "--");
+        str = str.replace(/&#8216;/g, "'");
+        str = str.replace(/&#8217;/g, "'");
+        str = str.replace(/&apos;/g, "'");
+        str = str.replace(/&#8220;/g, '"');
+        str = str.replace(/&#8221;/g, '"');
+        str = str.replace(/&#8212;/g, "--");
         return str;
     }
 
@@ -482,7 +494,8 @@
             });
             var tagLen = autoProducerTagsToCheck.length;
             var suggestedTags = [];
-            var tagContent = content.textContent.toLowerCase();
+            var decodedContent = $('<textarea/>').html(content.textContent).text();
+            var tagContent = decodedContent.toLowerCase();
             var articleTags = document.getElementById('post_tag').getElementsByTagName('button');
             var extantTags = [];
             for(i=0;i<articleTags.length;i++) {
@@ -512,7 +525,7 @@
                 }
             }
             var splitters = /\n\n|<\/p><p>|<\/p>\n<p>|[\s]{2,5}<p>|<p>|<\/p> <p>|<\/p> <p \/> <p>/;
-            var grafs = content.textContent.split(splitters);
+            var grafs = decodedContent.split(splitters);
             if (grafs[0].toLowerCase().startsWith('by') || grafs[0].toLowerCase().startsWith('[caption') || grafs[0].toLowerCase().startsWith('<strong>by')) {
                 if (grafs[1].toLowerCase().startsWith('by') || grafs[1].toLowerCase().startsWith('[caption') || grafs[0].toLowerCase().startsWith('<strong>by')) {
                     newExcerpt = stripTheHTML(grafs[2].replace(/\[.+\]/g,''));    
@@ -524,6 +537,7 @@
             }
             var grafsClean = [];
             for(i=0,len=grafs.length;i<len;i++) {
+                grafs[i] = fixPounds(grafs[i]);
                 if (grafs[i].match(/\[related_articles/) !== null) {
                     relExists = true;
                 }
