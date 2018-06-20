@@ -79,13 +79,13 @@ var autoProducerOptions = {
     "21": {
         "title": "Colorado Wildfires",
         "check-sections": ["48","39","47","65"],
-        "add-tags": ["wildfires","Colorado wildfires 2017"],
+        "add-tags": ["wildfires","Colorado wildfires 2018"],
         "primary-section": "65",
         "primary-tag": "11673",
         "features": [],
         "apple-news": ["colorado-news"],
         "related" : true,
-        "help-primary-tag": "Colorado wildfires 2017",
+        "help-primary-tag": "Colorado wildfires 2018",
         "help-sections": "Latest News, News, Colorado News, Colorado Wildfires",
         "help-primary-section": "Colorado Wildfires",
         "option-set": "news"

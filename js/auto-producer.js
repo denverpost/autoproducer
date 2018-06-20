@@ -407,10 +407,6 @@
                 uncheckAppleNewsNews();
                 contentArgs.newsletterDefault = '8';
             }
-            var sportsVideoSections = ['Broncos Story','Nuggets Story','Avalanche Story','Golf Story','NASCAR Story','CU Buffs Football','NFL Wire Story','NBA Wire Story','NHL Wire Story','College Hoops Wire Story','College Football Story'];
-            if (sportsVideoSections.indexOf(options.title) > -1) {
-                contentArgs.sportsVideo = true;
-            }
             if (options.title.indexOf('Opinion: Letter') !== -1) {
                 addOpinionauthor();
             }
@@ -595,12 +591,6 @@
             }
             if (args.hate) {
                 grafsClean.splice(7, 0, '[cq comment="ASIDE PLACED BELOW"]\n<aside class="related left alignleft">\n<h2 class="widget-title">Documenting Hate</h2>\n<div style="width:100%;"><a href="https://extras.denverpost.com/documenting-hate/"><img src="https://www.denverpost.com/wp-content/uploads/2017/06/hate-speech-vandalism.jpg" alt="Documenting Hate project submissions" style="width:90%;margin:0 auto;"></a></div>\n<p>Share your stories of hate crimes and discrimination with The Denver Post and ProPublica <a href="https://extras.denverpost.com/documenting-hate/">through the nationwide Documenting Hate project</a>.</p>\n</aside>\n[cq comment="ASIDE PLACED ABOVE"]');
-            }
-            if(args.rockies) {
-                grafsClean.splice(4, 0, 'https://embed.sendtonews.com/oembed/?fk=5vyDixL5&cid=5163&sound=off&format=json&offsetx=0&offsety=0&floatwidth=400&floatposition=bottom-right&float=on');
-            }
-            if (args.sportsVideo) {
-                grafsClean.splice(4, 0, 'https://embed.sendtonews.com/oembed/?fk=5vyDixL5&amp;cid=5163&amp;sound=off&amp;format=json&amp;offsetx=0&amp;offsety=0&amp;floatwidth=400&amp;floatposition=bottom-right&amp;float=on');
             }
             if (args.prepSider) {
                 grafsClean.splice(4, 0, '<aside class="related right"> <h2 class="widget-title"><a href="http://preps.denverpost.com/"">Colorado Prep Stats</a></h2>[dfm_iframe src="http://preps.denverpost.com/sidebar.html" width="300px" height="250px" scrolling="no"]</aside>');
