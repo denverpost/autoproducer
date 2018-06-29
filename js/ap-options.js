@@ -81,7 +81,7 @@ var autoProducerOptions = {
         "check-sections": ["48","39","47","65"],
         "add-tags": ["wildfires","Colorado wildfires 2018"],
         "primary-section": "65",
-        "primary-tag": "11673",
+        "primary-tag": "16278",
         "features": [],
         "apple-news": ["colorado-news"],
         "related" : true,
