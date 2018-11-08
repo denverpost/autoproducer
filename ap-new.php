@@ -23,7 +23,7 @@ $newObj .= '},'."\n";
 if( strpos(file_get_contents($file),$testObj) == false) {
 	file_put_contents($file, $newObj, FILE_APPEND | LOCK_EX);
 	$message = 'New request: '.$_GET['title']."\r\n" . $newObj . "\r\n";
-	mail('dschneider@denverpost.com','New AUTO-PRODUCER™ request!',$message);
+	mail('cbrubaker@denverpost.com','New AUTO-PRODUCER™ request!',$message);
 }
 
 ?>
