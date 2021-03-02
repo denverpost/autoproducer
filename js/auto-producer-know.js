@@ -15,7 +15,7 @@
         //https://github.com/jasonday/jQuery-UI-Dialog-extended
         //patch
         /*
-        jQuery.ui.dialog.overlay.events = $.map('focus,keydown,keypress'.split(','), function (event) {
+        jQuery.ui.dialog.overlay.events = jQuery.map('focus,keydown,keypress'.split(','), function (event) {
             return event + '.dialog-overlay';
         }).join(' ');
         */
@@ -25,23 +25,16 @@
     function getDPOtip() {
         //return a random DPO production tip
         var tips = Array(
+            'Overnight online shift? Don\'t forget the Front Page PDF! <a href="//denverpostplus.com/frontpages/">Upload it here.</a>',
             'The #justposted-all channel in Slack is a great place to catch up on everything that has been posted recently.',
-            'The #trending channel in Slack is a great place to see what stories are performing well.',
             '7-8 p.m. is a great time to post strong content on Facebook as we have a lot of fans active at that time.',
-            'Bookmark the WordPress pages you use most frequently. It will save you a lot of time!',
+            'When you check a child section in Wordpress, always check the parent, too. Example: If you use <strong>Colorado News</strong>, also use <strong>News</strong>.',
             'Don\'t forget to check partner and sister sites for great content.',
-            'Want to improve your headline? Drop it into the #headlinerodeo channel in Slack!',
-            'Don\'t forget to put your team\'s stories on the Digital Planner to make sure they get some homepage love.',
-            'Ask yourself: Is this story alert-worthy?',
-            'Have you looked at Google Trends lately?',
-            'If you stay positive, you\'ll see opportunities instead of obstacles. Widad Akwari',
-            'You\'re off to great places, today is your day. Your mountain is waiting, so get on your way. Dr. Suess',
-            'Attitude is a little thing that makes a big difference. Winston Churchill',
-            'Believe you can and you\'re halfway there. Teddy Roosevelt',
-            'Make each day your masterpiece. John Wooden',
-            'Success is the sum of small efforts repeated day in and day out. Robert Collier',
-            'Tough times never last, but tough people do. Robert H. Schuller',
-        );
+            'Be sure to put all Entertianment, Lifestyle and Outdoors stories in the <strong>Entertianment / Lifestyle</strong> section so they get fed to The Know.',
+            'Only use the "Slideshow" designation for standalone slideshows (with "PHOTOS" in the headline). Stories with the "Slideshow" designation DO NOT APPEAR in normal zones (only the Video/Photo rotator).',
+            'Reminder: Only use <strong>@channel</strong> in Slack when you really need everyone in the channel to get a notification on their phone. Use <strong>@here</strong> first.',
+            'Don\'t forget about <strong>Don\'t Miss</strong>! Add 1A and other interesting/longreads stories throughout the week.'
+            );
         var ceiling = tips.length;
         var index = Math.floor(Math.random() * ceiling);
         return tips[index];
@@ -172,21 +165,7 @@
             });
             return output;
         }
-        function captureTrustSections() {
-            var output = [];
-            jQuery('#type-of-workchecklist input:checked').each(function(){
-                output.push(jQuery(this).attr('value'));
-            });
-            return output;
-        }
-        function captureTrustSectionsHelp() {
-            var output = [];
-            jQuery('#type-of-workchecklist input:checked').each(function(){
-                var secName = jQuery(this).parent().clone().children().remove().end().text();
-                output.push(secName.trim());
-            });
-            return output;
-        }
+
         function captureTags() {
             var output = [];
             jQuery('#tagsdiv-post_tag .tagchecklist > span').each(function(){
@@ -208,15 +187,14 @@
         }
 
         function captureAppleNews() {
-            //do nothing because apple news is gone, remove this later
-            // var output = [];
-            // jQuery('#apple-news-publish div.section input:checked').each(function() {
-            //     var checked = getKeyByValue(appleNewsSections, jQuery(this).attr('id'));
-            //     if (typeof checked != 'undefined') {
-            //         output.push(checked);
-            //     }
-            // });
-            // return output;
+            var output = [];
+            jQuery('#apple-news-publish div.section input:checked').each(function() {
+                var checked = getKeyByValue(appleNewsSections, jQuery(this).attr('id'));
+                if (typeof checked != 'undefined') {
+                    output.push(checked);
+                }
+            });
+            return output;
         }
 
         function captureNew() {
@@ -305,7 +283,6 @@
             var newRelated = confirm('Should Related by Primary Tag be added to stories automatically? (cancel for no)');
             optionObject.title = newTitle;
             optionObject['check-sections'] = captureSections();
-            optionObject['trust'] = captureTrustSections();
             optionObject['add-tags'] = captureTags();
             optionObject['primary-section'] = document.getElementById(sectionSelect).value;
             optionObject['primary-tag'] = document.getElementById(tagSelect).value;
@@ -315,7 +292,6 @@
             var tagString = '#'+tagSelect+' option[value="'+optionObject['primary-tag']+'"]';
             optionObject['help-primary-tag'] = (jQuery(tagString).text() == ' ') ? '' : jQuery(tagString).text();
             optionObject['help-sections'] = captureSectionsHelp();
-            optionObject['help-trust'] = captureTrustSectionsHelp();
             var secString = '#'+sectionSelect+' option[value="'+optionObject['primary-section']+'"]';
             optionObject['help-primary-section'] = (jQuery(secString).text() == ' ') ? '' : jQuery(secString).text();
             optionObject['option-set'] = optionSetSelected;  //(optionSetSelected =='2') ? 'sports' : 'news';
@@ -336,24 +312,12 @@
 
         function checkSections(tags){
             for (var i=0,len=tags.length;i<len;i++){
-                var category = document.getElementById('in-category-'+tags[i]);
-                if (category != null ){
-                    document.getElementById('in-category-'+tags[i]).checked = true;
-                }
+                document.getElementById('in-category-'+tags[i]).checked = true;
             }
             // uncheck Uncategorized
             document.getElementById('in-category-1').checked = false;
         }
 
-        function checkTrustSections(tags){
-            //trust project selection
-            for (var i=0,len=tags.length;i<len;i++){
-                var worktype = document.getElementById('in-type-of-work-'+tags[i]);
-                if (worktype !== null){
-                    document.getElementById('in-type-of-work-'+tags[i]).checked = true;
-                }
-            }
-        }
         function setNotification(notify){
             console.log('inside set notify');
             //select the correct notification box here so that slack gets pinged on status change
@@ -393,22 +357,19 @@
         }
 
         function checkAppleNewsBoxes(boxes) {
-            //do nothing since they removed apple news, remove more of this later.
-            // for (var i=0,len=boxes.length;i<len;i++){
-            //     document.getElementById(appleNewsSections[boxes[i]]).checked = true;
-            // }
+            for (var i=0,len=boxes.length;i<len;i++){
+                document.getElementById(appleNewsSections[boxes[i]]).checked = true;
+            }
         }
 
         function sendtonews() {
             //uncheck the send to news box
-            console.log('unckeck ssend to news');
-            document.getElementById('fm-dfm_sendtonews_disable-0-sendtonews_disable-0').checked = true;
+            document.getElementById('fm-dfm_sendtonews_disable-0-sendtonews_disable-0').checked = false;
         }
 
 
         function uncheckAppleNewsNews() {
-            //do nothing in here because apple news is gone, remove this in the future.
-            //document.getElementById('apple-news-section-0ca35a0e-e4ed-3ff0-b73b-1bee2bc33390').checked = false;
+            document.getElementById('apple-news-section-0ca35a0e-e4ed-3ff0-b73b-1bee2bc33390').checked = false;
         }
 
         function primaryOptions(sectionPrimary,tagPrimary) {
@@ -553,11 +514,8 @@
             if (args.hateSelect) {
                 contentArgs.hate = true;
             }
-            // if (args.supportSelect) {
-            //     contentArgs.support = true;
-            // }
-            if (args.ethicsSelect) {
-                contentArgs.ethics = true;
+            if (args.supportSelect) {
+                contentArgs.support = true;
             }
             if (args.youtubeSelect) {
                 contentArgs.youtube = true;
@@ -568,9 +526,6 @@
             if (args.fullBleedSelect) {
                 contentArgs.fullbleed = true;
             }
-            if (args.doubleQuotesSelect) {
-                contentArgs.doubleQuotes = true;
-            }
             if (args.appPromo) {
                 contentArgs.appPromo = true;
             }
@@ -579,9 +534,6 @@
             }
             if (args.officerShootingSelect){
                 contentArgs.officerMap = true;
-            }
-            if (args.realEstateSelect){
-                contentArgs.realestateMap = true;
             }
             if (args.oilGasSelect){
                 contentArgs.oilMap = true;
@@ -656,12 +608,6 @@
                 contentArgs['related-override'] = true;
                 document.getElementById('fm-mason_post_settings-0-schema-0-featured_image_settings-0').value = 'hide';
             }
-            if (options.title == 'Health') {
-                contentArgs.bottomGrafAdd = '<em><a href="https://extras.denverpost.com/newsletters/"><strong>Subscribe to bi-weekly newsletter to get health news sent straight to your inbox.</strong></a></em>';
-            }
-            if (options.title == 'Coronavirus') {
-                contentArgs.virus = true;
-            }
             if (typeof options['check-sections'] != 'undefined' && options['check-sections'].indexOf('110') > -1) {
                 contentArgs.olymPlug = true;
             }
@@ -690,80 +636,31 @@
                     '<hr>';
                 document.getElementById('fm-mason_post_settings-0-schema-0-featured_image_settings-0').value = 'hide';
             }
-            if (options.title == 'Hero Sports Story') {
-                console.log('inside hero sports story fixes');
-                //hero sports customizations
-                document.getElementById('fm-mason_post_settings-0-schema-0-featured_image_settings-0').value = 'hide';
-                jQuery('#tagsdiv-feature .tagchecklist > li').each(function () {
-                    var tempTag = jQuery(this).clone().children().remove().end().text();
-                    if (tempTag.match(/Twitter/)) {
-                        //alert("got twitter");
-                        //we have to actually click the button because WP ajax's this, and doens't update on article update
-                        $(this).find('button').click();
-                    }
-                });
-                //set featured image to one of these random image ID's from WP
-                var heroFeaturedImages = ["3655034", "3655035", "3655030", "3657516", "3657517", "3657515"];
-                var selectHeroImage = heroFeaturedImages[Math.floor(Math.random() * heroFeaturedImages.length)];
-                //empty add photo div and refill with the content below
-                jQuery('#set-post-thumbnail').empty();
-                //this is what actually saves the image to WP
-                jQuery('#_thumbnail_id').val(selectHeroImage);
-                console.log("we selected this photo:"+selectHeroImage);
-                //show the correct thumb based on random hero image choosen
-                switch (selectHeroImage) {
-                    case '3655034':
-                        jQuery('#set-post-thumbnail').append("<img src='https://i2.wp.com/www.denverpost.com/wp-content/uploads/2019/09/TDP-L-football-preview-KEB-0687.jpg?w=266&crop=0%2C0px%2C100%2C266px&ssl=1'>");
-                        break;
-                    case '3655035':
-                        jQuery('#set-post-thumbnail').append("<img src='https://i0.wp.com/www.denverpost.com/wp-content/uploads/2019/09/TDP-L-gentry-prep-preview-KEB-0046.jpg?w=266&crop=0%2C0px%2C100%2C266px&ssl=1'>");
-                        break;
-                    case '3655030':
-                        jQuery('#set-post-thumbnail').append("<img src='https://i1.wp.com/www.denverpost.com/wp-content/uploads/2019/09/Caliche_homecoming_rj_13670.jpg?w=266&crop=0%2C0px%2C100%2C266px&ssl=1'>");
-                        break;
-                    case '3657516':
-                        jQuery('#set-post-thumbnail').append("<img src='https://i1.wp.com/www.denverpost.com/wp-content/uploads/2019/09/SCHSFB_MJ14104.jpg?w=266&crop=0%2C0px%2C100%2C266px&ssl=1'>");
-                        break;
-                    case '3657517':
-                        jQuery('#set-post-thumbnail').append("<img src='https://i1.wp.com/www.denverpost.com/wp-content/uploads/2019/09/SCHSFOOT2022.jpg?w=266&crop=0%2C0px%2C100%2C266px&ssl=1'>");
-                        break;
-                    case '3657515':
-                        jQuery('#set-post-thumbnail').append("<img src='https://i0.wp.com/www.denverpost.com/wp-content/uploads/2019/09/7080699.jpg?w=266&crop=0%2C0px%2C100%2C266px&ssl=1'>");
-                        break;
-                }
-                //add the remove image button and text
-                jQuery('#postimagediv').append("<p class=\"hide-if-no-js howto\" id=\"set-post-thumbnail-desc\">Click the image to edit or update</p><p class=\"hide-if-no-js\"><a href=\"#\" id=\"remove-post-thumbnail\">Remove featured image</a></p>");
-                //uncheck notify sports team
-                document.getElementById('following_usergroups12195').checked = false;
-            }
-            if (typeof options['check-sections'] != 'undefined') {
-                checkSections(options['check-sections']);
-            }
-            if (typeof options['notifications'] != 'undefined') {
-                setNotification(options['notifications']);
-            }
-            if (typeof options['trust'] != 'undefined') {
-                checkTrustSections(options['trust']);
-            }
-            if (typeof options['add-tags'] != 'undefined') {
-                addTag(options['add-tags']);
-            }
-            if (typeof options.features != 'undefined') {
-                addFeatures(options.features);
-            }
-            if (typeof options['primary-section'] != 'undefined' || typeof options['primary-tag'] != 'undefined') {
-                primaryOptions(options['primary-section'],options['primary-tag']);
-            }
-            if (typeof options['apple-news'] != 'undefined') {
-                //remove later apple news is gone.
-               // checkAppleNewsBoxes(options['apple-news']);
-            }
-            if (typeof options['sendtonews'] != 'undefined') {
-                sendtonews();
-            }
+            //dp.com only
+            // if (typeof options['check-sections'] != 'undefined') {
+            //     //checkSections(options['check-sections']);
+            // }
+            // if (typeof options['notifications'] != 'undefined') {
+            //     setNotification(options['notifications']);
+            // }
+            // if (typeof options['add-tags'] != 'undefined') {
+            //     addTag(options['add-tags']);
+            // }
+            // if (typeof options.features != 'undefined') {
+            //     addFeatures(options.features);
+            // }
+            // if (typeof options['primary-section'] != 'undefined' || typeof options['primary-tag'] != 'undefined') {
+            //     primaryOptions(options['primary-section'],options['primary-tag']);
+            // }
+            // if (typeof options['apple-news'] != 'undefined') {
+            //     checkAppleNewsBoxes(options['apple-news']);
+            // }
+            // if (typeof options['sendtonews'] != 'undefined') {
+            //     sendtonews();
+            // }
             var tagsSuggested = processContent(contentArgs);
             suggestSomeTags(tagsSuggested);
-        }
+        } //end of trumpThatBitch
 
         function processContent(args) {
             String.prototype.capitalizeFirstLetters = function() {
@@ -777,8 +674,8 @@
                     }
                 }
                 wordsOut = wordsOut.join(' ');
-                if (wordsOut.match(/,\s*$/)) {
-                    wordsOut = wordsOut.replace(/,\s*$/, "");
+                if (wordsOut.match(/,\s*jQuery/)) {
+                    wordsOut = wordsOut.replace(/,\s*jQuery/, "");
                 }
                 return wordsOut;
             };
@@ -791,7 +688,7 @@
             });
             var tagLen = autoProducerTagsToCheck.length;
             var suggestedTags = [];
-            var decodedContent = $('<textarea/>').html(content.textContent).text();
+            var decodedContent = jQuery('<textarea/>').html(content.textContent).text();
             var tagContent = decodedContent.toLowerCase();
             var articleTags = document.getElementById('post_tag').getElementsByTagName('button');
             var extantTags = [];
@@ -811,7 +708,7 @@
                 }
                 if (testPassed == false) {
                     RegExp.escape = function (value) {
-                        return value.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, "\\$&")
+                        return value.replace(/[\-\[\]{}()*+?.,\\\^jQuery|#\s]/g, "\\jQuery&")
                     };
                     tagToTest = RegExp.escape(tagToTest);
                     testPassed = new RegExp("\\b"+tagToTest+"\\b").test(tagContent);
@@ -889,13 +786,6 @@
                 }
 
             }
-            if (args.virus){
-                var relPlace = (grafsClean.length-4 < 4) ? 3 : ((grafsClean.length > 24) ? grafsClean.length-4 : 11 );
-                var coronavirusContent = '<a href="https://www.denverpost.com/newsletter-signup/checkup-denver"><img class="alignright size-article_inline_half lazyautosizes lazyload" src="https://www.denverpost.com/wp-content/uploads/2020/07/Checkup-Denver-3.gif" /></a>';
-                grafsClean.splice(relPlace, 0, coronavirusContent);
-                var coronavirusFacebook = '<em><a href="https://www.facebook.com/groups/638279553627526/"><strong>Join our Facebook group for the latest updates on coronavirus in Colorado.</strong></a></em>';
-                grafsClean.splice(grafsClean.length, 0, coronavirusFacebook);
-            }
             if (args.wire) {                
                 if (grafsClean[0].toLowerCase().startsWith('by')) {
                     var byline = grafsClean[0];
@@ -929,9 +819,7 @@
                 var excerptDateline = (excerpt.indexOf('(AP) —') > -1) ? excerpt.substring(0,excerpt.indexOf('(AP) —')) : excerpt.substring(0,excerpt.indexOf('(AP) &#8212;'));
                 var newExcerptText = excerpt.replace(excerptDateline,'').replace('&#8212;','--').replace('—','--').replace('(AP) --','').trim();
                 document.getElementById('excerpt').value = newExcerptText;
-                if (document.getElementById('wp_seo_meta_description').value == '') {
-                    document.getElementById('wp_seo_meta_description').value = newExcerptText;
-                }
+
             }
             //&& !relExists add this if you want to check for [related 
             if (args.relatedSelect ){
@@ -954,8 +842,7 @@
                 grafsClean.splice(7, 0, '[cq comment="ASIDE PLACED BELOW"]\n<aside class="related left alignleft">\n<h2 class="widget-title">Documenting Hate</h2>\n<div style="width:100%;"><a href="https://extras.denverpost.com/documenting-hate/"><img src="https://www.denverpost.com/wp-content/uploads/2017/06/hate-speech-vandalism.jpg" alt="Documenting Hate project submissions" style="width:90%;margin:0 auto;"></a></div>\n<p>Share your stories of hate crimes and discrimination with The Denver Post and ProPublica <a href="https://extras.denverpost.com/documenting-hate/">through the nationwide Documenting Hate project</a>.</p>\n</aside>\n[cq comment="ASIDE PLACED ABOVE"]');
             }
             if (args.prepSider) {
-                //removed because we have no prpes stats anymore. but left here so we can add something if we want.
-                //grafsClean.splice(4, 0, '<aside class="related right"> <h2 class="widget-title"><a href="http://preps.denverpost.com/"">Colorado Prep Stats</a></h2>[dfm_iframe src="http://preps.denverpost.com/sidebar_lg.html" width="300px" height="400px" scrolling="no"]</aside>');
+                grafsClean.splice(4, 0, '<aside class="related right"> <h2 class="widget-title"><a href="http://preps.denverpost.com/"">Colorado Prep Stats</a></h2>[dfm_iframe src="http://preps.denverpost.com/sidebar.html" width="300px" height="250px" scrolling="no"]</aside>');
             }
             if (args.olymPlug) {
                 var olyPlug = '<aside class="related left alignleft">' +
@@ -970,9 +857,6 @@
             }
             if (args.topGrafAdd) {
                 grafsClean.splice(0, 0, args.topGrafAdd);
-            }
-            if (args.bottomGrafAdd){
-                grafsClean.push(args.bottomGrafAdd);
             }
             if (args.crime && !args.wx) {
                 var crimemap = {
@@ -1069,57 +953,45 @@
                             str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
                         }
 
-                        return str.replace(/^\s+|\s+$/g, '') //trim
+                        return str.replace(/^\s+|\s+jQuery/g, '') //trim
                             .replace(/[^-a-zA-Z0-9\s]+/ig, '')
                             .replace(/\s/gi, "-");
                         }
                     };
                     crimemap.init();
                 }
-                if (args.ethics) {
-                    box_id = prompt('1 for Ethics Box -- 2 for Anonymous Source');
-                    var ethicsBox = '';
-                    if (box_id.indexOf('1') >= 0) {
-                        ethicsBox = '<div class="related right" style="border:1px solid black;padding:10px;text-align:left"><div style="border:3px solid black;padding:15px"><div style="font-size:30px;text-align:center">We should be transparent.</div><p style="text-align;left">Our job is to intensely scrutinize the activities of others as watchdogs that challenge authority and give voice to the voiceless. Our own actions should withstand equally intense scrutiny.</p><div style="text-align:center;font-weight:bold"><a style="color:#8e1024" target="_blank" href="https://www.denverpost.com/ethics-policy/" rel="noopener noreferrer">Read about The Denver Post Ethics Policy.</a></div></div></div>'
-                    }
-                    if (box_id.indexOf('2') >= 0) {
-                        ethicsBox = '<div class="related right" style="border:1px solid black;padding:10px;text-align:left"><div style="border:3px solid black;padding:15px"><div style="font-size:30px;text-align:center">We should be transparent.</div><p style="text-align;left">The Denver Post expects the information in its pages to be accurately attributed. Anonymous sources are a last resort.</p><div style="text-align:center;font-weight:bold"><a style="color:#8e1024" target="_blank" href="https://www.denverpost.com/anonymous-sources/" rel="noopener noreferrer">Read about The Denver Post Anonymous Sources Policy.</a></div></div></div>'
-                    }
-                    grafsClean.splice(2, 0, ethicsBox);
-                }
-            //not using remove later or replace
-            // if (args.support) {
-            //     var msgNum = Math.floor(Math.random() * 7) + 1;
-            //     var markup = new Array();
-            //     markup[1] = '<div style="padding:1em;background-color:#f6e8e9;border-bottom:1px solid black;border-top:10px solid #8e1024;text-align:left;clear:both;">\n' +
-            //     '<p><strong><em>The Denver Post needs your support.<br /><a style="color:#590a17;" href="https://checkout.denverpost.com/nolanding/?2204&utm_medium=article-link&utm_source=1-dp-needs-support&utm_campaign=support-message">Subscribe now for just 99 cents for the first month</a>.</em><strong></p>\n' +
-            //     '</div>';
-            //     markup[2] = '<div style="padding:1em;background-color:#f6e8e9;border-bottom:1px solid black;border-top:10px solid #8e1024;text-align:left;clear:both;">\n' +
-            //     '<p><strong><em>Democracy depends on journalism, and journalists need your help. Support The Denver Post and get unlimited digital access &mdash; <br /><a style="color:#590a17;" href="https://checkout.denverpost.com/nolanding/?2204&utm_medium=article-link&utm_source=2-democracy&utm_campaign=support-message">the first month is just 99 cents</a>.</em><strong></p>\n' +
-            //     '</div>';
-            //     markup[3] = '<div style="padding:1em;background-color:#f6e8e9;border-bottom:1px solid black;border-top:10px solid #8e1024;text-align:left;clear:both;">\n' +
-            //     '<p><strong><em>&ldquo;I never quarrel with a man who buys ink by the barrel,&rdquo; former Indiana Rep. Charles Brownson said of the press. But we need your help to keep up with the rising cost of ink.<br /><a style="color:#590a17;" href="https://checkout.denverpost.com/nolanding/?2204&utm_medium=article-link&utm_source=3-ink-barrel&utm_campaign=support-message">Get your first month for just 99 cents when you subscribe to The Post</a>.</em><strong></p>\n' +
-            //     '</div>';
-            //     markup[4] = '<div style="padding:1em;background-color:#f6e8e9;border-bottom:1px solid black;border-top:10px solid #8e1024;text-align:left;clear:both;">\n' +
-            //     '<p><strong><em>Like this story? Help support more local  journalism.<br /><a style="color:#590a17;" href="https://checkout.denverpost.com/nolanding/?2204&utm_medium=article-link&utm_source=4-like-story&utm_campaign=support-message">Become a subscriber for only 99 cents for the first month</a>.</em><strong></p>\n' +
-            //     '</div>';
-            //     markup[5] = '<div style="padding:1em;background-color:#f6e8e9;border-bottom:1px solid black;border-top:10px solid #8e1024;text-align:left;clear:both;">\n' +
-            //     '<p><strong><em>Reader support helps bring you quality local journalism like this. Please consider becoming a subscriber.<br /><a style="color:#590a17;" href="https://checkout.denverpost.com/nolanding/?2204&utm_medium=article-link&utm_source=5-reader-support&utm_campaign=support-message">Your first month is only 99 cents</a>.</em><strong></p>\n' +
-            //     '</div>';
-            //     markup[6] = '<div style="padding:1em;background-color:#f6e8e9;border-bottom:1px solid black;border-top:10px solid #8e1024;text-align:left;clear:both;">\n' +
-            //     '<p><strong><em>Journalism doesn’t grow on trees. Please support The Denver Post.<br /><a style="color:#590a17;" href="https://checkout.denverpost.com/nolanding/?2204&utm_medium=article-link&utm_source=6-journalism-trees&utm_campaign=support-message">Become a subscriber for only 99 cents for the first month</a>.</em><strong></p>\n' +
-            //     '</div>';
-            //     markup[7] = '<div style="padding:1em;background-color:#f6e8e9;border-bottom:1px solid black;border-top:10px solid #8e1024;text-align:left;clear:both;">\n' +
-            //     '<p><strong><em>Journalism isn’t free. Show your support of local news coverage by becoming a subscriber.<br /><a style="color:#590a17;" href="https://checkout.denverpost.com/nolanding/?2204&utm_medium=article-link&utm_source=7-journalism-isnt-free&utm_campaign=support-message">Your first month is only 99 cents</a>.</em><strong></p>\n' +
-            //     '</div>';
-            //     grafsClean.push(markup[msgNum]);
-            // }
+            if (args.support) {
+                var msgNum = Math.floor(Math.random() * 7) + 1;
+                var markup = new Array();
+                markup[1] = '<div style="padding:1em;background-color:#f6e8e9;border-bottom:1px solid black;border-top:10px solid #8e1024;text-align:left;clear:both;">\n' +
+                '<p><strong><em>The Denver Post needs your support.<br /><a style="color:#590a17;" href="https://checkout.denverpost.com/nolanding/?2204&utm_medium=article-link&utm_source=1-dp-needs-support&utm_campaign=support-message">Subscribe now for just 99 cents for the first month</a>.</em><strong></p>\n' +
+                '</div>';
+                markup[2] = '<div style="padding:1em;background-color:#f6e8e9;border-bottom:1px solid black;border-top:10px solid #8e1024;text-align:left;clear:both;">\n' +
+                '<p><strong><em>Democracy depends on journalism, and journalists need your help. Support The Denver Post and get unlimited digital access &mdash; <br /><a style="color:#590a17;" href="https://checkout.denverpost.com/nolanding/?2204&utm_medium=article-link&utm_source=2-democracy&utm_campaign=support-message">the first month is just 99 cents</a>.</em><strong></p>\n' +
+                '</div>';
+                markup[3] = '<div style="padding:1em;background-color:#f6e8e9;border-bottom:1px solid black;border-top:10px solid #8e1024;text-align:left;clear:both;">\n' +
+                '<p><strong><em>&ldquo;I never quarrel with a man who buys ink by the barrel,&rdquo; former Indiana Rep. Charles Brownson said of the press. But we need your help to keep up with the rising cost of ink.<br /><a style="color:#590a17;" href="https://checkout.denverpost.com/nolanding/?2204&utm_medium=article-link&utm_source=3-ink-barrel&utm_campaign=support-message">Get your first month for just 99 cents when you subscribe to The Post</a>.</em><strong></p>\n' +
+                '</div>';
+                markup[4] = '<div style="padding:1em;background-color:#f6e8e9;border-bottom:1px solid black;border-top:10px solid #8e1024;text-align:left;clear:both;">\n' +
+                '<p><strong><em>Like this story? Help support more local  journalism.<br /><a style="color:#590a17;" href="https://checkout.denverpost.com/nolanding/?2204&utm_medium=article-link&utm_source=4-like-story&utm_campaign=support-message">Become a subscriber for only 99 cents for the first month</a>.</em><strong></p>\n' +
+                '</div>';
+                markup[5] = '<div style="padding:1em;background-color:#f6e8e9;border-bottom:1px solid black;border-top:10px solid #8e1024;text-align:left;clear:both;">\n' +
+                '<p><strong><em>Reader support helps bring you quality local journalism like this. Please consider becoming a subscriber.<br /><a style="color:#590a17;" href="https://checkout.denverpost.com/nolanding/?2204&utm_medium=article-link&utm_source=5-reader-support&utm_campaign=support-message">Your first month is only 99 cents</a>.</em><strong></p>\n' +
+                '</div>';
+                markup[6] = '<div style="padding:1em;background-color:#f6e8e9;border-bottom:1px solid black;border-top:10px solid #8e1024;text-align:left;clear:both;">\n' +
+                '<p><strong><em>Journalism doesn’t grow on trees. Please support The Denver Post.<br /><a style="color:#590a17;" href="https://checkout.denverpost.com/nolanding/?2204&utm_medium=article-link&utm_source=6-journalism-trees&utm_campaign=support-message">Become a subscriber for only 99 cents for the first month</a>.</em><strong></p>\n' +
+                '</div>';
+                markup[7] = '<div style="padding:1em;background-color:#f6e8e9;border-bottom:1px solid black;border-top:10px solid #8e1024;text-align:left;clear:both;">\n' +
+                '<p><strong><em>Journalism isn’t free. Show your support of local news coverage by becoming a subscriber.<br /><a style="color:#590a17;" href="https://checkout.denverpost.com/nolanding/?2204&utm_medium=article-link&utm_source=7-journalism-isnt-free&utm_campaign=support-message">Your first month is only 99 cents</a>.</em><strong></p>\n' +
+                '</div>';
+                grafsClean.push(markup[msgNum]);
+            }
             if (args.youtube) {
                 loop:
                 while(true) {
                     var vidIdRaw = prompt('What is the YouTube ID or URL of the video you want to embed?\n\nNote: Embeds always appear at the top of a story, but can be moved with CTRL+X and CTRL+V\n\n','');
                     vidId = (vidIdRaw.match(/youtube/) !== null) ? vidIdRaw.replace('https://','').replace('http://','').replace('www.','').replace('youtube.com/','').replace('watch?v=','').replace('embed/','').replace('?autoplay=1') : vidIdRaw;
-                    if (vidId.length >= 11 && vidId.match(/^[A-za-z0-9_-]+$/) !== null) {
+                    if (vidId.length >= 11 && vidId.match(/^[A-za-z0-9_-]+jQuery/) !== null) {
                         break loop;
                     } else {
                         alert(vidId + ' is not a valid YouTube URL or ID. Try again.');
@@ -1290,11 +1162,7 @@
             }
 
             if (args.officerMap){
-                var map = '<hr> [dfm_iframe src="https://extras.denverpost.com/app/officer-involved-shootings/2020/" width="100%" height="1000px" allowfullscreen="yes" scrolling="yes" /]';
-                grafsClean.push(map);
-            }
-            if (args.realestateMap){
-                var map = '<hr> [dfm_iframe src="https://extras.denverpost.com/maps/business/2020/developments/" width="100%" height="1000px" allowfullscreen="yes" scrolling="yes" /]';
+                var map = '<hr> [dfm_iframe src="http://extras.denverpost.com/app/officer-involved-shootings/" width="100%" height="1000px" allowfullscreen="yes" scrolling="yes" /]';
                 grafsClean.push(map);
             }
             if (args.oilMap){
@@ -1302,7 +1170,7 @@
                 grafsClean.push(map);
             }
             if (args.wildfireMap){
-                var map = '<div class="size-article_fullbleed" style="padding: 0 15px 0 23px"> <hr> <h3 style="margin-bottom: 7px">Wildfires in Colorado and the U.S.</h3> The map shows active wildfire locations in 2020. The map defaults to Colorado; to see all wildfires, click "U.S." in the view area. Click the map layers icon in the top right corner of the map to change map backgrounds and to toggle active and contained fires. Click a marker or perimeter for details. To view the full map and a table of all wildfires, <a href="https://www.denverpost.com/2018/06/05/wildfires-colorado-united-states-map/">click here</a>.[dfm_iframe src="https://extras.denverpost.com/app/wildfire/?view=colorado" width="100%" height="850px" allowfullscreen="yes" scrolling="no" /] <p style="font-size: .9rem;line-height: 19px;font-style: italic">*Data comes from two sources, <a href="https://www.geomac.gov/">GeoMAC</a> and <a href="https://inciweb.nwcg.gov/">InciWeb</a>, and could contain inconsistencies. Map by Kevin Hamm and Daniel J. Schneider.</p> </div>';
+                var map = '<div class="size-article_fullbleed" style="padding: 0 15px 0 23px"> <hr> <h3 style="margin-bottom: 7px">Wildfires in Colorado and the U.S.</h3> The map shows active wildfire locations in 2019. The map defaults to Colorado; to see all wildfires, click "U.S." in the view area. Click the map layers icon in the top right corner of the map to change map backgrounds and to toggle active and contained fires. Click a marker or perimeter for details. To view the full map and a table of all wildfires, <a href="https://www.denverpost.com/2018/06/05/wildfires-colorado-united-states-map/">click here</a>.[dfm_iframe src="https://extras.denverpost.com/app/wildfire/?view=colorado" width="100%" height="850px" allowfullscreen="yes" scrolling="no" /] <p style="font-size: .9rem;line-height: 19px;font-style: italic">*Data comes from two sources, <a href="https://www.geomac.gov/">GeoMAC</a> and <a href="https://inciweb.nwcg.gov/">InciWeb</a>, and could contain inconsistencies. Map by Kevin Hamm and Daniel J. Schneider.</p> </div>';
                 grafsClean.push(map);
             }
             if (args.homicideMap){
@@ -1388,27 +1256,30 @@
         }
 
         var APsuccessText = '<div class="ap-success"><h3>I can do that!</h3><p>Here\'s a production tip while you wait:</p><p style="font-size:120%;color:firebrick;font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New;">' + getDPOtip() + '</p></div>';
-        var sectionSelect = 'fm-mason_post_settings-0-schema-0-primary_section-0';
-        var tagSelect = 'fm-mason_post_settings-0-schema-0-primary_tag-0';
-        var appleNewsSections = {
-            'broncos': 'apple-news-section-a39ee59b-d872-39ad-a323-b46261ea34ad',
-            'colorado-news':'apple-news-section-f7f303a0-da3b-3a93-8c2c-93be489a30a6',
-            'sports':'apple-news-section-3f7e6dbd-9845-39a3-ab67-14118fbd4a0e',
-            'politics': 'apple-news-section-befc81a6-ec36-3426-9992-0ce17c5782f4',
-            'business':'apple-news-section-9c5c2844-09ca-3e86-8315-87224d14c790',
-            'entertainment':'apple-news-section-e401a8c2-26e7-3871-8ede-782e7e582af4',
-            'lifestyle':'apple-news-section-c81ed803-584d-3a4a-b125-09beb6cf0f8b',
-            'cannabist':'apple-news-section-aa2f2d08-860e-32b4-a1d3-765ea19a85d7',
-            'opinion':'apple-news-section-4c9d0650-2499-3637-b87f-f9355a2a3471',
-        };
+        //dp.com unique
+        // var sectionSelect = 'fm-mason_post_settings-0-schema-0-primary_section-0';
+        // var tagSelect = 'fm-mason_post_settings-0-schema-0-primary_tag-0';
+        // var appleNewsSections = {
+        //     'broncos': 'apple-news-section-a39ee59b-d872-39ad-a323-b46261ea34ad',
+        //     'colorado-news':'apple-news-section-f7f303a0-da3b-3a93-8c2c-93be489a30a6',
+        //     'sports':'apple-news-section-3f7e6dbd-9845-39a3-ab67-14118fbd4a0e',
+        //     'politics': 'apple-news-section-befc81a6-ec36-3426-9992-0ce17c5782f4',
+        //     'business':'apple-news-section-9c5c2844-09ca-3e86-8315-87224d14c790',
+        //     'entertainment':'apple-news-section-e401a8c2-26e7-3871-8ede-782e7e582af4',
+        //     'lifestyle':'apple-news-section-c81ed803-584d-3a4a-b125-09beb6cf0f8b',
+        //     'cannabist':'apple-news-section-aa2f2d08-860e-32b4-a1d3-765ea19a85d7',
+        //     'opinion':'apple-news-section-4c9d0650-2499-3637-b87f-f9355a2a3471',
+        // };
+
         var options = autoProducerOptions;
-        var validOptions = [];
+         var validOptions = [];
         var autoProducerAllTags = [];
-        for (var i=0;i<document.getElementById(tagSelect).length;i++) {
-            if (document.getElementById(tagSelect).options[i].text.length >= 3) {
-                autoProducerAllTags.push(document.getElementById(tagSelect).options[i].text);
-            }
-        }
+        //dp.com unique
+        // for (var i=0;i<document.getElementById(tagSelect).length;i++) {
+        //     if (document.getElementById(tagSelect).options[i].text.length >= 3) {
+        //         autoProducerAllTags.push(document.getElementById(tagSelect).options[i].text);
+        //     }
+        // }
 
         function resetOptionSet(newSet) {
             eraseCookie('auto-producer-options');
@@ -1584,7 +1455,7 @@
             /*
             jQuery( ".inserts" ).on( "click", function() {
                 jQuery(".inserts").addClass("whichInsert");
-                if ($(".addInsert").is(":visible") == true) {
+                if (jQuery(".addInsert").is(":visible") == true) {
                     //do nothing
                     console.log("you can see my inserts");
                 }else{
@@ -1595,7 +1466,7 @@
             });
             jQuery(".embeds").on("click",function() {
                 jQuery(".embeds").addClass("whichInsert");
-                if ($(".addEmbeds").is(":visible") == true) {
+                if (jQuery(".addEmbeds").is(":visible") == true) {
                     //do nothing
                 }else{
                     jQuery(".inserts").removeClass("whichInsert");
@@ -1607,7 +1478,7 @@
             jQuery(".embedTab").on("click",function() {
                 jQuery(".embedTab").removeClass("whichInsert");
                 jQuery(this).addClass("whichInsert");
-                let which = jQuery(this).data('which');
+                var which = jQuery(this).data('which');
                 jQuery(".embedOptions").hide();
                 jQuery("."+which).show();
             });
@@ -1658,7 +1529,6 @@
                     //var relStar = (options[object].related) ? ' <span class="red-star">*</span>' : ' ';
                     var tooltipString = (options[object].related) ? '<p class=apDetail>Related bar included</p>' : '';
                     tooltipString += '<p>Sets <strong>Primary Section</strong> to: <br/><span class=apDetail>' + options[object]['help-primary-section'] + '</span></p>';
-                    tooltipString += '<p>Selects these <strong>Trust Categories</strong>:<br/><span class=apDetail>' + options[object]['help-trust'] + '</span></p>';
                     tooltipString += '<p>Sets <strong>Primary Tag</strong> to:<br/><span class=apDetail>' + options[object]['help-primary-tag'] + '</span></p>';
                     tooltipString += '<p>Selects these <strong>Sections</strong>:<br/><span class=apDetail>' + options[object]['help-sections'] + '</span></p>';
                     tooltipString += '<p>Adds these <strong>Tags</strong>:<br/><span class=apDetail>' + options[object]['add-tags'].join(', ') + '</span></p>';
@@ -1738,7 +1608,6 @@
             //KEVIN EMBEDS
             output += '<div class="grid-x">';
             output += '<div class="cell auto embedOptions embeds" id="officerShootingSelect" data-addinserts="15">Officer-involved shootings map</div>';
-            output += '<div class="cell auto embedOptions embeds" id="realEstateSelect" data-addinserts="15">Real Estate developments</div>';
             output += '<div class="cell auto embedOptions embeds" id="oilGasSelect" data-addinserts="16">Oil and gas permit map</div>';
             output += '<div class="cell auto embedOptions embeds" id="wildfireSelect" data-addinserts="17">Wildfire map</div>';
             output += '<div class="cell auto embedOptions embeds" id="homicideSelect" data-addinserts="18">Homicide report</div>';
@@ -1752,9 +1621,7 @@
             output += '<div class="cell auto embedOptions inserts" id="closureSelect" data-addinserts="11">School Closures</div>';
             output += '</div>'; //grid-x
             output += '<div class="grid-x">';
-            //remove later
-            // output += '<div class="cell auto embedOptions inserts" id="supportSelect" data-addinserts="3">Support Message</div>';
-            output += '<div class="cell auto embedOptions inserts" id="ethicsSelect" data-addinserts="3">Ethics Box</div>';
+            output += '<div class="cell auto embedOptions inserts" id="supportSelect" data-addinserts="3">Support Message</div>';
             output += '<div class="cell auto embedOptions inserts" id="appPromo" data-addinserts="6">App Promo Widget</div>';
             output += '<div class="cell auto embedOptions inserts" id="hateSelect" data-addinserts="8">Documenting Hate</div>';
             output += '<div class="cell auto embedOptions inserts" id="APauthorSelect" data-addinserts="12">Author -> AP</div>';
@@ -1846,7 +1713,7 @@
 
 
 // extend open function
-        var _open = $.ui.dialog.prototype.open;
+        var _open = jQuery.ui.dialog.prototype.open;
         jQuery.ui.dialog.prototype.open = function () {
             var self = this;
 
@@ -1856,7 +1723,7 @@
             // get dialog original size on open
             var oHeight = self.element.parent().outerHeight(),
                 oWidth = self.element.parent().outerWidth(),
-                isTouch = $("html").hasClass("touch");
+                isTouch = jQuery("html").hasClass("touch");
 
             // responsive width & height
             var resize = function () {
@@ -1865,8 +1732,8 @@
                 // dependent on modernizr for device detection / html.touch
                 if (self.options.responsive === true || (self.options.responsive === "touch" && isTouch)) {
                     var elem = self.element,
-                        wHeight = $(window).height(),
-                        wWidth = $(window).width(),
+                        wHeight = jQuery(window).height(),
+                        wWidth = jQuery(window).width(),
                         dHeight = elem.parent().outerHeight(),
                         dWidth = elem.parent().outerWidth(),
                         setHeight = Math.min(wHeight * self.options.scaleH, oHeight),
@@ -1957,7 +1824,7 @@
 
 // extend close function
 
-        var _close = $.ui.dialog.prototype.close;
+        var _close = jQuery.ui.dialog.prototype.close;
         jQuery.ui.dialog.prototype.close = function () {
             var self = this;
             // apply original arguments
@@ -2578,7 +2445,7 @@
         if (!document.body.contains(document.getElementById('auto-producer'))) {
             var APstyle = window.document.createElement('link');
             APstyle.setAttribute('rel','stylesheet');
-            APstyle.setAttribute('href','https://extras.denverpost.com/app/bookmarklet/js/newauto/auto-producer.css?v='+vSec());
+            APstyle.setAttribute('href','https://extras.denverpost.com/app/bookmarklet/js/know/auto-producer-know.css?v='+vSec());
             window.document.body.appendChild(APstyle);
             var s2 = window.document.createElement('script');
             s2.setAttribute('src','https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js');

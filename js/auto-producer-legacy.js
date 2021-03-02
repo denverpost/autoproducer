@@ -1,57 +1,26 @@
 (function() {
-    var APversion = ' v1.3.0';
-    var storySelection = '0';
-    var additionalAddOns = [];
-    var relatedText = '';
-    var relatedURL = '';
-
-// extend _init
-    var _init = jQuery.ui.dialog.prototype._init;
-    jQuery.ui.dialog.prototype._init = function () {
-        var self = this;
-
-        // apply original arguments
-        _init.apply(this, arguments);
-        //https://github.com/jasonday/jQuery-UI-Dialog-extended
-        //patch
-        /*
-        jQuery.ui.dialog.overlay.events = $.map('focus,keydown,keypress'.split(','), function (event) {
-            return event + '.dialog-overlay';
-        }).join(' ');
-        */
-    };
-// end _init
-
+    var APversion = ' v1.2.4';
     function getDPOtip() {
         //return a random DPO production tip
         var tips = Array(
+            'Overnight online shift? Don\'t forget the Front Page PDF! <a href="//denverpostplus.com/frontpages/">Upload it here.</a>',
             'The #justposted-all channel in Slack is a great place to catch up on everything that has been posted recently.',
-            'The #trending channel in Slack is a great place to see what stories are performing well.',
             '7-8 p.m. is a great time to post strong content on Facebook as we have a lot of fans active at that time.',
-            'Bookmark the WordPress pages you use most frequently. It will save you a lot of time!',
+            'When you check a child section in Wordpress, always check the parent, too. Example: If you use <strong>Colorado News</strong>, also use <strong>News</strong>.',
             'Don\'t forget to check partner and sister sites for great content.',
-            'Want to improve your headline? Drop it into the #headlinerodeo channel in Slack!',
-            'Don\'t forget to put your team\'s stories on the Digital Planner to make sure they get some homepage love.',
-            'Ask yourself: Is this story alert-worthy?',
-            'Have you looked at Google Trends lately?',
-            'If you stay positive, you\'ll see opportunities instead of obstacles. Widad Akwari',
-            'You\'re off to great places, today is your day. Your mountain is waiting, so get on your way. Dr. Suess',
-            'Attitude is a little thing that makes a big difference. Winston Churchill',
-            'Believe you can and you\'re halfway there. Teddy Roosevelt',
-            'Make each day your masterpiece. John Wooden',
-            'Success is the sum of small efforts repeated day in and day out. Robert Collier',
-            'Tough times never last, but tough people do. Robert H. Schuller',
-        );
+            'Be sure to put all Entertianment, Lifestyle and Outdoors stories in the <strong>Entertianment / Lifestyle</strong> section so they get fed to The Know.',
+            'Only use the "Slideshow" designation for standalone slideshows (with "PHOTOS" in the headline). Stories with the "Slideshow" designation DO NOT APPEAR in normal zones (only the Video/Photo rotator).',
+            'Reminder: Only use <strong>@channel</strong> in Slack when you really need everyone in the channel to get a notification on their phone. Use <strong>@here</strong> first.',
+            'Don\'t forget about <strong>Don\'t Miss</strong>! Add 1A and other interesting/longreads stories throughout the week.'
+            );
         var ceiling = tips.length;
         var index = Math.floor(Math.random() * ceiling);
         return tips[index];
-
     }
     function HTMLescape(html){
         return document.createElement('div').appendChild(document.createTextNode(html)).parentNode.innerHTML;
     }
 
-    //not used anymore, was used simply for styling the old design.
     function pad(n) {
         return (n < 10 && n >= 0) ? ("&nbsp;&nbsp;" + n) : n;
     }
@@ -155,7 +124,6 @@
     }
     
     function autoProducerPost() {
-
         function captureSections() {
             var output = [];
             jQuery('#categorychecklist input:checked').each(function(){
@@ -172,21 +140,7 @@
             });
             return output;
         }
-        function captureTrustSections() {
-            var output = [];
-            jQuery('#type-of-workchecklist input:checked').each(function(){
-                output.push(jQuery(this).attr('value'));
-            });
-            return output;
-        }
-        function captureTrustSectionsHelp() {
-            var output = [];
-            jQuery('#type-of-workchecklist input:checked').each(function(){
-                var secName = jQuery(this).parent().clone().children().remove().end().text();
-                output.push(secName.trim());
-            });
-            return output;
-        }
+
         function captureTags() {
             var output = [];
             jQuery('#tagsdiv-post_tag .tagchecklist > span').each(function(){
@@ -208,15 +162,14 @@
         }
 
         function captureAppleNews() {
-            //do nothing because apple news is gone, remove this later
-            // var output = [];
-            // jQuery('#apple-news-publish div.section input:checked').each(function() {
-            //     var checked = getKeyByValue(appleNewsSections, jQuery(this).attr('id'));
-            //     if (typeof checked != 'undefined') {
-            //         output.push(checked);
-            //     }
-            // });
-            // return output;
+            var output = [];
+            jQuery('#apple-news-publish div.section input:checked').each(function() {
+                var checked = getKeyByValue(appleNewsSections, jQuery(this).attr('id'));
+                if (typeof checked != 'undefined') {
+                    output.push(checked);
+                }
+            });
+            return output;
         }
 
         function captureNew() {
@@ -228,84 +181,24 @@
                 if (newTitle !== '' && newTitle !== null) {
                     break loop;
                 } else {
-                    prompt('We need a title!\n\n','');
+                    alert('You have to enter name, dude.');
                 }
-
             }
-            optionSetSelected = prompt('Which option set should this be associated with? (ENTER for "News")\n\n' +
-                        '1. News\n\n' +
-                        '2. Sports\n\n' +
-                        '3. Politics\n\n' +
-                        '4. Business\n\n' +
-                        '5. Entertainment\n\n' +
-                        '6. Opinion\n\n' +
-                    '\n\n','1');
-            switch (optionSetSelected) {
-                case '1':
-                    optionSetSelected = 'news';
-                    break;
-                case '2':
-                    optionSetSelected = 'sports';
-                    break;
-                case '3':
-                    optionSetSelected = 'politics';
-                    break;
-                case '4':
-                    optionSetSelected = 'business';
-                    break;
-                case '5':
-                    optionSetSelected = 'entertainment';
-                    break;
-                case '6':
-                    optionSetSelected = 'opinion';
-                    break;
-                default :
-                    optionSetSelected = 'news';
-                    break;
+            loop:
+            while(true) {
+                optionSetSelected = prompt('Which option set should this be associated with? (ENTER for "News")\n\n' +
+                            '1. News\n\n' +
+                            '2. Sports\n\n' +
+                        '\n\n','1');
+                if (optionSetSelected == '1' || optionSetSelected == '2') {
+                    break loop;
+                } else {
+                    alert('You have to enter name, dude.');
+                }
             }
-            notifySelected = prompt('Which account to notify?\n\n' +
-                '1. Breaking\n\n' +
-                '2. Sports\n\n' +
-                '3. Politics\n\n' +
-                '4. Business\n\n' +
-                '5. Enterprise\n\n' +
-                '6. Investigations\n\n' +
-                '7. Entertainment\n\n' +
-                '8. Opinion\n\n' +
-                '\n\n','1');
-            switch (notifySelected) {
-                case '1':
-                    notifySelected = 'breaking';
-                    break;
-                case '2':
-                    notifySelected = 'sports';
-                    break;
-                case '3':
-                    notifySelected = 'politics';
-                    break;
-                case '4':
-                    notifySelected = 'business';
-                    break;
-                case '5':
-                    notifySelected = 'enterprise';
-                    break;
-                case '6':
-                    notifySelected = 'investigations';
-                    break;
-                case '7':
-                    notifySelected = 'entertainment';
-                    break;
-                case '8':
-                    notifySelected = 'opinion';
-                    break;
-                default :
-                    notifySelected = 'breaking';
-                    break;
-            }
-            var newRelated = confirm('Should Related by Primary Tag be added to stories automatically? (cancel for no)');
+            var newRelated = confirm('Should Related by Primary Tag be added to stories automatically?');
             optionObject.title = newTitle;
             optionObject['check-sections'] = captureSections();
-            optionObject['trust'] = captureTrustSections();
             optionObject['add-tags'] = captureTags();
             optionObject['primary-section'] = document.getElementById(sectionSelect).value;
             optionObject['primary-tag'] = document.getElementById(tagSelect).value;
@@ -315,19 +208,14 @@
             var tagString = '#'+tagSelect+' option[value="'+optionObject['primary-tag']+'"]';
             optionObject['help-primary-tag'] = (jQuery(tagString).text() == ' ') ? '' : jQuery(tagString).text();
             optionObject['help-sections'] = captureSectionsHelp();
-            optionObject['help-trust'] = captureTrustSectionsHelp();
             var secString = '#'+sectionSelect+' option[value="'+optionObject['primary-section']+'"]';
             optionObject['help-primary-section'] = (jQuery(secString).text() == ' ') ? '' : jQuery(secString).text();
-            optionObject['option-set'] = optionSetSelected;  //(optionSetSelected =='2') ? 'sports' : 'news';
-            optionObject['notifications'] = notifySelected;
+            optionObject['option-set'] = (optionSetSelected =='2') ? 'sports' : 'news';
             if (newTitle !== '' && newTitle !== null) {
                 if (confirm('You\'re about to submit a new option called ' + newTitle + '. Are you sure?')) {
                     var i = document.createElement("img");
                     i.style.cssText = 'display:none;';
-                    alert("Send this to chris\n\n\n"+JSON.stringify(optionObject, null, 4)+"\n\n\n");
-                    console.log("here is what to send");
-                    console.log(optionObject);
-                    i.src = 'http://plus.denverpost.com/autoproducer/ap-new.php?'+serialize(optionObject);
+                    i.src = 'http://www.denverpostplus.com/app/autoproducer/ap-new.php?'+serialize(optionObject);
                 }
             } else {
                 alert('Sorry, something went wrong. Try again. \n\n\nOh, and next time -- don\'t do whatever you did that broke it this time.');
@@ -336,56 +224,10 @@
 
         function checkSections(tags){
             for (var i=0,len=tags.length;i<len;i++){
-                var category = document.getElementById('in-category-'+tags[i]);
-                if (category != null ){
-                    document.getElementById('in-category-'+tags[i]).checked = true;
-                }
+                document.getElementById('in-category-'+tags[i]).checked = true;
             }
             // uncheck Uncategorized
             document.getElementById('in-category-1').checked = false;
-        }
-
-        function checkTrustSections(tags){
-            //trust project selection
-            for (var i=0,len=tags.length;i<len;i++){
-                var worktype = document.getElementById('in-type-of-work-'+tags[i]);
-                if (worktype !== null){
-                    document.getElementById('in-type-of-work-'+tags[i]).checked = true;
-                }
-            }
-        }
-        function setNotification(notify){
-            console.log('inside set notify');
-            //select the correct notification box here so that slack gets pinged on status change
-            switch(notify){
-                case 'sports':
-                    document.getElementById('following_usergroups12195').checked = true
-                    break;
-                case 'breaking':
-                    document.getElementById('following_usergroups17787').checked = true
-                    break;
-                case 'politics':
-                    document.getElementById('following_usergroups17788').checked = true
-                    break;
-                case 'business':
-                    document.getElementById('following_usergroups17790').checked = true
-                    break;
-                case 'enterprise':
-                    document.getElementById('following_usergroups17789').checked = true
-                    break;
-                case 'investigations':
-                    document.getElementById('following_usergroups17791').checked = true
-                    break;
-                case 'entertainment':
-                    document.getElementById('following_usergroups17794').checked = true
-                    break;
-                case 'opinion':
-                    document.getElementById('following_usergroups17793').checked = true
-                    break;
-                default:
-                    document.getElementById('following_usergroups17787').checked = true
-            }
-
         }
 
         function uncheckLatestSection() {
@@ -393,22 +235,13 @@
         }
 
         function checkAppleNewsBoxes(boxes) {
-            //do nothing since they removed apple news, remove more of this later.
-            // for (var i=0,len=boxes.length;i<len;i++){
-            //     document.getElementById(appleNewsSections[boxes[i]]).checked = true;
-            // }
+            for (var i=0,len=boxes.length;i<len;i++){
+                document.getElementById(appleNewsSections[boxes[i]]).checked = true;
+            }
         }
-
-        function sendtonews() {
-            //uncheck the send to news box
-            console.log('unckeck ssend to news');
-            document.getElementById('fm-dfm_sendtonews_disable-0-sendtonews_disable-0').checked = true;
-        }
-
 
         function uncheckAppleNewsNews() {
-            //do nothing in here because apple news is gone, remove this in the future.
-            //document.getElementById('apple-news-section-0ca35a0e-e4ed-3ff0-b73b-1bee2bc33390').checked = false;
+            document.getElementById('apple-news-section-0ca35a0e-e4ed-3ff0-b73b-1bee2bc33390').checked = false;
         }
 
         function primaryOptions(sectionPrimary,tagPrimary) {
@@ -553,11 +386,8 @@
             if (args.hateSelect) {
                 contentArgs.hate = true;
             }
-            // if (args.supportSelect) {
-            //     contentArgs.support = true;
-            // }
-            if (args.ethicsSelect) {
-                contentArgs.ethics = true;
+            if (args.supportSelect) {
+                contentArgs.support = true;
             }
             if (args.youtubeSelect) {
                 contentArgs.youtube = true;
@@ -565,80 +395,11 @@
             if (args.newsletterSelect) {
                 contentArgs.newsletter = true;
             }
-            if (args.fullBleedSelect) {
-                contentArgs.fullbleed = true;
-            }
-            if (args.doubleQuotesSelect) {
-                contentArgs.doubleQuotes = true;
-            }
             if (args.appPromo) {
                 contentArgs.appPromo = true;
             }
             if (args.promoSelect) {
                 contentArgs.promos = true;
-            }
-            if (args.officerShootingSelect){
-                contentArgs.officerMap = true;
-            }
-            if (args.realEstateSelect){
-                contentArgs.realestateMap = true;
-            }
-            if (args.oilGasSelect){
-                contentArgs.oilMap = true;
-            }
-            if (args.wildfireSelect){
-                contentArgs.wildfireMap = true;
-            }
-            if (args.homicideSelect){
-                contentArgs.homicideMap = true;
-            }
-            if (args.rockiesGeneral){
-                contentArgs.rockiesGeneral = true;
-            }
-            if (args.rockiesScoreboard){
-                contentArgs.rockiesScoreboard = true;
-            }
-            if (args.nlwestStandings){
-                contentArgs.nlwestStandings = true;
-            }
-            if (args.rockiesSchedule){
-                contentArgs.rockiesSchedule = true;
-            }
-            if (args.rockiesLeaders){
-                contentArgs.rockiesLeaders = true;
-            }
-            if (args.rockiesOffense){
-                contentArgs.rockiesOffense = true;
-            }
-            if (args.rockiesDefense){
-                contentArgs.rockiesDefense = true;
-            }
-            if (args.mlbHomeRUnLeaders){
-                contentArgs.mlbHomeRUnLeaders = true;
-            }
-            if (args.broncosGeneral){
-                contentArgs.broncosGeneral = true;
-            }
-            if (args.avalancheGeneral){
-                contentArgs.avalancheGeneral = true;
-            }
-            if (args.nuggestGeneral){
-                contentArgs.nuggestGeneral = true;
-            }
-            if (args.domesticViolence){
-                contentArgs.domesticViolence = true;
-            }
-            if (args.alzheimer){
-                contentArgs.alzheimer = true;
-            }
-            if (args.suicideResources){
-                contentArgs.suicideResources = true;
-            }
-            if (args.avalancheDanger){
-                contentArgs.avalancheDanger = true;
-            }
-            if (args.relatedSelect){
-                contentArgs.relatedSelect = true;
             }
             if (options.title.indexOf('Opinion') !== -1) {
                 contentArgs.opinion = true;
@@ -655,12 +416,6 @@
             if (options.title == 'YourHub Crime Blotter') {
                 contentArgs['related-override'] = true;
                 document.getElementById('fm-mason_post_settings-0-schema-0-featured_image_settings-0').value = 'hide';
-            }
-            if (options.title == 'Health') {
-                contentArgs.bottomGrafAdd = '<em><a href="https://extras.denverpost.com/newsletters/"><strong>Subscribe to bi-weekly newsletter to get health news sent straight to your inbox.</strong></a></em>';
-            }
-            if (options.title == 'Coronavirus') {
-                contentArgs.virus = true;
             }
             if (typeof options['check-sections'] != 'undefined' && options['check-sections'].indexOf('110') > -1) {
                 contentArgs.olymPlug = true;
@@ -690,60 +445,8 @@
                     '<hr>';
                 document.getElementById('fm-mason_post_settings-0-schema-0-featured_image_settings-0').value = 'hide';
             }
-            if (options.title == 'Hero Sports Story') {
-                console.log('inside hero sports story fixes');
-                //hero sports customizations
-                document.getElementById('fm-mason_post_settings-0-schema-0-featured_image_settings-0').value = 'hide';
-                jQuery('#tagsdiv-feature .tagchecklist > li').each(function () {
-                    var tempTag = jQuery(this).clone().children().remove().end().text();
-                    if (tempTag.match(/Twitter/)) {
-                        //alert("got twitter");
-                        //we have to actually click the button because WP ajax's this, and doens't update on article update
-                        $(this).find('button').click();
-                    }
-                });
-                //set featured image to one of these random image ID's from WP
-                var heroFeaturedImages = ["3655034", "3655035", "3655030", "3657516", "3657517", "3657515"];
-                var selectHeroImage = heroFeaturedImages[Math.floor(Math.random() * heroFeaturedImages.length)];
-                //empty add photo div and refill with the content below
-                jQuery('#set-post-thumbnail').empty();
-                //this is what actually saves the image to WP
-                jQuery('#_thumbnail_id').val(selectHeroImage);
-                console.log("we selected this photo:"+selectHeroImage);
-                //show the correct thumb based on random hero image choosen
-                switch (selectHeroImage) {
-                    case '3655034':
-                        jQuery('#set-post-thumbnail').append("<img src='https://i2.wp.com/www.denverpost.com/wp-content/uploads/2019/09/TDP-L-football-preview-KEB-0687.jpg?w=266&crop=0%2C0px%2C100%2C266px&ssl=1'>");
-                        break;
-                    case '3655035':
-                        jQuery('#set-post-thumbnail').append("<img src='https://i0.wp.com/www.denverpost.com/wp-content/uploads/2019/09/TDP-L-gentry-prep-preview-KEB-0046.jpg?w=266&crop=0%2C0px%2C100%2C266px&ssl=1'>");
-                        break;
-                    case '3655030':
-                        jQuery('#set-post-thumbnail').append("<img src='https://i1.wp.com/www.denverpost.com/wp-content/uploads/2019/09/Caliche_homecoming_rj_13670.jpg?w=266&crop=0%2C0px%2C100%2C266px&ssl=1'>");
-                        break;
-                    case '3657516':
-                        jQuery('#set-post-thumbnail').append("<img src='https://i1.wp.com/www.denverpost.com/wp-content/uploads/2019/09/SCHSFB_MJ14104.jpg?w=266&crop=0%2C0px%2C100%2C266px&ssl=1'>");
-                        break;
-                    case '3657517':
-                        jQuery('#set-post-thumbnail').append("<img src='https://i1.wp.com/www.denverpost.com/wp-content/uploads/2019/09/SCHSFOOT2022.jpg?w=266&crop=0%2C0px%2C100%2C266px&ssl=1'>");
-                        break;
-                    case '3657515':
-                        jQuery('#set-post-thumbnail').append("<img src='https://i0.wp.com/www.denverpost.com/wp-content/uploads/2019/09/7080699.jpg?w=266&crop=0%2C0px%2C100%2C266px&ssl=1'>");
-                        break;
-                }
-                //add the remove image button and text
-                jQuery('#postimagediv').append("<p class=\"hide-if-no-js howto\" id=\"set-post-thumbnail-desc\">Click the image to edit or update</p><p class=\"hide-if-no-js\"><a href=\"#\" id=\"remove-post-thumbnail\">Remove featured image</a></p>");
-                //uncheck notify sports team
-                document.getElementById('following_usergroups12195').checked = false;
-            }
             if (typeof options['check-sections'] != 'undefined') {
                 checkSections(options['check-sections']);
-            }
-            if (typeof options['notifications'] != 'undefined') {
-                setNotification(options['notifications']);
-            }
-            if (typeof options['trust'] != 'undefined') {
-                checkTrustSections(options['trust']);
             }
             if (typeof options['add-tags'] != 'undefined') {
                 addTag(options['add-tags']);
@@ -755,11 +458,7 @@
                 primaryOptions(options['primary-section'],options['primary-tag']);
             }
             if (typeof options['apple-news'] != 'undefined') {
-                //remove later apple news is gone.
-               // checkAppleNewsBoxes(options['apple-news']);
-            }
-            if (typeof options['sendtonews'] != 'undefined') {
-                sendtonews();
+                checkAppleNewsBoxes(options['apple-news']);
             }
             var tagsSuggested = processContent(contentArgs);
             suggestSomeTags(tagsSuggested);
@@ -810,10 +509,6 @@
                     }
                 }
                 if (testPassed == false) {
-                    RegExp.escape = function (value) {
-                        return value.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, "\\$&")
-                    };
-                    tagToTest = RegExp.escape(tagToTest);
                     testPassed = new RegExp("\\b"+tagToTest+"\\b").test(tagContent);
                 }
                 return testPassed; 
@@ -829,72 +524,22 @@
             var grafs = decodedContent.split(splitters);
             if (grafs[0].toLowerCase().startsWith('by') || grafs[0].toLowerCase().startsWith('[caption') || grafs[0].toLowerCase().startsWith('<strong>by')) {
                 if (grafs[1].toLowerCase().startsWith('by') || grafs[1].toLowerCase().startsWith('[caption') || grafs[0].toLowerCase().startsWith('<strong>by')) {
-                    newExcerpt = stripTheHTML(grafs[2].replace(/\[.+\]/g,''));    
+                    newExcerpt = fixPounds(stripTheHTML(grafs[2].replace(/\[.+\]/g,'')));
                 } else {
-                    newExcerpt = stripTheHTML(grafs[1].replace(/\[.+\]/g,''));
+                    newExcerpt = fixPounds(stripTheHTML(grafs[1].replace(/\[.+\]/g,'')));
                 }
             } else {
-                newExcerpt = stripTheHTML(grafs[0].replace(/\[.+\]/g,''));
+                newExcerpt = fixPounds(stripTheHTML(grafs[0].replace(/\[.+\]/g,'')));
             }
             var grafsClean = [];
             for(i=0,len=grafs.length;i<len;i++) {
                 grafs[i] = fixPounds(grafs[i]);
-                //finding placement for end of article content
-                var placeWidget = (grafsClean.length-4 < 2) ? 1 : ((grafsClean.length < 24) ? 11 : grafsClean.length-4);
                 if (grafs[i].match(/\[related_articles/) !== null) {
                     relExists = true;
-                }
-                //fix full bleed if selected
-                if (args.fullbleed){
-                    if (grafs[i].match(/\[caption/) !== null) {
-                        //checking for caption type image
-                        grafsClean.push( grafs[i].replace(/w=/g,"fit=").replace(/crop=[^&]*&/g,'') );
-                        grafs[i] = '';
-                    }else{
-                        if (grafs[i].match(/\<img class="aligncenter  size-article_fullbleed lazyautosizes lazyload"/) !== null) {
-                            //checking for regular non caption image center aligned
-                            grafsClean.push( grafs[i].replace(/w=/g,"fit=").replace(/crop=[^&]*&/g,'') );
-                            grafs[i] = '';
-                        }else{
-                            if (grafs[i].match(/\<img class="alignnone  size-article_fullbleed lazyautosizes lazyload"/) !== null) {
-                                //checking for regular non caption image align-none alignment
-                        grafsClean.push( grafs[i].replace(/w=/g,"fit=").replace(/crop=[^&]*&/g,'') );
-                        grafs[i] = '';
-                            }else{
-                                if (grafs[i].match(/\<img class="size-article_fullbleed lazyautosizes lazyload alignnone"/) !== null) {
-                                    //checking for regular non caption image no alignment tag
-                                    grafsClean.push( grafs[i].replace(/w=/g,"fit=").replace(/crop=[^&]*&/g,'') );
-                                    grafs[i] = '';
-                                }else{
-                                    /*
-                                    if (grafs[i].match(/\<img class="alignleft  size-article_inline_half lazyautosizes lazyload"/) !== null) {
-                                        //align left fix
-                                        grafsClean.push( grafs[i].replace(/<img/,"<img style='width:70%;'") );
-                                        grafs[i] = '';
-                                    }else{
-                                        if (grafs[i].match(/\<img class="alignright  size-article_inline_half lazyautosizes lazyload"/) !== null) {
-                                            //align right fix
-                                            grafsClean.push( grafs[i].replace(/<img/,"<img style='width:70%;'") );
-                                            grafs[i] = '';
-                                        }
-                                    }
-                                    */
-                                }
-                            }
-                        }
-                    }
                 }
                 if (grafs[i].match(/<p \/>/) === null && grafs[i].length > 0 && !(grafs[i].match(/&nbsp;/) && grafs[i].length < 7)) {
                     grafsClean.push(grafs[i].replace('</p>','').replace('&#8212;','--').replace('—','--').replace('(AP) ',''));
                 }
-
-            }
-            if (args.virus){
-                var relPlace = (grafsClean.length-4 < 4) ? 3 : ((grafsClean.length > 24) ? grafsClean.length-4 : 11 );
-                var coronavirusContent = '<a href="https://www.denverpost.com/newsletter-signup/checkup-denver"><img class="alignright size-article_inline_half lazyautosizes lazyload" src="https://www.denverpost.com/wp-content/uploads/2020/07/Checkup-Denver-3.gif" /></a>';
-                grafsClean.splice(relPlace, 0, coronavirusContent);
-                var coronavirusFacebook = '<em><a href="https://www.facebook.com/groups/638279553627526/"><strong>Join our Facebook group for the latest updates on coronavirus in Colorado.</strong></a></em>';
-                grafsClean.splice(grafsClean.length, 0, coronavirusFacebook);
             }
             if (args.wire) {                
                 if (grafsClean[0].toLowerCase().startsWith('by')) {
@@ -933,12 +578,6 @@
                     document.getElementById('wp_seo_meta_description').value = newExcerptText;
                 }
             }
-            //&& !relExists add this if you want to check for [related 
-            if (args.relatedSelect ){
-                //add new related tag if related isn't already there
-                grafsClean.splice(5, 0, '<p style="font-style:italic;border-left:7px solid #8e1024;margin-left:15px;margin-top:10px;cursor:pointer;padding-left:8px"><strong>RELATED:</strong> <a href="'+relatedURL+'">'+relatedText+'</a>\n</p>');
-            }
-            //related bar (not currated)
             if (args.related && !relExists) {
                 var relPlace = (grafsClean.length-4 < 2) ? 1 : ((grafsClean.length > 24) ? 11 : grafsClean.length-4);
                 if (grafsClean.length >= 4 || args['related-override']) {
@@ -954,8 +593,7 @@
                 grafsClean.splice(7, 0, '[cq comment="ASIDE PLACED BELOW"]\n<aside class="related left alignleft">\n<h2 class="widget-title">Documenting Hate</h2>\n<div style="width:100%;"><a href="https://extras.denverpost.com/documenting-hate/"><img src="https://www.denverpost.com/wp-content/uploads/2017/06/hate-speech-vandalism.jpg" alt="Documenting Hate project submissions" style="width:90%;margin:0 auto;"></a></div>\n<p>Share your stories of hate crimes and discrimination with The Denver Post and ProPublica <a href="https://extras.denverpost.com/documenting-hate/">through the nationwide Documenting Hate project</a>.</p>\n</aside>\n[cq comment="ASIDE PLACED ABOVE"]');
             }
             if (args.prepSider) {
-                //removed because we have no prpes stats anymore. but left here so we can add something if we want.
-                //grafsClean.splice(4, 0, '<aside class="related right"> <h2 class="widget-title"><a href="http://preps.denverpost.com/"">Colorado Prep Stats</a></h2>[dfm_iframe src="http://preps.denverpost.com/sidebar_lg.html" width="300px" height="400px" scrolling="no"]</aside>');
+                grafsClean.splice(4, 0, '<aside class="related right"> <h2 class="widget-title"><a href="http://preps.denverpost.com/"">Colorado Prep Stats</a></h2>[dfm_iframe src="http://preps.denverpost.com/sidebar.html" width="300px" height="250px" scrolling="no"]</aside>');
             }
             if (args.olymPlug) {
                 var olyPlug = '<aside class="related left alignleft">' +
@@ -970,9 +608,6 @@
             }
             if (args.topGrafAdd) {
                 grafsClean.splice(0, 0, args.topGrafAdd);
-            }
-            if (args.bottomGrafAdd){
-                grafsClean.push(args.bottomGrafAdd);
             }
             if (args.crime && !args.wx) {
                 var crimemap = {
@@ -1076,44 +711,32 @@
                     };
                     crimemap.init();
                 }
-                if (args.ethics) {
-                    box_id = prompt('1 for Ethics Box -- 2 for Anonymous Source');
-                    var ethicsBox = '';
-                    if (box_id.indexOf('1') >= 0) {
-                        ethicsBox = '<div class="related right" style="border:1px solid black;padding:10px;text-align:left"><div style="border:3px solid black;padding:15px"><div style="font-size:30px;text-align:center">We should be transparent.</div><p style="text-align;left">Our job is to intensely scrutinize the activities of others as watchdogs that challenge authority and give voice to the voiceless. Our own actions should withstand equally intense scrutiny.</p><div style="text-align:center;font-weight:bold"><a style="color:#8e1024" target="_blank" href="https://www.denverpost.com/ethics-policy/" rel="noopener noreferrer">Read about The Denver Post Ethics Policy.</a></div></div></div>'
-                    }
-                    if (box_id.indexOf('2') >= 0) {
-                        ethicsBox = '<div class="related right" style="border:1px solid black;padding:10px;text-align:left"><div style="border:3px solid black;padding:15px"><div style="font-size:30px;text-align:center">We should be transparent.</div><p style="text-align;left">The Denver Post expects the information in its pages to be accurately attributed. Anonymous sources are a last resort.</p><div style="text-align:center;font-weight:bold"><a style="color:#8e1024" target="_blank" href="https://www.denverpost.com/anonymous-sources/" rel="noopener noreferrer">Read about The Denver Post Anonymous Sources Policy.</a></div></div></div>'
-                    }
-                    grafsClean.splice(2, 0, ethicsBox);
-                }
-            //not using remove later or replace
-            // if (args.support) {
-            //     var msgNum = Math.floor(Math.random() * 7) + 1;
-            //     var markup = new Array();
-            //     markup[1] = '<div style="padding:1em;background-color:#f6e8e9;border-bottom:1px solid black;border-top:10px solid #8e1024;text-align:left;clear:both;">\n' +
-            //     '<p><strong><em>The Denver Post needs your support.<br /><a style="color:#590a17;" href="https://checkout.denverpost.com/nolanding/?2204&utm_medium=article-link&utm_source=1-dp-needs-support&utm_campaign=support-message">Subscribe now for just 99 cents for the first month</a>.</em><strong></p>\n' +
-            //     '</div>';
-            //     markup[2] = '<div style="padding:1em;background-color:#f6e8e9;border-bottom:1px solid black;border-top:10px solid #8e1024;text-align:left;clear:both;">\n' +
-            //     '<p><strong><em>Democracy depends on journalism, and journalists need your help. Support The Denver Post and get unlimited digital access &mdash; <br /><a style="color:#590a17;" href="https://checkout.denverpost.com/nolanding/?2204&utm_medium=article-link&utm_source=2-democracy&utm_campaign=support-message">the first month is just 99 cents</a>.</em><strong></p>\n' +
-            //     '</div>';
-            //     markup[3] = '<div style="padding:1em;background-color:#f6e8e9;border-bottom:1px solid black;border-top:10px solid #8e1024;text-align:left;clear:both;">\n' +
-            //     '<p><strong><em>&ldquo;I never quarrel with a man who buys ink by the barrel,&rdquo; former Indiana Rep. Charles Brownson said of the press. But we need your help to keep up with the rising cost of ink.<br /><a style="color:#590a17;" href="https://checkout.denverpost.com/nolanding/?2204&utm_medium=article-link&utm_source=3-ink-barrel&utm_campaign=support-message">Get your first month for just 99 cents when you subscribe to The Post</a>.</em><strong></p>\n' +
-            //     '</div>';
-            //     markup[4] = '<div style="padding:1em;background-color:#f6e8e9;border-bottom:1px solid black;border-top:10px solid #8e1024;text-align:left;clear:both;">\n' +
-            //     '<p><strong><em>Like this story? Help support more local  journalism.<br /><a style="color:#590a17;" href="https://checkout.denverpost.com/nolanding/?2204&utm_medium=article-link&utm_source=4-like-story&utm_campaign=support-message">Become a subscriber for only 99 cents for the first month</a>.</em><strong></p>\n' +
-            //     '</div>';
-            //     markup[5] = '<div style="padding:1em;background-color:#f6e8e9;border-bottom:1px solid black;border-top:10px solid #8e1024;text-align:left;clear:both;">\n' +
-            //     '<p><strong><em>Reader support helps bring you quality local journalism like this. Please consider becoming a subscriber.<br /><a style="color:#590a17;" href="https://checkout.denverpost.com/nolanding/?2204&utm_medium=article-link&utm_source=5-reader-support&utm_campaign=support-message">Your first month is only 99 cents</a>.</em><strong></p>\n' +
-            //     '</div>';
-            //     markup[6] = '<div style="padding:1em;background-color:#f6e8e9;border-bottom:1px solid black;border-top:10px solid #8e1024;text-align:left;clear:both;">\n' +
-            //     '<p><strong><em>Journalism doesn’t grow on trees. Please support The Denver Post.<br /><a style="color:#590a17;" href="https://checkout.denverpost.com/nolanding/?2204&utm_medium=article-link&utm_source=6-journalism-trees&utm_campaign=support-message">Become a subscriber for only 99 cents for the first month</a>.</em><strong></p>\n' +
-            //     '</div>';
-            //     markup[7] = '<div style="padding:1em;background-color:#f6e8e9;border-bottom:1px solid black;border-top:10px solid #8e1024;text-align:left;clear:both;">\n' +
-            //     '<p><strong><em>Journalism isn’t free. Show your support of local news coverage by becoming a subscriber.<br /><a style="color:#590a17;" href="https://checkout.denverpost.com/nolanding/?2204&utm_medium=article-link&utm_source=7-journalism-isnt-free&utm_campaign=support-message">Your first month is only 99 cents</a>.</em><strong></p>\n' +
-            //     '</div>';
-            //     grafsClean.push(markup[msgNum]);
-            // }
+            if (args.support) {
+                var msgNum = Math.floor(Math.random() * 7) + 1;
+                var markup = new Array();
+                markup[1] = '<div style="padding:1em;background-color:#f6e8e9;border-bottom:1px solid black;border-top:10px solid #8e1024;text-align:left;clear:both;">\n' +
+                '<p><strong><em>The Denver Post needs your support.<br /><a style="color:#590a17;" href="https://plus.denverpost.com/link-tracker/subscribe-article.php?msg=1">Subscribe now for just 99 cents for the first month</a>.</em><strong></p>\n' +
+                '</div>';
+                markup[2] = '<div style="padding:1em;background-color:#f6e8e9;border-bottom:1px solid black;border-top:10px solid #8e1024;text-align:left;clear:both;">\n' +
+                '<p><strong><em>Democracy depends on journalism, and journalists need your help. Support The Denver Post and get unlimited digital access &mdash; <br /><a style="color:#590a17;" href="https://plus.denverpost.com/link-tracker/subscribe-article.php?msg=2">the first month is just 99 cents</a>.</em><strong></p>\n' +
+                '</div>';
+                markup[3] = '<div style="padding:1em;background-color:#f6e8e9;border-bottom:1px solid black;border-top:10px solid #8e1024;text-align:left;clear:both;">\n' +
+                '<p><strong><em>&ldquo;I never quarrel with a man who buys ink by the barrel,&rdquo; former Indiana Rep. Charles Brownson said of the press. But we need your help to keep up with the rising cost of ink.<br /><a style="color:#590a17;" href="https://plus.denverpost.com/link-tracker/subscribe-article.php?msg=3">Get your first month for just 99 cents when you subscribe to The Post</a>.</em><strong></p>\n' +
+                '</div>';
+                markup[4] = '<div style="padding:1em;background-color:#f6e8e9;border-bottom:1px solid black;border-top:10px solid #8e1024;text-align:left;clear:both;">\n' +
+                '<p><strong><em>Like this story? Help support more local  journalism.<br /><a style="color:#590a17;" href="https://plus.denverpost.com/link-tracker/subscribe-article.php?msg=4">Become a subscriber for only 99 cents for the first month</a>.</em><strong></p>\n' +
+                '</div>';
+                markup[5] = '<div style="padding:1em;background-color:#f6e8e9;border-bottom:1px solid black;border-top:10px solid #8e1024;text-align:left;clear:both;">\n' +
+                '<p><strong><em>Reader support helps bring you quality local journalism like this. Please consider becoming a subscriber.<br /><a style="color:#590a17;" href="https://plus.denverpost.com/link-tracker/subscribe-article.php?msg=5">Your first month is only 99 cents</a>.</em><strong></p>\n' +
+                '</div>';
+                markup[6] = '<div style="padding:1em;background-color:#f6e8e9;border-bottom:1px solid black;border-top:10px solid #8e1024;text-align:left;clear:both;">\n' +
+                '<p><strong><em>Journalism doesn’t grow on trees. Please support The Denver Post.<br /><a style="color:#590a17;" href="https://plus.denverpost.com/link-tracker/subscribe-article.php?msg=6">Become a subscriber for only 99 cents for the first month</a>.</em><strong></p>\n' +
+                '</div>';
+                markup[7] = '<div style="padding:1em;background-color:#f6e8e9;border-bottom:1px solid black;border-top:10px solid #8e1024;text-align:left;clear:both;">\n' +
+                '<p><strong><em>Journalism isn’t free. Show your support of local news coverage by becoming a subscriber.<br /><a style="color:#590a17;" href="https://plus.denverpost.com/link-tracker/subscribe-article.php?msg=7">Your first month is only 99 cents</a>.</em><strong></p>\n' +
+                '</div>';
+                grafsClean.push(markup[msgNum]);
+            }
             if (args.youtube) {
                 loop:
                 while(true) {
@@ -1288,89 +911,6 @@
                 grafsClean.splice(3, 0, '[cq comment="ASIDE PLACED BELOW"]\n<aside class=\'related alignright\'> <h2 class=\'widget-title\'><a href=\'/denver-homicides/\'>Homicide Report</a></h2>\n' +
 '<div style="width:100%;height: 150px;overflow:hidden"><a href=\'/denver-homicides/\'><img src=\'https://www.denverpost.com/wp-content/uploads/2016/10/homicide-map-denver.png\' alt=\'Denver Homicide Map\' border=\'0\'></a></div> <p>Follow this year\'s <a href=\'/denver-homicides/\'>homicides in Denver</a>, and track the city\'s homicide rate. See also: <a href="https://crime.denverpost.com/map/">Denver crime map</a>.</p> </aside>\n[cq comment="ASIDE PLACED ABOVE"]');
             }
-
-            if (args.officerMap){
-                var map = '<hr> [dfm_iframe src="https://extras.denverpost.com/app/officer-involved-shootings/2020/" width="100%" height="1000px" allowfullscreen="yes" scrolling="yes" /]';
-                grafsClean.push(map);
-            }
-            if (args.realestateMap){
-                var map = '<hr> [dfm_iframe src="https://extras.denverpost.com/maps/business/2020/developments/" width="100%" height="1000px" allowfullscreen="yes" scrolling="yes" /]';
-                grafsClean.push(map);
-            }
-            if (args.oilMap){
-                var map = '<div class="size-article_fullbleed" style="padding: 0 15px 0 23px"> <hr> <p style="text-align:center;font-style:italic;"><a href="https://www.denverpost.com/colorado-oil-gas-well-permit-map/">Click here</a> to view the map on its own page.</p> <h2 style="margin:15px 0 15px 14px;font-size:1.6em;">Oil and gas well permit map</h2> [dfm_iframe src="http://extras.denverpost.com/maps/news/oil-gas/permits/" width="100%" height="1800px" allowfullscreen="yes" scrolling="yes" /] </div>';
-                grafsClean.push(map);
-            }
-            if (args.wildfireMap){
-                var map = '<div class="size-article_fullbleed" style="padding: 0 15px 0 23px"> <hr> <h3 style="margin-bottom: 7px">Wildfires in Colorado and the U.S.</h3> The map shows active wildfire locations in 2020. The map defaults to Colorado; to see all wildfires, click "U.S." in the view area. Click the map layers icon in the top right corner of the map to change map backgrounds and to toggle active and contained fires. Click a marker or perimeter for details. To view the full map and a table of all wildfires, <a href="https://www.denverpost.com/2018/06/05/wildfires-colorado-united-states-map/">click here</a>.[dfm_iframe src="https://extras.denverpost.com/app/wildfire/?view=colorado" width="100%" height="850px" allowfullscreen="yes" scrolling="no" /] <p style="font-size: .9rem;line-height: 19px;font-style: italic">*Data comes from two sources, <a href="https://www.geomac.gov/">GeoMAC</a> and <a href="https://inciweb.nwcg.gov/">InciWeb</a>, and could contain inconsistencies. Map by Kevin Hamm and Daniel J. Schneider.</p> </div>';
-                grafsClean.push(map);
-            }
-            if (args.homicideMap){
-                var map = '<div class="size-article_fullbleed" style="padding: 0 15px 0 23px"> <hr> <p style="text-align:center;font-style:italic;margin:15px 0 15px 0;"><a href=" https://www.denverpost.com/denver-homicides/">Click here</a> to view the Denver Homicide Report on its own page.</p> [dfm_iframe src="https://extras.denverpost.com/app/homicide-report/" width="100%" height="3700px" allowfullscreen="yes" scrolling="yes" /] </div>';
-                grafsClean.push(map);
-            }
-
-            //SPORT EMBEDS
-            if (args.rockiesGeneral){
-                var map = '<aside class="related right"> <h2 class="widget-title"><a href="/sports/colorado-rockies/">Colorado Rockies</a></h2> <ul> <li><a href="https://stats.denverpost.com/baseball/mlb/scores"><span class="dfm-title">MLB scoreboard</span></a></li> <li><a href="https://stats.denverpost.com/baseball/mlb/standings"><span class="dfm-title">MLB standings</span></a></li> <li><a href="https://stats.denverpost.com/baseball/mlb/teamschedule/2956"><span class="dfm-title">Schedule</span></a></li> <li><a href="https://stats.denverpost.com/baseball/mlb/teamstatistics/2956"><span class="dfm-title">Colorado Rockies stats</span></a></li> <li><a href="https://www.denverpost.com/tag/rockies-mailbag/"><span class="dfm-title">Rockies Mailbag</span></a></li> <li><a href="https://www.denverpost.com/rockies-mailbag-form/"><span class="dfm-title">Ask mailbag questions</span></a></li> </ul> </aside>\n';
-                grafsClean.push(map);
-            }
-            if (args.rockiesScoreboard){
-                grafsClean.splice(5, 0, '[dfm_iframe style="height: 150px; width: 100%" src="http://stats.denverpost.com/sports-scores/TeamMatchup.aspx?TeamAbbr=COL&amp;League=MLB" frameborder="no" scrolling="no" ]\n');
-            }
-            if (args.nlwestStandings){
-                grafsClean.splice(5, 0, '<aside class="related right">[dfm_iframe style="height: 150px; width: 100%" src="http://extras.denverpost.com/sports-widget/mlb-nl-west.html" frameborder="no" scrolling="no" ]</aside>\n');
-            }
-            if (args.rockiesSchedule){
-                var map = '<aside class="related right"><h2 class="widget-title"><a href="/sports/colorado-rockies/">Rockies Baseball</a></h2> <script> var head  = document.getElementsByTagName(\'head\')[0]; var link  = document.createElement(\'link\'); link.rel  = \'stylesheet\'; link.type = \'text/css\'; link.href = \'http://stats.denverpost.com/stylesheet\'; head.appendChild(link); </script> <script  src="http://stats.denverpost.com/brick/mlb/team/schedule?teamId=2956"></script> </aside>\n';
-                grafsClean.push(map);
-            }
-            if (args.rockiesLeaders){
-                var map = '<aside class="related right"><h2 class="widget-title"><a href="/sports/colorado-rockies/">Rockies Baseball</a></h2> <script> var head  = document.getElementsByTagName(\'head\')[0]; var link  = document.createElement(\'link\'); link.rel  = \'stylesheet\'; link.type = \'text/css\'; link.href = \'http://stats.denverpost.com/stylesheet\'; head.appendChild(link); </script> <script  src="http://stats.denverpost.com/brick/mlb/team/leaders?teamId=2956"></script> </aside>\n';
-                grafsClean.push(map);
-            }
-            if (args.rockiesOffense){
-                var map = '<aside class="related right"><h2 class="widget-title"><a href="/sports/colorado-rockies/">Rockies Baseball</a></h2> <script> var head  = document.getElementsByTagName(\'head\')[0]; var link  = document.createElement(\'link\'); link.rel  = \'stylesheet\'; link.type = \'text/css\'; link.href = \'http://stats.denverpost.com/stylesheet\'; head.appendChild(link); </script> <script  src="http://stats.denverpost.com/brick/mlb/team/offense?teamId=2956"></script> </aside>\n';
-                grafsClean.push(map);
-            }
-            if (args.rockiesDefense){
-                var map = '<aside class="related right"><h2 class="widget-title"><a href="/sports/colorado-rockies/">Rockies Baseball</a></h2> <script> var head  = document.getElementsByTagName(\'head\')[0]; var link  = document.createElement(\'link\'); link.rel  = \'stylesheet\'; link.type = \'text/css\'; link.href = \'http://stats.denverpost.com/stylesheet\'; head.appendChild(link); </script> <script  src="http://stats.denverpost.com/brick/mlb/team/defense?teamId=2956"></script> </aside>\n';
-                grafsClean.push(map);
-            }
-            if (args.mlbHomeRunLeaders){
-                var map = '<aside class="related right"><h2 class="widget-title"><a href="/sports/colorado-rockies/">Rockies Baseball</a></h2> <script> var head  = document.getElementsByTagName(\'head\')[0]; var link  = document.createElement(\'link\'); link.rel  = \'stylesheet\'; link.type = \'text/css\'; link.href = \'http://stats.denverpost.com/stylesheet\'; head.appendChild(link); </script> <script  src="http://stats.denverpost.com/brick/mlb/statistics/2016/hitter_mlb_hr_regular_1.html"></script> </aside>\n';
-                grafsClean.push(map);
-            }
-            if (args.broncosGeneral){
-                grafsClean.splice(5, 0, '<aside class="related right"> <h2 class="widget-title"><a href="/sports/denver-broncos/">Denver Broncos</a></h2> <ul> <li><a href="http://www.denverpost.com/sports/denver-broncos/"><span class="dfm-title">More Broncos news</span></a></li> <li><a href="https://stats.denverpost.com/football/nfl/scores"><span class="dfm-title">NFL scoreboard</span></a></li> <li><a href="https://stats.denverpost.com/football/nfl/standings"><span class="dfm-title">NFL standings</span></a></li> <li><a href="https://stats.denverpost.com/football/nfl/teamschedule/21"><span class="dfm-title">Denver Broncos schedule 2018</span></a></li> <li><a href="https://stats.denverpost.com/football/nfl/team/21"><span class="dfm-title">Denver Broncos stats and scores</span></a></li> <li><a href="https://stats.denverpost.com/football/nfl/teamroster/21"><span class="dfm-title">Denver Broncos roster</span></a></li> <li><a href="http://www.denverpost.com/tag/broncos-mailbag/"><span class="dfm-title">Broncos Mailbag</span></a></li> <li><a href="http://www.denverpost.com/broncos-mailbag-form/"><span class="dfm-title">Ask mailbag questions</span></a></li> </ul> </aside>\n');
-            }
-            if (args.avalancheGeneral){
-                grafsClean.splice(5, 0, '<aside class="related right"><h2 class="widget-title"><a href="/sports/colorado-avalanche/">Colorado Avalanche</a></h2> <ul> <li><a href="http://stats.denverpost.com/sports-scores/Hockey-Scores-Matchups.aspx"><span class="dfm-title">NHL scoreboard</span></a></li> <li><a href="http://stats.denverpost.com/hockey/nhl-standings.aspx?page=/data/nhl/standings/2015-2016/league/standings.html"><span class="dfm-title">NHL standings</span></a></li> <li><a href="https://stats.denverpost.com/hockey/nhl/team/1"><span class="dfm-title">Colorado Avalanche stats, roster, schedule</span></a></li> <li><a href="http://www.denverpost.com/tag/avalanche-mailbag/"><span class="dfm-title">Avs Mailbag</span></a></li> <li><a href="http://www.denverpost.com/avs-mailbag-form/"><span class="dfm-title">Ask mailbag questions</span></a></li> </ul> </aside>\n');
-            }
-            if (args.nuggestGeneral){
-                grafsClean.splice(5, 0, '<aside class="related right"><h2 class="widget-title"><a href="/sports/denver-nuggets/">Denver Nuggets</a></h2> <ul> <li><a href="https://stats.denverpost.com/basketball/nba/scores"><span class="dfm-title">NBA Scoreboard</span></a></li> <li><a href="https://stats.denverpost.com/basketball/nba/standings"><span class="dfm-title">NBA Standings</span></a></li> <li><a href="https://stats.denverpost.com/basketball/nba/teamschedule/404065"><span class="dfm-title">Schedule</span></a></li> <li><a href="https://stats.denverpost.com/basketball/nba/teamstatistics/404065"><span class="dfm-title">Denver Nuggets stats</span></a></li> <li><a href="http://www.denverpost.com/tag/nuggets-mailbag/"><span class="dfm-title">Nuggets Mailbag</span></a></li> <li><a href="http://www.denverpost.com/nuggets-mailbag-form/"><span class="dfm-title">Ask mailbag questions</span></a></li> </ul> </aside>\n');
-            }
-            if (args.domesticViolence){
-                grafsClean.splice(placeWidget, 0, '<aside class="related right"> <h2 class="widget-title">Sexual assault, domestic violence resources</h2> <strong>Denver Sexual Assault Hotline</strong>: <a href="https://thebluebench.org/">thebluebench.org</a>. Call the hotline at 303-322-7273 for free, 24-hour help. <strong>National Domestic Violence Hotline</strong>: <a href="https://www.thehotline.org/">thehotline.org</a>. Call the hotline at 1-800-799-7233 for free, 24-hour help. <strong>Violence Free Colorado</strong>: <a href="https://www.violencefreecolorado.org/find-help/programs-by-county/">Use this map to locate resources by county in Colorado</a>. The website also has resources <a href="https://www.violencefreecolorado.org/find-help/how-to-help-someone-you-know/">like a guide to helping someone</a> you know who is being abused. <strong>SafeHouse Denver</strong>: <a href="https://safehouse-denver.org/">safe-house-denver.org</a>. Reach local professionals by calling the 24-hour crisis and information line at 303-318-9989. <strong>Moving to End Sexual Assault (MESA)</strong>: <a href="https://www.mhpcolorado.org/about/services/specialty-moving-to-end-sexual-assault/" target="_blank" rel="noopener">movingtoendsexualassault.org</a>. Call the 24-hour hotline at 303-443-7300. </aside>\n');
-            }
-            if (args.alzheimer){
-                grafsClean.splice(placeWidget, 0, '<aside class="related right"> <h2 class="widget-title">What is Alzheimer’s disease?</h2> <em>Alzheimer’s disease is a brain disorder that affects a person’s memory and thinking skills. Symptoms can include, loss of memory and difficulty with skills, such as keeping up with bills and driving. During the later stages of the disease, a person can experience delusions and paranoia.</em> <strong>Alzheimer’s Association Colorado</strong>: <a href="https://www.alz.org/co">alz.org/co</a>. Call the helpline at 800-272-3900 for free, 24-hour help. <strong>Alzheimer’s Foundation of America</strong>: <a href="https://alzfdn.org/">alzfdn.org</a>. Call the helpline at 866-232-8484 for free, 24-hour help. </aside>\n');
-            }
-            if (args.suicideResources){
-                grafsClean.splice(placeWidget, 0, '<aside class="related right"> <h2 class="widget-title">Suicide prevention resources</h2> [cq  <span class="dfm_cq_comment" style="color: red"> <span class="dfm_cq_comment" style="color: red"> <span class="dfm_cq_comment" style="color: red"> comment="RUN THIS AS A TEXT BOX IN PRINT"</span></span></span>]<ul><li><strong>Colorado Crisis Line</strong>: 1-844-493-8255, <a  href="http://coloradocrisisservices.org">coloradocrisisservices.org</a>. Chat online or text TALK to 38255.</li><li><strong>Mental Health First Aid</strong>: <a href="http://mhfaco.org">mhfaco.org</a>. Get trained to recognize the signs and how to respond.</li><li><strong>American Foundation for Suicide Prevention</strong>: <a href="http://afsp.org">afsp.org</a>. Join one of their upcoming walks for awareness in Colorado.</li><li><strong>Crisis Text Line</strong>: <a href="http://www.crisistextline.org">crisistextline.org</a>. Text 741741 from anywhere in the nation to reach a counselor.</li><li><strong>Second Wind Fund</strong>: <a href="http://thesecondwindfund.org">thesecondwindfund.org</a>. Links students to mental health professionals and pays for up to 12 counseling sessions.</li></ul></aside>');
-            }
-            if (args.avalancheDanger){
-                grafsClean.splice(grafsClean.length, 0, '<hr />\n' +
-                    '\n' +
-                    '<h3>Avalanche danger scale</h3>\n' +
-                    '<em>A live look at Colorado\'s avalanche danger scale, provided by the Colorado Avalanche Information Center:</em>\n' +
-                    '\n' +
-                    '[dfm_iframe src="http://avalanche.state.co.us/caic/fx_map.php" width="495px" height="565px" advanced_fields="true" allowfullscreen="yes" scrolling="no" /]\n' +
-                    '\n' +
-                    '<img src="http://avalanche.state.co.us/caic/images/map-danger-scale.png" />\n' +
-                    '\n' +
-                    '<hr />');
-            }
             document.getElementById('content').value = grafsClean.join('\n\n');
             return suggestedTags;
         }
@@ -1405,7 +945,7 @@
         var validOptions = [];
         var autoProducerAllTags = [];
         for (var i=0;i<document.getElementById(tagSelect).length;i++) {
-            if (document.getElementById(tagSelect).options[i].text.length >= 3) {
+            if (document.getElementById(tagSelect).options[i].text.length >= 3 && document.getElementById(tagSelect).options[i].text.indexOf('[') < 0 && document.getElementById(tagSelect).options[i].text.indexOf(']') < 0) {
                 autoProducerAllTags.push(document.getElementById(tagSelect).options[i].text);
             }
         }
@@ -1417,148 +957,9 @@
         }
 
         var keySetup = false;
-        function modifyDialog(menu_id) {
-            //new top menu selector
-            jQuery('.categoryMenu').click(function() {
-               var menuSelected = jQuery(this).attr('id');
-                newOptionSelect = resetOptionSet(menuSelected);
-                buildHTML(newOptionSelect);
-            });
-
-            //story selector
-            jQuery('.storyBox').click(function(){
-                var storyID = jQuery(this).data('storyid');
-                storySelection = storyID;
-                jQuery('.storyBox').css({'background':'#eaf4ff','border':'none','font-weight':'normal'});
-                jQuery(this).css({'background':'white','font-weight':'bold'});
-                var toolTipInsert = jQuery('#'+storyID+' > a').data('tooltip');
-                jQuery('.tipGraf').html(toolTipInsert);
-            });
-            //add on selector
-            jQuery('.addInsert').click(function(){
-                var addID = jQuery(this).attr('id');
-                //only allow ap or wapo author option
-                if (addID == "APauthorSelect") {
-                    jQuery( ".addOnNote" ).remove();
-                    jQuery( ".ui-dialog-buttonpane" ).prepend('<div class="addOnNote" style="float: left;margin-top: 15px;margin-left: 15px;color: red;">*Author will not update until post is saved.</div>');
-                    console.log("remove wapo author because ap author selected");
-                    jQuery("#WaPoauthorSelect").removeClass("addInsertSelected");
-                    delete additionalAddOns["WaPoauthorSelect"];
-                    console.log(additionalAddOns);
-                }
-                //only allow ap or wapo author option
-                if (addID == "WaPoauthorSelect") {
-                    jQuery( ".addOnNote" ).remove();
-                    jQuery( ".ui-dialog-buttonpane" ).prepend('<div class="addOnNote" style="float: left;margin-top: 15px;margin-left: 15px;color: red;">*Author will not update until post is saved.</div>');
-                    console.log("remove wapo author because ap author selected");
-                    jQuery("#APauthorSelect").removeClass("addInsertSelected");
-                    delete additionalAddOns["APauthorSelect"];
-                    console.log(additionalAddOns);
-                }
-                if (addID == "crimeMapSelect") {
-                    jQuery("#homicideSelect").removeClass("addInsertSelected");
-                    delete additionalAddOns["homicideSelect"];
-                    console.log(additionalAddOns);
-                }
-                //only allow ap or wapo author option
-                if (addID == "homicideSelect") {
-                    jQuery("#crimeMapSelect").removeClass("addInsertSelected");
-                    delete additionalAddOns["homicideSelect"];
-                    console.log(additionalAddOns);
-                }
-
-
-
-
-
-                //check if add on is in array already and remove it if it is otherwise add it
-                if (additionalAddOns.hasOwnProperty(addID)) {
-                    console.log("I'm ALREADY THERE...remove please");
-                    jQuery( ".addOnNote" ).remove();
-                    jQuery(this).toggleClass("addInsertSelected");
-                    delete additionalAddOns[addID];
-                    console.log(additionalAddOns);
-                    //need to remove from array
-                } else {
-                    jQuery(this).toggleClass("addInsertSelected");
-                    additionalAddOns[addID] = true;
-                    console.log("add this extra thing " + addID);
-                    console.log(additionalAddOns);
-
-                }
-
-            });
-            //add embeds
-            jQuery('.embedOptions').click(function(){
-                var myClick = jQuery(this);
-                var addID = jQuery(this).attr('id');
-                var dupcheck;
-
-                function removeAddOn(myClick) {
-                    console.log("I'm ALREADY THERE...remove please");
-                    jQuery( ".addOnNote" ).remove();
-                    jQuery(myClick).toggleClass("addInsertSelected");
-                    delete additionalAddOns[addID];
-                    console.log(additionalAddOns);
-                }
-
-                //check if add on is in array already and remove it if it is otherwise add it
-                if (additionalAddOns.hasOwnProperty(addID)) {
-                    console.log("it's a dup!");
-                    dupcheck = 1;
-                    removeAddOn(myClick);
-                } else {
-                    jQuery(this).toggleClass("addInsertSelected");
-                    additionalAddOns[addID] = true;
-                    console.log("add this extra thing " + addID);
-                    console.log(additionalAddOns);
-                }
-                if (dupcheck !== 1) {
-                    if (addID == "relatedSelect") {
-                        //chris
-
-                        function askRelatedQuestions(){
-                            loop:
-                                while(true) {
-                                    relatedText = prompt('What do you want the link to say?\n\n', '');
-                                    if (relatedText !== '' && relatedText !== null) {
-                                        break loop;
-                                    } else {
-                                        relatedText;
-                                        if (relatedText !== '' && relatedText !== null) {
-                                            break loop;
-                                        }
-                                    }
-                                }
-                            loop2:
-                                while(true) {
-                            relatedURL = prompt('What is the URL (include HTTP)?\n\n', '');
-                            if (relatedURL !== '' && relatedURL !== null) {
-                                //do nothing because the variables are ready
-                                        break loop2;
-                            }else{
-                                        relatedURL;
-                                        if (relatedURL !== '' && relatedURL !== null) {
-                                            //do nothing because the variables are ready
-                                            break loop2;
-                            }
-                        }
-                        }
-
-                        }
-                        askRelatedQuestions();
-                    }
-                }
-            });
-
-            //addCorrection
-            jQuery('#addCorrection').click(function(){
-                insertCX();
-            });
-
-            //old select drop down code
+        function modifyDialog() {
             jQuery('#ap-option-set-select').on('change', function() {
-                newOptionSelect = resetOptionSet(menu_id);
+                newOptionSelect = resetOptionSet(this.value);
                 buildHTML(newOptionSelect);
             });
             if (keySetup == false) {
@@ -1570,71 +971,19 @@
                 });
                 keySetup = true;
             }
-
             jQuery('.tooltip-link').on('mouseenter',function(){
                 var tipText = jQuery(this).data("tooltip");
                 jQuery('.tipGraf').html(tipText).css('display','block');
             }).on('mouseleave',function(){
                 jQuery('.tipGraf').html('').css('display','none');            
             });
-          //  jQuery("#APoptionSelect").get(0).focus();
-
-            jQuery(".embeds, .sportEmbeds, .sidebars").css('display','none');
-            //listen for embeds vs insert clicks
-            /*
-            jQuery( ".inserts" ).on( "click", function() {
-                jQuery(".inserts").addClass("whichInsert");
-                if ($(".addInsert").is(":visible") == true) {
-                    //do nothing
-                    console.log("you can see my inserts");
-                }else{
-                    jQuery(".embeds").removeClass("whichInsert");
-                    jQuery('.addInsert').toggle();
-                    jQuery('.addEmbeds').toggle();
+//            jQuery("#APoptionSelect").get(0).focus();
         }
-            });
-            jQuery(".embeds").on("click",function() {
-                jQuery(".embeds").addClass("whichInsert");
-                if ($(".addEmbeds").is(":visible") == true) {
-                    //do nothing
-                }else{
-                    jQuery(".inserts").removeClass("whichInsert");
-                    jQuery('.addEmbeds').toggle();
-                    jQuery('.addInsert').toggle();
-                }
-            });
-            */
-            jQuery(".embedTab").on("click",function() {
-                jQuery(".embedTab").removeClass("whichInsert");
-                jQuery(this).addClass("whichInsert");
-                let which = jQuery(this).data('which');
-                jQuery(".embedOptions").hide();
-                jQuery("."+which).show();
-            });
-        }
-
-
 
         function APdialogText(options,optionSet){
-            //menu select
-            var menuNews = (optionSet == 'news') ? 'menuOn' : '';
-            var menuSports = (optionSet == 'sports') ? 'menuOn' : '';
-            var menuPolitics = (optionSet == 'politics') ? 'menuOn' : '';
-            var menuBusiness = (optionSet == 'business') ? 'menuOn' : '';
-            var menuEntertainment = (optionSet == 'entertainment') ? 'menuOn' : '';
-            var menuOpinion = (optionSet == 'opinion') ? 'menuOn' : '';
-
-            //category menu
-            var output = '<div class="grid-x">';
-            output += '<div id="news" class="cell auto categoryMenu ap-options '+menuNews+'">News</div>' +
-                '<div id="sports" class="cell auto categoryMenu ap-options '+menuSports+'">Sports</div>' +
-                '<div id="politics" class="cell auto categoryMenu ap-options '+menuPolitics+'">Politics</div>' +
-                '<div id="business" class="cell auto categoryMenu ap-options '+menuBusiness+'">Business</div>' +
-                '<div id="entertainment" class="cell auto categoryMenu ap-options '+menuEntertainment+'">Entertainment</div>' +
-                '<div id="opinion" class="cell auto categoryMenu ap-options '+menuOpinion+'">Opinion</div>';
-            output += '</div>'; //end grid-x
-
-            output += '<div class="storyWrapper">';
+            var output = '<div class="ap-options"><p>Welcome to The Denver Post AUTO🤖PRODUCER™ for Articles. Here\'s a list of helper functions I can perform for you:</p>';
+            output += '<div class="one-quarter">';
+            output += '<ul>';
             var displayOptions = [];
             validOptions.splice(0,validOptions.length);
             for(var object in options){
@@ -1646,158 +995,76 @@
             var optsLength = Object.keys(displayOptions).length;
             var oneThird = Math.ceil(optsLength * 0.35);
             var twoThird = Math.ceil(optsLength * 0.68);
-            //var newsSelected = (optionSet == 'news') ? ' selected="selected"' : ''; //old selected options
-            //var sportsSelected = (optionSet == 'sports') ? ' selected="selected"' : ''; //old selected options
+            var newsSelected = (optionSet == 'news') ? ' selected="selected"' : '';
+            var sportsSelected = (optionSet == 'sports') ? ' selected="selected"' : '';
             var i = 0;
             for(var object in options){
-                //if (i == 0){output += '<div class="grid-x">';}
-                if (i % 4 == 0) {
-                    output += '<div class="grid-x">';
-                }
                 if (options[object]['option-set'] == optionSet || typeof options[object]['option-set'] == 'undefined') {
-                    //var relStar = (options[object].related) ? ' <span class="red-star">*</span>' : ' ';
-                    var tooltipString = (options[object].related) ? '<p class=apDetail>Related bar included</p>' : '';
-                    tooltipString += '<p>Sets <strong>Primary Section</strong> to: <br/><span class=apDetail>' + options[object]['help-primary-section'] + '</span></p>';
-                    tooltipString += '<p>Selects these <strong>Trust Categories</strong>:<br/><span class=apDetail>' + options[object]['help-trust'] + '</span></p>';
-                    tooltipString += '<p>Sets <strong>Primary Tag</strong> to:<br/><span class=apDetail>' + options[object]['help-primary-tag'] + '</span></p>';
-                    tooltipString += '<p>Selects these <strong>Sections</strong>:<br/><span class=apDetail>' + options[object]['help-sections'] + '</span></p>';
-                    tooltipString += '<p>Adds these <strong>Tags</strong>:<br/><span class=apDetail>' + options[object]['add-tags'].join(', ') + '</span></p>';
-                    tooltipString += '<p>Adds <strong>Apple News</strong> sections:<br/><span class=apDetail>' + options[object]['apple-news'] + '</span></p>';
-                    tooltipString += '<p>Notify:<br/><span class=apDetail>' + options[object]['notifications'] + '</span></p>';
-                    tooltipString += '<p>Adds these <strong>Features</strong>:<br/><span class=apDetail>' + options[object].features.join(', ') + '</span></p>';
+                    var relStar = (options[object].related) ? ' <span class="red-star">*</span>' : ' ';
+                    var tooltipString = '<p>Sets <strong>Primary Section</strong> to:<br />' + options[object]['help-primary-section'] + '</p>';
+                    tooltipString += '<p>Sets <strong>Primary Tag</strong> to:<br />' + options[object]['help-primary-tag'] + '</p>';
+                    tooltipString += '<p>Selects these <strong>Sections</strong>:<br />' + options[object]['help-sections'] + '</p>';
+                    tooltipString += '<p>Adds these <strong>Tags</strong>:<br />' + options[object]['add-tags'].join(', ') + '</p>';
+                    tooltipString += '<p>Adds <strong>Apple News</strong> sections:<br />' + options[object]['apple-news'] + '</p>';
+                    tooltipString += '<p>Adds these <strong>Features</strong>:<br />' + options[object].features.join(', ') + '</p>';
                     if (options.hasOwnProperty(object)) {
-                        //relStar //adds a star or not to the element, not sure if i need or want this still
-                        output += '<div class="cell small-3 storyBox" id="'+object.trim()+'" data-storyID="'+object.trim()+'" >' + options[object].title + ' <a class="tooltip-link" data-tooltip="' + HTMLescape(tooltipString) + '" href="#" tabindex="0"></a></div>';
+                        output += '<li>( ' + pad(object) + ' ) ' + options[object].title + relStar + ' <a class="tooltip-link" data-tooltip="' + HTMLescape(tooltipString) + '" href="#" tabindex="0">(?)</a></li>';
                     }
-
-                   /* if (i == oneThird || i == twoThird) {
+                    if (i == oneThird || i == twoThird) {
                         output += '</ul></div><div class="one-quarter"><ul>';
-                    }*/
+                    }
                     i++;
                 }
-                if (i % 4 == 0) {
-                    output += '</div> <!-- /grid-x close -->';
-                }
             }
+            output += '</ul>';
             output += '</div>';
-            output += '</div>'; //.storyWrapper end
-            output += '<div class="grid-x">';
-            output += '<div class="cell small-3 autoDetailsWrapper">';
-            //removed because new menu system is being used
-            //output += '<p>Option set:<br />'
-            //output += '<select id="ap-option-set-select" name="ap-option-set-select" tabindex="1">';
-            //output += '<option value="news"' + newsSelected + '>News</option>';
-            //output += '<option value="sports"' + sportsSelected + '>Sports</option>';
-            //output += '</select>';
-            //output += '</p>';
-            output += '<p class="boxTitle">Auto Details</p>';
-            output += '<div class="tipGraf">';
-            output += '<b>Primary Section</b> to:<br/><br/>\n' +
-                '<b>Primary Tag</b> to:<br/><br/>\n' +
-                'Selects these <b>Sections</b>:<br/><br/>\n' +
-                'Adds these <b>Tags</b>:<br/><br/>\n' +
-                'Adds <b>Apple News</b> sections:<br/><br/>\n' +
-                'Notify:<br/><br/>\n' +
-                'Adds these <b>Features:</b><br/><br/></div>';
+            output += '<div class="one-quarter">';
+            output += '<p>Option set:<br />'
+            output += '<select id="ap-option-set-select" name="ap-option-set-select" tabindex="1">';
+            output += '<option value="news"' + newsSelected + '>News</option>';
+            output += '<option value="sports"' + sportsSelected + '>Sports</option>';
+            output += '</select>';
+            output += '</p>';
+            output += '<div class="tipGraf" style="display:none;"></div>';
             output += '</div>';
-           // output += '<div class="cell small-6" style="display:none;">';
-           // output += '<p><strong>Enter selection:</strong></p><p><input type="text" id="APoptionSelect" tabindex="1"></p>';
-           // output += '</div>';
-            output += '<div class="cell small-7 addInsertWrapper">';
-            output += '<div class="boxTitle grid-x"><div class="cell auto embedTab" data-which="inserts">Additional Inserts</div><div class="cell auto embedTab" data-which="embeds">Data Embeds</div><div class="cell auto embedTab" data-which="sportEmbeds">Sport Embeds</div><div class="cell auto embedTab" data-which="sidebars" style="font-size:12px;">Story Sidebars/Embeds</div></div>';
-            //story sidebars
-            output += '<div class="grid-x">';
-            output += '<div class="cell auto embedOptions sidebars " id="domesticViolence" data-addinserts="30">Domestic Violence</div>';
-            output += '<div class="cell auto embedOptions sidebars " id="alzheimer" data-addinserts="31">Alzheimer</div>';
-            output += '<div class="cell auto embedOptions sidebars " id="suicideResources" data-addinserts="32">Suicide Resources</div>';
-            output += '<div class="cell auto embedOptions sidebars " id="avalancheDanger" data-addinserts="32">Avalanche Danger Scale</div>';
-            output += '</div>'; //grid-x
-
-            //SPORTS EMBEDS
-            /* NONE OF THESE WORK
-            output += '<div class="grid-x">';
-            output += '<div class="cell auto embedOptions sportEmbeds rockies" id="rockiesScoreboard" data-addinserts="20">Rockies Scoreboard</div>';
-            output += '<div class="cell auto embedOptions sportEmbeds rockies" id="nlwestStandings" data-addinserts="21">NL West Standings</div>';
-            output += '<div class="cell auto embedOptions sportEmbeds rockies" id="rockiesSchedule" data-addinserts="22">Rockies Schedule next5/last10</div>';
-            output += '</div>'; //grid-x
-            output += '<div class="grid-x">';
-            output += '<div class="cell auto embedOptions sportEmbeds rockies" id="rockiesLeaders" data-addinserts="23">Rockies Team Leader</div>';
-            output += '<div class="cell auto embedOptions sportEmbeds rockies" id="rockiesOffense" data-addinserts="24">Rockies Offence</div>';
-            output += '<div class="cell auto embedOptions sportEmbeds rockies" id="rockiesDefense" data-addinserts="25">Rockies Pitching/Defense</div>';
-            output += '<div class="cell auto embedOptions sportEmbeds rockies" id="mlbHomeRunLeaders" data-addinserts="26">MLB Home run leaders</div>';
-            output += '</div>'; //grid-x
-            */
-            output += '<div class="grid-x">';
-            output += '<div class="cell auto embedOptions sportEmbeds rockies" id="rockiesGeneral" data-addinserts="19">Rockies General</div>';
-            output += '<div class="cell auto embedOptions sportEmbeds rockies" id="nlwestStandings" data-addinserts="21">NL West Standings</div>';
-            output += '<div class="cell auto embedOptions sportEmbeds broncos" id="broncosGeneral" data-addinserts="27">Broncos General</div>';
-            output += '<div class="cell auto embedOptions sportEmbeds avalanche" id="avalancheGeneral" data-addinserts="128">Avalanche General</div>';
-            output += '<div class="cell auto embedOptions sportEmbeds nuggets" id="nuggestGeneral" data-addinserts="29">Nuggets General</div>';
-            output += '</div>'; //grid-x
-
-            //KEVIN EMBEDS
-            output += '<div class="grid-x">';
-            output += '<div class="cell auto embedOptions embeds" id="officerShootingSelect" data-addinserts="15">Officer-involved shootings map</div>';
-            output += '<div class="cell auto embedOptions embeds" id="realEstateSelect" data-addinserts="15">Real Estate developments</div>';
-            output += '<div class="cell auto embedOptions embeds" id="oilGasSelect" data-addinserts="16">Oil and gas permit map</div>';
-            output += '<div class="cell auto embedOptions embeds" id="wildfireSelect" data-addinserts="17">Wildfire map</div>';
-            output += '<div class="cell auto embedOptions embeds" id="homicideSelect" data-addinserts="18">Homicide report</div>';
-            output += '</div>'; //grid-x
-
-            //GENERAL EMBEDS
-            output += '<div class="grid-x">';
-            output += '<div class="cell auto embedOptions inserts" id="relatedSelect" data-addinserts="2">Insert Related</div>';
-            output += '<div class="cell auto embedOptions inserts" id="fullBleedSelect" data-addinserts="14">Full Bleed </div>';
-            output += '<div class="cell auto embedOptions inserts" id="newsletterSelect" data-addinserts="5">Newsletter widget</div>';
-            output += '<div class="cell auto embedOptions inserts" id="closureSelect" data-addinserts="11">School Closures</div>';
-            output += '</div>'; //grid-x
-            output += '<div class="grid-x">';
-            //remove later
-            // output += '<div class="cell auto embedOptions inserts" id="supportSelect" data-addinserts="3">Support Message</div>';
-            output += '<div class="cell auto embedOptions inserts" id="ethicsSelect" data-addinserts="3">Ethics Box</div>';
-            output += '<div class="cell auto embedOptions inserts" id="appPromo" data-addinserts="6">App Promo Widget</div>';
-            output += '<div class="cell auto embedOptions inserts" id="hateSelect" data-addinserts="8">Documenting Hate</div>';
-            output += '<div class="cell auto embedOptions inserts" id="APauthorSelect" data-addinserts="12">Author -> AP</div>';
-            output += '</div>'; //grid-x
-            output += '<div class="grid-x">';
-            output += '<div class="cell auto embedOptions inserts" id="promoSelect" data-addinserts="4">Insert Promos</div>';
-            output += '<div class="cell auto embedOptions inserts" id="youtubeSelect" data-addinserts="7">YouTube video</div>';
-            output += '<div class="cell auto embedOptions inserts" id="crimeMapSelect" data-addinserts="10">Crime Map widget</div>';
-            output += '<div class="cell auto embedOptions inserts" id="WaPoauthorSelect" data-addinserts="13">Author -> WaPo</div>';
-            output += '</div>'; //grid-x
-            output += '<div class="grid-x" style="margin-top:10px;">';
-            output += '<div class="cell small-3 embedOptions inserts" id="addCorrection">Add Correction</div>';
-            output += '</div>'; //grid-x
-            output += '</div>'; //cell small-7
             output += '<div class="clear"></div>';
-            output += '</div>'; //grid-x from line 1078
-            /*
-            //removed for now. To confusing.
+            output += '<div class="one-quarter">';
+            output += '<p><strong>Enter selection:</strong></p><p><input type="text" id="APoptionSelect" tabindex="1"></p>';
+            output += '</div>';
+            output += '<div class="one-quarter">';
+            output += '<p>Insert Related <span class="red-star">*</span> <input type="checkbox" id="relatedSelect" tabindex="2" /><br />';
+            output += 'Newsletter widget <input type="checkbox" id="newsletterSelect" tabindex="5" disabled /><br />';
+            output += 'Documenting Hate <input type="checkbox" id="hateSelect" tabindex="8" /><br />';
+            output += 'School Closures <input type="checkbox" id="closureSelect" tabindex="11" /></p>';
+            output += '</div>';
+            output += '<div class="one-quarter">';
+            output += '<p>Support Message <input type="checkbox" id="supportSelect" tabindex="3" /><br />';
+            output += 'App Promo Widget <input type="checkbox" id="appPromo" tabindex="6" disabled /><br />';
+            output += 'Homicide Report <span class="mag-star">*</span> <input type="checkbox" id="homicideSelect" tabindex="9" /><br />';
+            output += 'Author -> AP <span class="blue-star">*</span> <input type="checkbox" id="APauthorSelect" tabindex="12" /></p>';
+            output += '</div>';
+            output += '<div class="one-quarter">';
+            output += '<p>Insert Promos <input type="checkbox" id="promoSelect" tabindex="4" /><br />';
+            output += 'YouTube video <input type="checkbox" id="youtubeSelect" tabindex="7" /><br />';
+            output += 'Crime Map widget <input type="checkbox" id="crimeMapSelect" tabindex="10" /><br />';
+            output += 'Author -> WaPo <span class="blue-star">*</span> <input type="checkbox" id="WaPoauthorSelect" tabindex="13" /></p>';
+            output += '</div>';
+            output += '<div class="clear"></div>';
             output += '<p class="red-small">Items with a star insert Related by Primary Tag automatically.<br />Related items will only be inserted on articles with 6 or more paragraphs.</p>';
             output += '<p class="blue-small">AP will override WaPo if both are checked; you WILL NOT see the new author until you save.</p>';
             output += '<p class="mag-small">Overrides the Crime Map if both are checked.</p>';
             output += '<div class="ap-help"><a href="https://extras.denverpost.com/app/bookmarklet/ap-help.html" target="_blank">AUTO🤖PRODUCER™ Help</a></div></div>';
-            */
+            output = '<div style="width:100%;background-color:lightcoral;font-size:20px;line-height:35px;text-align:center;"><img style="width: 30%;" src="https://media.giphy.com/media/Bp3dFfoqpCKFyXuSzP/giphy.gif"/><br/>Hello There. You seem to be using the legacy version of Auto Producer.<br/>Please go to this page: <a href="https://extras.denverpost.com/app/bookmarklet/">https://extras.denverpost.com/app/bookmarklet/</a> and replace your bookmark with the new one.  Thanks! Have a great day!☀️ </div>';
             return output;
         }
 
         function processAPform() {
-            console.log("PROCESSING THIS");
-            console.log(storySelection);
-            if (storySelection == 0) {
-                //alert("You didn't select anything ¯\\_(ツ)_/¯");
-            }
             if (typeof processing == 'undefined') {
                 processing = true;
-                var args = additionalAddOns;
+                var args = [];
                 if (typeof selectFunction == 'undefined') {
-                    // var selectFunction = (jQuery('#APoptionSelect').val() == '') ? '0' : jQuery('#APoptionSelect').val(); //old select story
-                    var selectFunction = (storySelection == '') ? '0' : storySelection;
+                    var selectFunction = (jQuery('#APoptionSelect').val() == '') ? '0' : jQuery('#APoptionSelect').val();
                 }
-                console.log("inside process function");
-
-                /*
-                // old check box system these are now saved in an onclick function up higher once each button is selected
                 args['selectRelated'] = jQuery('#relatedSelect').prop('checked');
                 args['APauthorSelect'] = jQuery('#APauthorSelect').prop('checked');
                 args['WaPoauthorSelect'] = jQuery('#WaPoauthorSelect').prop('checked');
@@ -1810,7 +1077,6 @@
                 args['homicideSelect'] = jQuery('#homicideSelect').prop('checked') ? true : false;
                 args['closureSelect'] = jQuery('#closureSelect').prop('checked') ? true : false;
                 args['crimeMapSelect'] = jQuery('#crimeMapSelect').prop('checked') ? true : false;
-                */
                 if (validOptions.indexOf(String(selectFunction)) !== -1) {
                     jQuery('#auto-producer').html(APsuccessText);
                     trumpThatBitch(options[selectFunction],args);
@@ -1831,157 +1097,10 @@
             modifyDialog();
         }
 
-        //make the JQUERY dialog box response and a couple other cool features
-        //https://github.com/jasonday/jQuery-UI-Dialog-extended
-        // add new options with default values
-        jQuery.ui.dialog.prototype.options.clickOut = true;
-        jQuery.ui.dialog.prototype.options.responsive = true;
-        jQuery.ui.dialog.prototype.options.scaleH = 0.8;
-        jQuery.ui.dialog.prototype.options.scaleW = 0.8;
-        jQuery.ui.dialog.prototype.options.showTitleBar = false;
-        jQuery.ui.dialog.prototype.options.showCloseButton = true;
-
-
-
-
-
-// extend open function
-        var _open = $.ui.dialog.prototype.open;
-        jQuery.ui.dialog.prototype.open = function () {
-            var self = this;
-
-            // apply original arguments
-            _open.apply(this, arguments);
-
-            // get dialog original size on open
-            var oHeight = self.element.parent().outerHeight(),
-                oWidth = self.element.parent().outerWidth(),
-                isTouch = $("html").hasClass("touch");
-
-            // responsive width & height
-            var resize = function () {
-
-                //check if responsive
-                // dependent on modernizr for device detection / html.touch
-                if (self.options.responsive === true || (self.options.responsive === "touch" && isTouch)) {
-                    var elem = self.element,
-                        wHeight = $(window).height(),
-                        wWidth = $(window).width(),
-                        dHeight = elem.parent().outerHeight(),
-                        dWidth = elem.parent().outerWidth(),
-                        setHeight = Math.min(wHeight * self.options.scaleH, oHeight),
-                        setWidth = Math.min(wWidth * self.options.scaleW, oWidth);
-
-                    if ((oHeight + 100) > wHeight || elem.hasClass("resizedH")) {
-                        elem.dialog("option", "height", setHeight).parent().css("max-height", setHeight);
-                        elem.addClass("resizedH");
-                    }
-                    if ((oWidth + 100) > wWidth || elem.hasClass("resizedW")) {
-                        elem.dialog("option", "width", setWidth).parent().css("max-width", setWidth);
-                        elem.addClass("resizedW");
-                    }
-
-                    // only recenter & add overflow if dialog has been resized
-                    if (elem.hasClass("resizedH") || elem.hasClass("resizedW")) {
-                        elem.dialog("option", "position", "center");
-                        elem.css("overflow", "auto");
-                    }
-                }
-
-                // add webkit scrolling to all dialogs for touch devices
-                if (isTouch) {
-                    elem.css("-webkit-overflow-scrolling", "touch");
-                }
-            };
-
-            // call resize()
-            resize();
-
-            // resize on window resize
-            jQuery(window).on("resize", function () {
-                resize();
-            });
-
-            // resize on orientation change
-            window.addEventListener("orientationchange", function () {
-                resize();
-            });
-
-            // hide titlebar
-            if (!self.options.showTitleBar) {
-                self.uiDialogTitlebar.css({
-                    "height": 0,
-                    "padding": 0,
-                    "background": "none",
-                    "border": 0
-                });
-                self.uiDialogTitlebar.find(".ui-dialog-title").css("display", "none");
-            }
-
-            //hide close button
-            if (!self.options.showCloseButton) {
-                self.uiDialogTitlebar.find(".ui-dialog-titlebar-close").css("display", "none");
-            }
-
-            // close on clickOut
-            if (self.options.clickOut && !self.options.modal) {
-                // use transparent div - simplest approach (rework)
-                jQuery('<div id="dialog-overlay"></div>').insertBefore(self.element.parent());
-                jQuery('#dialog-overlay').css({
-                    "position": "fixed",
-                    "top": 0,
-                    "right": 0,
-                    "bottom": 0,
-                    "left": 0,
-                    "background-color": "transparent"
-                });
-                jQuery('#dialog-overlay').click(function (e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    self.close();
-                });
-                // else close on modal click
-            } else if (self.options.clickOut && self.options.modal) {
-                jQuery('.ui-widget-overlay').click(function (e) {
-                    self.close();
-                });
-            }
-
-            // add dialogClass to overlay
-            if (self.options.dialogClass) {
-                jQuery('.ui-widget-overlay').addClass(self.options.dialogClass);
-            }
-        };
-//end open
-
-
-// extend close function
-
-        var _close = $.ui.dialog.prototype.close;
-        jQuery.ui.dialog.prototype.close = function () {
-            var self = this;
-            // apply original arguments
-            _close.apply(this, arguments);
-
-            // remove dialogClass to overlay
-            if (self.options.dialogClass) {
-                jQuery('.ui-widget-overlay').removeClass(self.options.dialogClass);
-            }
-            //remove clickOut overlay
-            if (jQuery("#dialog-overlay").length) {
-                jQuery("#dialog-overlay").remove();
-            }
-
-        };
-
-//end close
-        //end JQUERY dialog extends
-
         jQuery('#auto-producer').dialog({
             autoOpen: false,
             buttons: [
                 {
-                //not being used right now.
                     id: "btnCapture",
                     text: "CAPTURE",
                     click: function () {
@@ -1989,26 +1108,22 @@
                     },
                     tabindex: 17
                 },
-                /*
-                //school closures is a dup.
                 {
                     id: "btnClosures",
-                    text: "Add School Closures",
+                    text: "+Closures",
                     click: function () {
                         insertClosures();
                     },
                     tabindex: 16
                 },
-                //moved this button up to be with additional addons 
                 {
                     id: "btnCX",
-                    text: "Add Correction",
+                    text: "+CX",
                     click: function () {
                         insertCX();
                     },
                     tabindex: 14
                 },
-                */
                 {
                     id: "btnCancel",
                     text: "CANCEL",
@@ -2026,11 +1141,10 @@
                     tabindex: 10
                 }
             ],
-           // title: 'Denver Post AUTO🤖PRODUCER™' + APversion, //removed in variable above and commented out here
+            title: 'Denver Post AUTO🤖PRODUCER™' + APversion,
             resize: 'auto',
             modal: true,
             minWidth: 940,
-            responsive: true,
             position: { my: 'top', at: 'top+30', of: window, collision: "fit", within: window },
             create: function (event, ui) {
                 jQuery(event.target).parent().css('position', 'fixed');
@@ -2039,7 +1153,6 @@
         });
         jQuery('#auto-producer').dialog('open');
     }
-//end of autoProducerPost
 
     function autoProducerContentHub() {
         var options = {
@@ -2274,6 +1387,7 @@
             output += '<div class="clear"></div>';
             output += '<p>Add a search term? <input type="text" id="APoptionSelect" tabindex="3"></p>';
             output += '<div class="ap-help"><a href="https://extras.denverpost.com/app/bookmarklet/ap-help.html" target="_blank">AUTO🤖PRODUCER™ Help</a></div></div>';
+            output = '<div style="width:100%;background-color:lightcoral">Hello There. You seem to be using the legacy version of Auto Producer.<br/>Please go to this page: <a href="https://extras.denverpost.com/app/bookmarklet/">https://extras.denverpost.com/app/bookmarklet/</a> and replace your bookmark with the new one.  Thanks! Have a great day!☀️ </div>';
             return output;
         }
 
@@ -2566,8 +1680,7 @@
     }
 
     var optionSetting = readCookie('auto-producer-options');
-    //var optionSelect = (optionSetting != null) ? optionSetting : 'news'; //old checking for cookie varibale
-    var optionSelect = 'news'; //hardcoding starting with news
+    var optionSelect = (optionSetting != null) ? optionSetting : 'news';
     var loc = window.location.href;
     var allTags = [];
     if (document.body.classList.contains('modal-open') || loc.indexOf('upload.php') > -1) {
@@ -2578,31 +1691,20 @@
         if (!document.body.contains(document.getElementById('auto-producer'))) {
             var APstyle = window.document.createElement('link');
             APstyle.setAttribute('rel','stylesheet');
-            APstyle.setAttribute('href','https://extras.denverpost.com/app/bookmarklet/js/newauto/auto-producer.css?v='+vSec());
+            APstyle.setAttribute('href','https://extras.denverpost.com/app/bookmarklet/auto-producer.min.css?v='+vSec());
             window.document.body.appendChild(APstyle);
             var s2 = window.document.createElement('script');
             s2.setAttribute('src','https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js');
             window.document.body.appendChild(s2);
-            var dialogJS = window.document.createElement('script');
-            dialogJS.setAttribute('src','https://extras.denverpost.com/app/bookmarklet/js/jquery.dialogOptions.js');
-            window.document.body.appendChild(dialogJS);
             var tagJS = window.document.createElement('script');
             tagJS.setAttribute('src','https://extras.denverpost.com/app/bookmarklet/autoproducer/ap-tagignore.js?v='+vSec());
             window.document.body.appendChild(tagJS);
             var optionsJS = window.document.createElement('script');
-            optionsJS.setAttribute('src','https://extras.denverpost.com/app/bookmarklet/js/newauto/ap-options-new-ui.min.js?v='+vSec());
+            optionsJS.setAttribute('src','https://extras.denverpost.com/app/bookmarklet/js/ap-options.min.js?v='+vSec());
             window.document.body.appendChild(optionsJS);
             var APdiv = window.document.createElement('div');
             APdiv.setAttribute('id','auto-producer');
             window.document.body.appendChild(APdiv);
-            var foundation = window.document.createElement('script');
-            foundation.setAttribute('src','https://cdn.jsdelivr.net/npm/foundation-sites@6.5.1/dist/js/foundation.min.js');
-            foundation.setAttribute('crossorigin','anonymous');
-            document.body.appendChild(foundation);
-            var foundationStyle = window.document.createElement('link');
-            foundationStyle.setAttribute('rel','stylesheet');
-            foundationStyle.setAttribute('href','https://extras.denverpost.com/app/bookmarklet/foundation_iframe.css?v='+vSec());
-            document.body.appendChild(foundationStyle);
         }
 
         var requirementsLoaded = setInterval(function() {

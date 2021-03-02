@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bookmarklets</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="//extras.denverpost.com/transgender/css/normalize.css" />
+    <link rel="stylesheet" href="//extras.denverpost.com/transgender/css/foundation.min.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <link href='http://fonts.googleapis.com/css?family=Noticia+Text:400,700,400italic,700italic|PT+Sans:400,700,400italic,700italic|PT+Sans+Narrow:400,700' rel='stylesheet' type='text/css'>
+    <link rel="shortcut icon" href="http://extras.mnginteractive.com/live/media/favIcon/dpo/favicon.ico" type="image/x-icon" />
+</head>
+<body>
+
+    <div class="row">
+        <div class="large-12 columns">
+            <h1>Bookmarklets!</h1>
+
+            <p>Note on the WordPress bookmarklets: Don't use 'em in visual mode.</p>
+            <p><strong>Also:</strong> Most of these WordPress bookmarklets must be clicked before you make any other edits to an article.</p>
+
+            <section class="body-copy">
+                <div class="row panel">
+                    <div class="large-9 columns">
+                        <h4>Denver Post AUTO🤖PRODUCER™</h4>
+                        <p>Drag this link to your browser's bookmakers bar and click the button to enter the Denver Post AUTO🤖PRODUCER™, which automates some repetitive story production tasks.</p>
+                        <p>HELP: AUTO🤖PRODUCER™ has tooltips with detailed explanations of your options, and <a href="ap-help.html">full documentation here</a>.</p>
+                    </div>
+                    <div class="large-3 columns">
+                        <div class="panel panelbig callout radius text-center">
+                            <span style="font-size:80%;">Mac/Linux:</span> <a href="javascript:void((function(){    var e = document.createElement('script'); e.setAttribute('src','//extras.denverpost.com/app/bookmarklet/js/auto-link.min.js'); document.body.appendChild(e);  })());">🤖</a><br />
+                            <span style="font-size:80%;">Windows:</span> <a href="javascript:void((function(){    var e = document.createElement('script'); e.setAttribute('src','//extras.denverpost.com/app/bookmarklet/js/auto-link.min.js'); document.body.appendChild(e);  })());"><span style="font-size:40%;">A-P™</span></a><br/><br/>
+                            <span style="font-size:80%;">Beta:</span> <a href="javascript:void((function(){    var e = document.createElement('script'); e.setAttribute('src','//extras.denverpost.com/app/bookmarklet/js/auto-link_new.js'); document.body.appendChild(e);  })());">[[🤖]]</a><br />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row panel">
+                    <div id="photos" class="large-9 columns">
+                        <h4>Photo Caption Cleaner</h4>
+                        <p>Attempts to cleanup photo Caption, Credit, Description and Alt text in Wordpress</p>
+                        <p>With a Media Library Modal open (the pop-up window that appears when you click to set a Featured Image or Add Media) <strong>and an image selected</strong>, or while viewing an image in the Media Library, clicking this bookmarklet.</p>
+                        <p>It will copy the raw Caption to the Description field, attempt to extract the Photo Credit and set it in the correct field, and attempt to trim the Getty Dateline and Credit from the Caption field. It will also set basic Alt Text for you, and remove "APTOPIX" from the Title, if it's there.</p>
+                        <p>Note: Some instances of month names may be abbreviated when they should not be.</p>
+                        <p>This feature is still considered <em>experimental</em>.</p>
+                    </div>
+                    <div class="large-3 columns">
+                        <div class="panel callout radius text-center">
+                            <a href="javascript:void((function(){    var e = document.createElement('script'); e.setAttribute('src','//extras.denverpost.com/app/bookmarklet/js/photo-link.min.js'); document.body.appendChild(e);  })());">+CAPTION</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row panel">
+                    <div class="large-9 columns">
+                        <h4 id="flush">Flush Cache Bookmarklet</h4>
+                        <p>Drag this link to your browser's bookmakers bar and click the button to flush the cache on any Denver Post page you're on.</p>
+                    </div>
+                    <div class="large-3 columns">
+                        <div class="panel panelbig callout radius text-center">
+                            <span style="font-size:80%;">Mac/Linux:</span> <a href="javascript:void((function(){ var iframe = document.createElement('iframe'); iframe.style.display = 'none'; iframe.src='http://denverpostplus.com/app/cache-buster/?url=' + window.location.href; document.body.appendChild(iframe);  })());">🚽</a><br />
+                            <span style="font-size:80%;">Windows:</span> <a href="javascript:void((function(){ var iframe = document.createElement('iframe'); iframe.style.display = 'none'; iframe.src='http://denverpostplus.com/app/cache-buster/?url=' + window.location.href; document.body.appendChild(iframe);  })());"><span style="font-size:40%;">FLUSH</span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row panel">
+                    <div class="large-9 columns">
+                        <h4>Wordpress Article ID fetcher</h4>
+                        <p>Drag this link to your browser's bookmakers bar and click the button to find the Article ID of any Wordpress article.</p>
+                    </div>
+                    <div class="large-3 columns">
+                        <div class="panel callout radius text-center">
+                            <a href="javascript:void((function(){    var e = document.createElement('script'); e.setAttribute('src','//extras.denverpost.com/app/bookmarklet/js/wp-id.min.js'); document.body.appendChild(e);  })());">+WP-ID</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row panel">
+                    <div class="large-9 columns">
+                        <h4 id="inarticlepromo">In-Article-Promo Bookmarklet</h4>
+                        <p>Drag this link to your browser's bookmakers bar and click it when you're editing an article to automatically add in-article promos (for soft news, hard news, sports and for Broncos) every 6 paragraphs.</p>
+                    </div>
+                    <div class="large-3 columns">
+                        <div class="panel callout radius text-center">
+                            <a href="javascript:void((function(){    var e = document.createElement('script'); e.setAttribute('src','//extras.denverpost.com/app/bookmarklet/js/inarticlepromo.js'); document.body.appendChild(e);  })());">+PROMOS</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row panel">
+                    <div class="large-9 columns">
+                        <h4 id="cx">Corrections Bookmarklet</h4>
+                        <p>Drag this link to your browser's bookmakers bar and click it when you need to add a correction. Paste in the language and you're done!</p>
+                    </div>
+                    <div class="large-3 columns">
+                        <div class="panel callout radius text-center">
+                            <a href="javascript:void((function(){    var e = document.createElement('script'); e.setAttribute('src','//extras.denverpost.com/app/bookmarklet/js/cx.js'); document.body.appendChild(e);  })());">+CX</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row panel">
+                    <div class="large-9 columns">
+                        <h4 id="inform">Inform Embed Bookmarklet</h4>
+                        <p>Drag this link to your browser's bookmakers bar and click it when you're editing an article to add an Inform Video Embed code without looking up the syntax. Now with handy list of top playlist IDs!</p>
+                    </div>
+                    <div class="large-3 columns">
+                        <div class="panel panelbig callout radius text-center">
+                            <span style="font-size:80%;">Mac/Linux:</span> <a href="javascript:void((function(){    var e = document.createElement('script'); e.setAttribute('src','//extras.denverpost.com/app/bookmarklet/js/vid_embed.js'); document.body.appendChild(e);  })());">🎥</a><br />
+                            <span style="font-size:80%;">Windows:</span> <a href="javascript:void((function(){    var e = document.createElement('script'); e.setAttribute('src','//extras.denverpost.com/app/bookmarklet/js/vid_embed.js'); document.body.appendChild(e);  })());"><span style="font-size:40%;">+INFORM</span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row panel">
+                    <div class="large-9 columns">
+                        <h4 id="nouner">Nouner Bookmarklet</h4>
+                        <p>Drag this link to your browser's bookmakers bar and click it when you're editing an article to automatically link matching proper nouns in the article.</p>
+                    </div>
+                    <div class="large-3 columns">
+                        <div class="panel callout radius text-center">
+                            <a href="javascript:void((function(){    var e = document.createElement('script'); e.setAttribute('src','//extras.denverpost.com/app/bookmarklet/js/nouner.js'); document.body.appendChild(e);  })());">+NOUNER</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row panel">
+                    <div class="large-9 columns">
+                        <h4 id="wx">Weather Sidebar Bookmarklets</h4>
+                        <p>Drag this link to your browser's bookmakers bar and click it when you're editing an article to automatically add the sidebar after the third graf of the story.</p>
+                        <p><strong>NOTE:</strong> This must be clicked before you make any other edits to an article.</p>
+                    </div>
+                    <div class="large-3 columns">
+                        <div class="panel callout radius text-center">
+                            <a href="javascript:void((function(){    var e = document.createElement('script'); e.setAttribute('src','//extras.denverpost.com/app/bookmarklet/js/weather.js'); document.body.appendChild(e);  })());">+COWX</a>
+                            <a href="javascript:void((function(){    var e = document.createElement('script'); e.setAttribute('src','//extras.denverpost.com/app/bookmarklet/js/weather-closures.js'); document.body.appendChild(e);  })());">+CLOSURES</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="row panel">
+                    <div class="large-9 columns">
+                        <h4 id="video">Inform video Sidebar Bookmarklet</h4>
+                        <p>Drag this link to your browser's bookmakers bar and click it when you're editing an article to automatically add the Inform video markup with cq's above and below it to the top of the article you're editing.</p>
+                        <p><strong>NOTE:</strong> This bookmarklet can be clicked at any time in the article-editing process.</p>
+                    </div>
+                    <div class="large-3 columns">
+                        <div class="panel callout radius text-center">
+                            <a href="javascript:void((function(){  var e = document.createElement('script'); e.setAttribute('src','//extras.denverpost.com/app/bookmarklet/js/video.js'); document.body.appendChild(e);    })());">+ INFORM VIDEO</a>
+                        </div>
+                    </div>
+                </div> -->
+
+                <div class="row panel">
+                    <div class="large-9 columns">
+                        <h4 id="homicidereport">Homicide Report Sidebar Bookmarklet</h4>
+                        <p>Drag this link to your browser's bookmakers bar and click it when you're editing an article to automatically add the sidebar after the third graf of the story.</p>
+                    </div>
+                    <div class="large-3 columns">
+                        <div class="panel callout radius text-center">
+                            <a href="javascript:void((function(){  var e = document.createElement('script'); e.setAttribute('src','//extras.denverpost.com/app/bookmarklet/js/homicidereport.js'); document.body.appendChild(e);    })());">HOMICIDE SIDEBAR</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row panel">
+                    <div class="large-9 columns">
+                        <h4 id="preps">Preps Sidebar Bookmarklet</h4>
+                        <p>Drag this link to your browser's bookmakers bar and click it when you're editing an article to automatically add the sidebar after the third graf of the story.</p>
+                    </div>
+                    <div class="large-3 columns">
+                        <div class="panel callout radius text-center">
+                            <a href="javascript:void((function(){  var e = document.createElement('script'); e.setAttribute('src','//extras.denverpost.com/app/bookmarklet/js/preps.js'); document.body.appendChild(e);    })());">+ PREPS SIDEBAR</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row panel">
+                    <div class="large-9 columns">
+                        <h4 id="crime">Denver Crime Bookmarklet</h4>
+                        <p>Drag this link to your browser's bookmakers bar and click it when you're editing an article to automatically add the sidebar after the second-to-last graf of an article.</p>
+                    </div>
+                    <div class="large-3 columns">
+                        <div class="panel callout radius text-center">
+                            <a href="javascript:void((function(){  var e = document.createElement('script'); e.setAttribute('src','//extras.denverpost.com/app/bookmarklet/js/crime.js'); document.body.appendChild(e);    })());">+ CRIME SIDEBAR</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+</html>

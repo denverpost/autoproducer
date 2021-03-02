@@ -1,5 +1,12 @@
 <?php
 
+see 1mamp folder => php-email folder
+using sandboxed mailgun account to send emails from plus.denverpost.com
+
+/*
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 $file = 'new-requests.txt';
 
 $testObj = "\t".'"check-sections": ["'.implode($_GET['check-sections'],'","').'"],'."\n";
@@ -18,12 +25,18 @@ $newObj .= "\t".'"help-primary-tag": "'.(strlen($_GET['help-primary-tag']) >= 2 
 $newObj .= "\t".'"help-sections": "'.implode($_GET['help-sections'],', ').'",'."\n";
 $newObj .= "\t".'"help-primary-section": "'.$_GET['help-primary-section'].'",'."\n";
 $newObj .= "\t".'"option-set": "'.$_GET['option-set'].'",'."\n";
+$newObj .= "\t".'"notifications": "'.$_GET['notifications'].'",'."\n";
 $newObj .= '},'."\n";
 
-if( strpos(file_get_contents($file),$testObj) == false) {
-	file_put_contents($file, $newObj, FILE_APPEND | LOCK_EX);
+echo $newObj;
+echo "<br/><br/>";
+
+//if( strpos(file_get_contents($file),$testObj) == false) {
+    echo "sending email";
+	//file_put_contents($file, $newObj, FILE_APPEND | LOCK_EX);
 	$message = 'New request: '.$_GET['title']."\r\n" . $newObj . "\r\n";
 	mail('cbrubaker@denverpost.com','New AUTO-PRODUCER™ request!',$message);
-}
+//}
+*/
 
 ?>

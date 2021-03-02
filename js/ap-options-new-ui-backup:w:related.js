@@ -18,7 +18,8 @@ var autoProducerOptions = {
         "help-primary-tag": "Donald Trump",
         "help-sections": "Latest News, News, Nation and World News, Politics, National Politics, Trump Administration",
         "help-primary-section": "Trump Administration",
-        "option-set": "news"
+        "option-set": "politics",
+        "notifications": 'politics'
     },
     "2": {
         "title": "Cannabist Story",
@@ -32,7 +33,9 @@ var autoProducerOptions = {
         "help-primary-tag": "marijuana politics",
         "help-sections": "Latest News, News, Colorado News, Marijuana",
         "help-primary-section": "Marijuana",
-        "option-set": "news"
+        "option-set": "news",
+        "notifications": 'breaking'
+
     },
     "10": {
         "title": "Nation / World Story",
@@ -46,7 +49,8 @@ var autoProducerOptions = {
         "help-primary-tag": "",
         "help-sections": "Latest News, News, Nation and World News",
         "help-primary-section": "Nation and World News",
-        "option-set": "news"
+        "option-set": "news",
+        "notifications": 'breaking'
     },
     "11": {
         "title": "Obamacare",
@@ -60,7 +64,7 @@ var autoProducerOptions = {
         "help-primary-tag": "Obamacare",
         "help-sections": "Latest News, Business, Healthcare, News, Health, Politics, National Politics",
         "help-primary-section": "Healthcare",
-        "option-set": "news"
+        "option-set": "politics"
     },
     "20": {
         "title": "Colorado News",
@@ -74,7 +78,8 @@ var autoProducerOptions = {
         "help-primary-tag": "",
         "help-sections": "Latest News, News, Colorado News,",
         "help-primary-section": "Colorado News",
-        "option-set": "news"
+        "option-set": "news",
+        "notifications": 'breaking'
     },
     "21": {
         "title": "Colorado Wildfires",
@@ -88,7 +93,8 @@ var autoProducerOptions = {
         "help-primary-tag": "Colorado wildfires 2018",
         "help-sections": "Latest News, News, Colorado News, Colorado Wildfires",
         "help-primary-section": "Colorado Wildfires",
-        "option-set": "news"
+        "option-set": "news",
+        "notifications": 'breaking'
     },
     "22": {
         "title": "Crime Story",
@@ -102,7 +108,8 @@ var autoProducerOptions = {
         "help-primary-tag": "",
         "help-sections": "Latest News, News, Colorado News, Crime & Courts",
         "help-primary-section": "Crime & Courts",
-        "option-set": "news"
+        "option-set": "news",
+        "notifications": 'breaking'
     },
     "23": {
         "title": "Weather Story",
@@ -116,7 +123,8 @@ var autoProducerOptions = {
         "help-primary-tag": "",
         "help-sections": "Latest News, News, Colorado News, Weather",
         "help-primary-section": "Weather",
-        "option-set": "news"
+        "option-set": "news",
+        "notifications": 'breaking'
     },
     "24": {
         "title": "Colorado Immigration",
@@ -130,7 +138,8 @@ var autoProducerOptions = {
         "help-primary-tag": "U.S. immigration policy",
         "help-sections": "News, Colorado News, Immigration, Politics, Colorado Politics",
         "help-primary-section": "Immigration",
-        "option-set": "news"
+        "option-set": "news",
+        "notifications": 'breaking'
     },
     "31": {
         "title": "Colorado Legislature",
@@ -144,7 +153,8 @@ var autoProducerOptions = {
         "help-primary-tag": "",
         "help-sections": "Latest News, News, Colorado News, Politics, Local Politics, Colorado Legislature",
         "help-primary-section": "Colorado Legislature",
-        "option-set": "news"
+        "option-set": "politics",
+        "notifications": 'politics'
     },
     "32": {
         "title": "National Politics",
@@ -158,7 +168,8 @@ var autoProducerOptions = {
         "help-primary-tag": "",
         "help-sections": "Latest News, Politics, National Politics",
         "help-primary-section": "National Politics",
-        "option-set": "news"
+        "option-set": "politics",
+        "notifications": 'politics'
     },
     "33": {
         "title": "Denver Politics",
@@ -172,7 +183,8 @@ var autoProducerOptions = {
         "help-primary-tag": "",
         "help-sections": "News, Colorado News, Latest News, Politics, Local Politics, Denver Politics",
         "help-primary-section": "Denver Politics",
-        "option-set": "news"
+        "option-set": "politics",
+        "notifications": 'politics'
     },
     "40": {
         "title": "Business Story",
@@ -186,7 +198,8 @@ var autoProducerOptions = {
         "help-primary-tag": "More Business News",
         "help-sections": "Latest News, Business",
         "help-primary-section": "Business",
-        "option-set": "news"
+        "option-set": "business",
+        "notifications": 'business'
     },
     "41": {
         "title": "Technology Story",
@@ -200,7 +213,8 @@ var autoProducerOptions = {
         "help-primary-tag": "More Business News",
         "help-sections": "Latest News, Business, Technology",
         "help-primary-section": "Technology",
-        "option-set": "news"
+        "option-set": "business",
+        "notifications": 'business'
     },
     "42": {
         "title": "Featured Homes",
@@ -214,7 +228,8 @@ var autoProducerOptions = {
         "help-primary-tag": "Featured Homes",
         "help-sections": "Business, Real Estate, Don\"t Miss, Entertainment / Lifestyle, Latest News, News, Colorado News, Home & Garden",
         "help-primary-section": "Real Estate",
-        "option-set": "news"
+        "option-set": "business",
+        "notifications": 'business'
     },
     "43": {
         "title": "Top Workplaces",
@@ -228,7 +243,8 @@ var autoProducerOptions = {
         "help-primary-tag": "Top Workplaces 2017",
         "help-sections": "Business, Economy, Jobs",
         "help-primary-section": "Jobs",
-        "option-set": "news"
+        "option-set": "business",
+        "notifications": 'business'
     },
     "44": {
         "title": "Art",
@@ -242,7 +258,8 @@ var autoProducerOptions = {
         "help-primary-tag": " ",
         "help-sections": "Entertainment, Entertainment / Lifestyle, Lifestyle, News, Colorado News, Arts, Things To Do",
         "help-primary-section": "Arts",
-        "option-set": "news",
+        "option-set": "entertainment",
+        "notifications": 'entertainment'
     },
     "45": {
         "title": "Theater",
@@ -256,7 +273,8 @@ var autoProducerOptions = {
         "help-primary-tag": " ",
         "help-sections": "Entertainment, Theater, Things To Do, Entertainment / Lifestyle, News, Colorado News",
         "help-primary-section": "Theater",
-        "option-set": "news",
+        "option-set": "entertainment",
+        "notifications": 'entertainment'
     },
     "46": {
         "title": "Things To Do",
@@ -270,7 +288,8 @@ var autoProducerOptions = {
         "help-primary-tag": " ",
         "help-sections": "Entertainment, Things To Do, Entertainment / Lifestyle, Lifestyle",
         "help-primary-section": "Things To Do",
-        "option-set": "news",
+        "option-set": "entertainment",
+        "notifications": 'entertainment'
     },
     "50": {
         "title": "Lifestyle",
@@ -284,7 +303,8 @@ var autoProducerOptions = {
         "help-primary-tag": " ",
         "help-sections": "Latest News, Entertainment / Lifestyle, Lifestyle",
         "help-primary-section": "Lifestyle",
-        "option-set": "news"
+        "option-set": "entertainment",
+        "notifications": 'entertainment'
     },
     "51": {
         "title": "Ask Amy",
@@ -298,7 +318,8 @@ var autoProducerOptions = {
         "help-primary-tag": "Ask Amy, advice, relationship advice",
         "help-sections": "Latest News, Ask Amy, Lifestyle, Entertainment / Lifestyle, Family, Lifestyle Columnists",
         "help-primary-section": "Ask Amy",
-        "option-set": "news"
+        "option-set": "entertainment",
+        "notifications": 'entertainment'
     },
     "52": {
         "title": "Movie Review",
@@ -312,7 +333,8 @@ var autoProducerOptions = {
         "help-primary-tag": "movie reviews",
         "help-sections": "Latest News, Movies, Entertainment, Entertainment / Lifestyle",
         "help-primary-section": "Movies",
-        "option-set": "news"
+        "option-set": "entertainment",
+        "notifications": 'entertainment'
     },
     "53": {
         "title": "Restaurants & Dining",
@@ -326,7 +348,8 @@ var autoProducerOptions = {
         "help-primary-tag": "",
         "help-sections": "Latest News, Lifestyle, Restaurants & Dining, Entertainment / Lifestyle",
         "help-primary-section": "Restaurants & Dining",
-        "option-set": "news"
+        "option-set": "entertainment",
+        "notifications": 'entertainment'
     },
     "54": {
         "title": "Travel Story",
@@ -340,7 +363,8 @@ var autoProducerOptions = {
         "help-primary-tag": "",
         "help-sections": "Latest News, Travel",
         "help-primary-section": "Travel",
-        "option-set": "news"
+        "option-set": "entertainment",
+        "notifications": 'entertainment'
     },
     "55": {
         "title": "Book Review",
@@ -354,7 +378,8 @@ var autoProducerOptions = {
         "help-primary-tag": "book reviews",
         "help-sections": "Entertainment, Books, Latest News",
         "help-primary-section": "Books",
-        "option-set": "news"
+        "option-set": "entertainment",
+        "notifications": 'entertainment'
     },
     "56": {
         "title": "Recipes",
@@ -368,7 +393,8 @@ var autoProducerOptions = {
         "help-primary-tag": "",
         "help-sections": "Latest News, Lifestyle, Food & Drink, Recipes",
         "help-primary-section": "Food & Drink",
-        "option-set": "news"
+        "option-set": "entertainment",
+        "notifications": 'entertainment'
     },
     "57": {
         "title": "Gardening",
@@ -382,7 +408,8 @@ var autoProducerOptions = {
         "help-primary-tag": "Gardening",
         "help-sections": "Latest News, Lifestyle, Home & Garden",
         "help-primary-section": "Home & Garden",
-        "option-set": "news"
+        "option-set": "entertainment",
+        "notifications": 'entertainment'
     },
     "58": {
         "title": "Television",
@@ -396,7 +423,8 @@ var autoProducerOptions = {
         "help-primary-tag": "",
         "help-sections": "Entertainment, Television, Entertainment / Lifestyle, Latest News",
         "help-primary-section": "Television",
-        "option-set": "news"
+        "option-set": "entertainment",
+        "notifications": 'entertainment'
     },
     "59": {
         "title": "Seen",
@@ -410,7 +438,8 @@ var autoProducerOptions = {
         "help-primary-tag": "Seen Gallery",
         "help-sections": "Latest News, Lifestyle, Lifestyle Columnists",
         "help-primary-section": "Lifestyle",
-        "option-set": "news"
+        "option-set": "entertainment",
+        "notifications": 'entertainment'
     },
     "60": {
         "title": "YourHub General",
@@ -466,7 +495,8 @@ var autoProducerOptions = {
         "help-primary-tag": "Marni Jameson",
         "help-sections": "Lifestyle, Home & Garden, Lifestyle Columnists, Entertainment / Lifestyle, Latest News",
         "help-primary-section": "Home & Garden",
-        "option-set": "news"
+        "option-set": "entertainment",
+        "notifications": 'entertainment'
     },
     "64": {
         "title": "Entertainment",
@@ -480,7 +510,8 @@ var autoProducerOptions = {
         "help-primary-tag": " ",
         "help-sections": "Entertainment, Entertainment / Lifestyle, Latest News",
         "help-primary-section": "Entertainment",
-        "option-set": "news",
+        "option-set": "entertainment",
+        "notifications": 'entertainment'
     },
     "65": {
         "title": "Opinion: Perpective",
@@ -494,7 +525,8 @@ var autoProducerOptions = {
         "help-primary-tag": "",
         "help-sections": "Opinion, Opinion Columnists, Perspective",
         "help-primary-section": "Perspective",
-        "option-set": "news",
+        "option-set": "opinion",
+        "notifications": 'opinion'
     },
     "66": {
         "title": "Opinion: Editorial",
@@ -508,7 +540,8 @@ var autoProducerOptions = {
         "help-primary-tag": "",
         "help-sections": "Opinion, Editorials",
         "help-primary-section": "Editorials",
-        "option-set": "news",
+        "option-set": "opinion",
+        "notifications": 'opinion'
     },
     "67": {
         "title": "Opinion: Columnist",
@@ -522,7 +555,8 @@ var autoProducerOptions = {
         "help-primary-tag": "",
         "help-sections": "Opinion, Opinion Columnists",
         "help-primary-section": "Opinion Columnists",
-        "option-set": "news",
+        "option-set": "opinion",
+        "notifications": 'opinion'
     },
     "68": {
         "title": "Opinion: Letter",
@@ -536,7 +570,8 @@ var autoProducerOptions = {
         "help-primary-tag": " ",
         "help-sections": "Opinion, Letters",
         "help-primary-section": "Letters",
-        "option-set": "news",
+        "option-set": "opinion",
+        "notifications": 'opinion'
     },
     "69": {
         "title": "Opinion: Cartoons",
@@ -550,7 +585,8 @@ var autoProducerOptions = {
         "help-primary-tag": "",
         "help-sections": "Opinion, Cartoons",
         "help-primary-section": "Cartoons",
-        "option-set": "news",
+        "option-set": "opinion",
+        "notifications": 'opinion'
     },
     "70": {
         "title": "Mark Kiszla Column",
@@ -564,7 +600,8 @@ var autoProducerOptions = {
         "help-primary-tag": "Mark Kiszla",
         "help-sections": "Latest News, Sports, Sports Columnists",
         "help-primary-section": "Sports Columnists",
-        "option-set": "sports"
+        "option-set": "sports",
+        "notifications": 'sports'
     },
     "71": {
         "title": "Broncos Story",
@@ -578,7 +615,8 @@ var autoProducerOptions = {
         "help-primary-tag": "More Broncos News",
         "help-sections": "Latest News, Sports, Denver Broncos",
         "help-primary-section": "Denver Broncos",
-        "option-set": "sports"
+        "option-set": "sports",
+        "notifications": 'sports'
     },
     "72": {
         "title": "Rockies Story",
@@ -592,7 +630,8 @@ var autoProducerOptions = {
         "help-primary-tag": "More Rockies News",
         "help-sections": "Latest News, Sports, Colorado Rockies",
         "help-primary-section": "Colorado Rockies",
-        "option-set": "sports"
+        "option-set": "sports",
+        "notifications": 'sports'
     },
     "73": {
         "title": "Nuggets Story",
@@ -606,7 +645,8 @@ var autoProducerOptions = {
         "help-primary-tag": "More Nuggets News",
         "help-sections": "Latest News, Sports, Denver Nuggets",
         "help-primary-section": "Denver Nuggets",
-        "option-set": "sports"
+        "option-set": "sports",
+        "notifications": 'sports'
     },
     "74": {
         "title": "Avalanche Story",
@@ -620,7 +660,8 @@ var autoProducerOptions = {
         "help-primary-tag": "More Avalanche News",
         "help-sections": "Latest News, Sports, Colorado Avalanche",
         "help-primary-section": "Colorado Avalanche",
-        "option-set": "sports"
+        "option-set": "sports",
+        "notifications": 'sports'
     },
     "75": {
         "title": "Rapids Story",
@@ -634,7 +675,8 @@ var autoProducerOptions = {
         "help-primary-tag": "More Rapids news",
         "help-sections": "Latest News, Sports, Colorado Rapids, Soccer",
         "help-primary-section": "Colorado Rapids",
-        "option-set": "sports"
+        "option-set": "sports",
+        "notifications": 'sports'
     },
     "76": {
         "title": "Golf Story",
@@ -648,7 +690,8 @@ var autoProducerOptions = {
         "help-primary-tag": "",
         "help-sections": "Latest News, Sports, Golf",
         "help-primary-section": "Golf",
-        "option-set": "sports"
+        "option-set": "sports",
+        "notifications": 'sports'
     },
     "77": {
         "title": "NASCAR Story",
@@ -662,7 +705,8 @@ var autoProducerOptions = {
         "help-primary-tag": "NASCAR",
         "help-sections": "Latest News, Sports, Motorsports",
         "help-primary-section": "Motorsports",
-        "option-set": "sports"
+        "option-set": "sports",
+        "notifications": 'sports'
     },
     "78": {
         "title": "USMNT Soccer Story",
@@ -676,7 +720,8 @@ var autoProducerOptions = {
         "help-primary-tag": "USMNT",
         "help-sections": "Latest News, Sports, Soccer",
         "help-primary-section": "Soccer",
-        "option-set": "sports"
+        "option-set": "sports",
+        "notifications": 'sports'
     },
     "79": {
         "title": "Terry Wickstrom",
@@ -690,7 +735,8 @@ var autoProducerOptions = {
         "help-primary-tag": "Terry Wickstrom",
         "help-sections": "Latest News, Sports, Outdoors, Entertainment / Lifestyle",
         "help-primary-section": "Outdoors",
-        "option-set": "sports"
+        "option-set": "sports",
+        "notifications": 'sports'
     },
     "80": {
         "title": "CU Buffs Football",
@@ -704,7 +750,8 @@ var autoProducerOptions = {
         "help-primary-tag": "CU Buffs football",
         "help-sections": "Latest News, Sports, College Sports, Colorado Buffaloes",
         "help-primary-section": "Colorado Buffaloes",
-        "option-set": "sports"
+        "option-set": "sports",
+        "notifications": 'sports'
     },
     "81": {
         "title": "CSU Rams Football",
@@ -718,7 +765,8 @@ var autoProducerOptions = {
         "help-primary-tag": "Colorado State football",
         "help-sections": "Latest News, Sports, College Sports, Colorado State Rams",
         "help-primary-section": "Colorado State Rams",
-        "option-set": "sports"
+        "option-set": "sports",
+        "notifications": 'sports'
     },
     "82": {
         "title": "CU Buffs Basketball",
@@ -732,7 +780,8 @@ var autoProducerOptions = {
         "help-primary-tag": "CU Buffs basketball",
         "help-sections": "Latest News, Sports, College Sports, Colorado Buffaloes",
         "help-primary-section": "Colorado Buffaloes",
-        "option-set": "sports"
+        "option-set": "sports",
+        "notifications": 'sports'
     },
     "83": {
         "title": "CSU Rams Basketball",
@@ -746,7 +795,8 @@ var autoProducerOptions = {
         "help-primary-tag": "Colorado State basketball",
         "help-sections": "Latest News, Sports, College Sports, Colorado State Rams",
         "help-primary-section": "Colorado State Rams",
-        "option-set": "sports"
+        "option-set": "sports",
+        "notifications": 'sports'
     },
     "84": {
         "title": "DU Hockey",
@@ -760,7 +810,8 @@ var autoProducerOptions = {
         "help-primary-tag": "Denver Pioneers hockey",
         "help-sections": "Latest News, Sports, College Sports, Denver Pioneers",
         "help-primary-section": "Denver Pioneers",
-        "option-set": "sports"
+        "option-set": "sports",
+        "notifications": 'sports'
     },
     "85": {
         "title": "DU Basketball",
@@ -774,7 +825,8 @@ var autoProducerOptions = {
         "help-primary-tag": "Denver Pioneers basketball",
         "help-sections": "Latest News, Sports, College Sports, Denver Pioneers",
         "help-primary-section": "Denver Pioneers",
-        "option-set": "sports"
+        "option-set": "sports",
+        "notifications": 'sports'
     },
     "86": {
         "title": "DU Soccer",
@@ -788,7 +840,8 @@ var autoProducerOptions = {
         "help-primary-tag": "Denver Pioneers soccer",
         "help-sections": "Latest News, Sports, College Sports, Denver Pioneers, Soccer",
         "help-primary-section": "Denver Pioneers",
-        "option-set": "sports"
+        "option-set": "sports",
+        "notifications": 'sports'
     },
     "87": {
         "title": "DU Lacrosse",
@@ -802,7 +855,8 @@ var autoProducerOptions = {
         "help-primary-tag": "Denver Pioneers Lacrosse",
         "help-sections": "Latest News, Sports, College Sports, Denver Pioneers",
         "help-primary-section": "Denver Pioneers",
-        "option-set": "sports"
+        "option-set": "sports",
+        "notifications": 'sports'
     },
     "88": {
         "title": "Mikaela Shiffrin Story",
@@ -816,7 +870,8 @@ var autoProducerOptions = {
         "help-primary-tag": "Mikaela Shiffrin",
         "help-sections": "Latest News, Sports, Olympics, Outdoors, Skiing, Winter Sports",
         "help-primary-section": "Skiing",
-        "option-set": "sports"
+        "option-set": "sports",
+        "notifications": 'sports'
     },
     "89": {
         "title": "Lindsey Vonn Story",
@@ -830,7 +885,8 @@ var autoProducerOptions = {
         "help-primary-tag": "Lindsey Vonn",
         "help-sections": "Latest News, Sports, Olympics, Outdoors, Skiing, Winter Sports",
         "help-primary-section": "Skiing",
-        "option-set": "sports"
+        "option-set": "sports",
+        "notifications": 'sports'
     },
     "90": {
         "title": "NFL Wire Story",
@@ -844,7 +900,8 @@ var autoProducerOptions = {
         "help-primary-tag": "NFL",
         "help-sections": "Latest News, Sports, Denver Broncos",
         "help-primary-section": "Denver Broncos",
-        "option-set": "sports"
+        "option-set": "sports",
+        "notifications": 'sports'
     },
     "91": {
         "title": "NBA Wire Story",
@@ -858,7 +915,8 @@ var autoProducerOptions = {
         "help-primary-tag": "NBA",
         "help-sections": "Latest News, Sports, Denver Nuggets",
         "help-primary-section": "Denver Nuggets",
-        "option-set": "sports"
+        "option-set": "sports",
+        "notifications": 'sports'
     },
     "92": {
         "title": "MLB Wire Story",
@@ -872,7 +930,8 @@ var autoProducerOptions = {
         "help-primary-tag": "MLB",
         "help-sections": "Latest News, Sports, Colorado Rockies",
         "help-primary-section": "Colorado Rockies",
-        "option-set": "sports"
+        "option-set": "sports",
+        "notifications": 'sports'
     },
     "93": {
         "title": "NHL Wire Story",
@@ -886,7 +945,8 @@ var autoProducerOptions = {
         "help-primary-tag": "NHL",
         "help-sections": "Latest News, Sports, Colorado Avalanche",
         "help-primary-section": "Colorado Avalanche",
-        "option-set": "sports"
+        "option-set": "sports",
+        "notifications": 'sports'
     },
     "94": {
         "title": "College Hoops Wire",
@@ -900,7 +960,8 @@ var autoProducerOptions = {
         "help-primary-tag": "college basketball",
         "help-sections": "Latest News, Sports, College Sports",
         "help-primary-section": "College Sports",
-        "option-set": "sports"
+        "option-set": "sports",
+        "notifications": 'sports'
     },
     "95": {
         "title": "MLS wire story",
@@ -914,7 +975,8 @@ var autoProducerOptions = {
         "help-primary-tag": "MLS",
         "help-sections": "Latest News, Sports, Colorado Rapids, Soccer",
         "help-primary-section": "Colorado Rapids",
-        "option-set": "sports"
+        "option-set": "sports",
+        "notifications": 'sports'
     },
     "96": {
         "title": "Preps Story",
@@ -928,7 +990,8 @@ var autoProducerOptions = {
         "help-primary-tag": "",
         "help-sections": "Latest News, Sports, Preps",
         "help-primary-section": "Preps",
-        "option-set": "sports"
+        "option-set": "sports",
+        "notifications": 'sports'
     },
     "97": {
         "title": "Olympics story",
@@ -943,6 +1006,7 @@ var autoProducerOptions = {
         "help-sections": "Sports, Olympics",
         "help-primary-section": "Olympics",
         "option-set": "sports",
+        "notifications": 'sports'
     },
     "98": {
         "title": "Winter Sports Story",
@@ -957,6 +1021,7 @@ var autoProducerOptions = {
         "help-sections": "Sports, Outdoors, Winter Sports",
         "help-primary-section": "Winter Sports",
         "option-set": "sports",
+        "notifications": 'sports'
     },
     "99": {
         "title": "Skiing story",
@@ -971,6 +1036,7 @@ var autoProducerOptions = {
         "help-sections": "Sports, Skiing, Winter Sports",
         "help-primary-section": "Skiing",
         "option-set": "sports",
+        "notifications": 'sports'
     },
     "100": {
         "title": "Outdoors Story",
@@ -985,6 +1051,7 @@ var autoProducerOptions = {
         "help-sections": "Sports, Outdoors, Entertainment / Lifestyle",
         "help-primary-section": "Outdoors",
         "option-set": "sports",
+        "notifications": 'sports'
     },
     "101": {
         "title": "CSU Track & Field",
@@ -999,6 +1066,7 @@ var autoProducerOptions = {
         "help-sections": "Sports, College Sports, Colorado State Rams, Running",
         "help-primary-section": "Colorado State Rams",
         "option-set": "sports",
+        "notifications": 'sports'
     },
     "102": {
         "title": "CU Cross Country",
@@ -1013,6 +1081,7 @@ var autoProducerOptions = {
         "help-sections": "Sports, College Sports, Colorado Buffaloes, Running",
         "help-primary-section": "Colorado Buffaloes",
         "option-set": "sports",
+        "notifications": 'sports'
     },
     "103": {
         "title": "CU Track & Field",
@@ -1027,6 +1096,7 @@ var autoProducerOptions = {
         "help-sections": "Sports, College Sports, Colorado Buffaloes",
         "help-primary-section": "Colorado Buffaloes",
         "option-set": "sports",
+        "notifications": 'sports'
     },
     "104": {
         "title": "AFA football",
@@ -1041,6 +1111,7 @@ var autoProducerOptions = {
         "help-sections": "Sports, College Sports, Air Force Falcons",
         "help-primary-section": "Air Force Falcons",
         "option-set": "sports",
+        "notifications": 'sports'
     },
     "105": {
         "title": "Lacrosse Story",
@@ -1055,6 +1126,7 @@ var autoProducerOptions = {
         "help-sections": "Sports, Lacrosse",
         "help-primary-section": "Lacrosse",
         "option-set": "sports",
+        "notifications": 'sports'
     },
     "106": {
         "title": "Boxing/MMA story",
@@ -1069,6 +1141,7 @@ var autoProducerOptions = {
         "help-sections": "Sports, Boxing / MMA",
         "help-primary-section": "Boxing / MMA",
         "option-set": "sports",
+        "notifications": 'sports'
     },
     "107": {
         "title": "Horse Racing Story",
@@ -1083,6 +1156,7 @@ var autoProducerOptions = {
         "help-sections": "Sports, Horse Racing",
         "help-primary-section": "Horse Racing",
         "option-set": "sports",
+        "notifications": 'sports'
     },
     "108": {
         "title": "Sports story",
@@ -1097,6 +1171,7 @@ var autoProducerOptions = {
         "help-sections": "Sports",
         "help-primary-section": "Sports",
         "option-set": "sports",
+        "notifications": 'sports'
     },
     "109": {
         "title": "Soccer wire story",
@@ -1111,6 +1186,7 @@ var autoProducerOptions = {
         "help-sections": "Sports, Soccer",
         "help-primary-section": "Soccer",
         "option-set": "sports",
+        "notifications": 'sports'
     },
     "110": {
         "title": "Tennis story",
@@ -1125,6 +1201,7 @@ var autoProducerOptions = {
         "help-sections": "Sports, Tennis",
         "help-primary-section": "Tennis",
         "option-set": "sports",
+        "notifications": 'sports'
     },
     "111": {
         "title": "College Football story",
@@ -1139,6 +1216,7 @@ var autoProducerOptions = {
         "help-sections": "Sports, College Sports",
         "help-primary-section": "College Sports",
         "option-set": "sports",
+        "notifications": 'sports'
     },
     "112": {
         "title": "Cycling story",
@@ -1153,6 +1231,7 @@ var autoProducerOptions = {
         "help-sections": "Sports, Cycling",
         "help-primary-section": "Cycling",
         "option-set": "sports",
+        "notifications": 'sports'
     },
     "113": {
         "title": "Running story",
@@ -1167,6 +1246,7 @@ var autoProducerOptions = {
         "help-sections": "Sports, Running",
         "help-primary-section": "Running",
         "option-set": "sports",
+        "notifications": 'sports'
     },
     "121": {
         "title": "Blog: Field House",
@@ -1180,7 +1260,8 @@ var autoProducerOptions = {
         "help-primary-tag": "The Field House",
         "help-sections": "Latest News, Sports, College Sports",
         "help-primary-section": "College Sports",
-        "option-set": "sports"
+        "option-set": "sports",
+        "notifications": 'sports'
     },
     "122": {
         "title": "Insider: Basketball",
@@ -1194,7 +1275,8 @@ var autoProducerOptions = {
         "help-primary-tag": "Post Preps Insider",
         "help-sections": "Latest News, Sports, Preps",
         "help-primary-section": "Preps",
-        "option-set": "sports"
+        "option-set": "sports",
+        "notifications": 'sports'
     },
     "123": {
         "title": "Insider: Football",
@@ -1208,7 +1290,8 @@ var autoProducerOptions = {
         "help-primary-tag": "Post Preps Insider",
         "help-sections": "Latest News, Sports, Preps",
         "help-primary-section": "Preps",
-        "option-set": "sports"
+        "option-set": "sports",
+        "notifications": 'sports'
     },
     "124": {
         "title": "Insider: Baseball",
@@ -1222,6 +1305,323 @@ var autoProducerOptions = {
         "help-primary-tag": "Post Preps Insider",
         "help-sections": "Latest News, Sports, Preps",
         "help-primary-section": "Preps",
-        "option-set": "sports"
+        "option-set": "sports",
+        "notifications": 'sports'
+    },
+    "125": {
+        "title": "Marijuana",
+        "check-sections": ["48","39","53"],
+        "add-tags": [],
+        "primary-section": "53",
+        "primary-tag": "",
+        "features": [],
+        "apple-news": ["cannabist"],
+        "related": true,
+        "help-primary-tag": " ",
+        "help-sections": "Latest News, News, Marijuana",
+        "help-primary-section": "Marijuana",
+        "option-set": "news",
+        "notifications": "breaking",
+    },
+    "126": {
+        "title": "Education",
+        "check-sections": ["48","39","47","41"],
+        "add-tags": [],
+        "primary-section": "41",
+        "primary-tag": "",
+        "features": [],
+        "apple-news": [],
+        "related": true,
+        "help-primary-tag": " ",
+        "help-sections": "Latest News, News, Colorado News, Education",
+        "help-primary-section": "Education",
+        "option-set": "news",
+        "notifications": "enterprise",
+    },
+    "127": {
+        "title": "Health",
+        "check-sections": ["48","39","47","44"],
+        "add-tags": [],
+        "primary-section": "44",
+        "primary-tag": "",
+        "features": [],
+        "apple-news": ["colorado-news"],
+        "related": true,
+        "help-primary-tag": " ",
+        "help-sections": "Latest News, News, Colorado News, Health",
+        "help-primary-section": "Health",
+        "option-set": "news",
+        "notifications": "enterprise",
+    },
+    "128": {
+        "title": "Investigations",
+        "check-sections": ["48","39","47","45"],
+        "add-tags": [],
+        "primary-section": "45",
+        "primary-tag": "",
+        "features": [],
+        "apple-news": ["colorado-news"],
+        "related": true,
+        "help-primary-tag": " ",
+        "help-sections": "Latest News, News, Colorado News, Investigations",
+        "help-primary-section": "Investigations",
+        "option-set": "news",
+        "notifications": "investigations",
+    },
+    "129": {
+        "title": "Environment",
+        "check-sections": ["48","39","47","42"],
+        "add-tags": [],
+        "primary-section": "42",
+        "primary-tag": "",
+        "features": [],
+        "apple-news": ["colorado-news"],
+        "related": true,
+        "help-primary-tag": " ",
+        "help-sections": "Latest News, News, Colorado News, Environment",
+        "help-primary-section": "Environment",
+        "option-set": "news",
+        "notifications": "enterprise",
+    },
+    "130": {
+        "title": "Watercooler",
+        "check-sections": ["48","39","63"],
+        "add-tags": [],
+        "primary-section": "63",
+        "primary-tag": "",
+        "features": [],
+        "apple-news": [],
+        "related": true,
+        "help-primary-tag": " ",
+        "help-sections": "Latest News, News, Watercooler",
+        "help-primary-section": "Watercooler",
+        "option-set": "news",
+        "notifications": "breaking",
+    },
+    "131": {
+        "title": "Animal News",
+        "check-sections": ["48","39"],
+        "add-tags": [],
+        "primary-section": "39",
+        "primary-tag": "937",
+        "features": [],
+        "apple-news": [],
+        "related": true,
+        "help-primary-tag": "animals",
+        "help-sections": "Latest News, News",
+        "help-primary-section": "News",
+        "option-set": "news",
+        "notifications": "breaking",
+    },
+    "132": {
+        "title": "Real Estate",
+        "check-sections": ["15","25","48","39"],
+        "add-tags": [],
+        "primary-section": "25",
+        "primary-tag": "",
+        "features": [],
+        "apple-news": ["business"],
+        "related": true,
+        "help-primary-tag": " ",
+        "help-sections": "Business, Real Estate, Latest News, News",
+        "help-primary-section": "Real Estate",
+        "option-set": "business",
+        "notifications": "business",
+    },
+    "133": {
+        "title": "Aerospace",
+        "check-sections": ["15","16","48","39"],
+        "add-tags": [],
+        "primary-section": "16",
+        "primary-tag": "",
+        "features": [],
+        "apple-news": ["business"],
+        "related": true,
+        "help-primary-tag": " ",
+        "help-sections": "Business, Aerospace, Latest News, News",
+        "help-primary-section": "Aerospace",
+        "option-set": "business",
+        "notifications": "business",
+    },
+    "134": {
+        "title": "Airlines",
+        "check-sections": ["15","17","48","39"],
+        "add-tags": [],
+        "primary-section": "17",
+        "primary-tag": "",
+        "features": [],
+        "apple-news": ["business"],
+        "related": true,
+        "help-primary-tag": " ",
+        "help-sections": "Business, Airlines, Latest News, News",
+        "help-primary-section": "Airlines",
+        "option-set": "business",
+        "notifications": "business",
+    },
+    "135": {
+        "title": "Retail",
+        "check-sections": ["15","20","48","39"],
+        "add-tags": [],
+        "primary-section": "20",
+        "primary-tag": "",
+        "features": [],
+        "apple-news": ["business"],
+        "related": true,
+        "help-primary-tag": " ",
+        "help-sections": "Business, Retail, Latest News, News",
+        "help-primary-section": "Retail",
+        "option-set": "business",
+        "notifications": "business",
+    },
+    "136": {
+        "title": "Economy",
+        "check-sections": ["15","18","48","39"],
+        "add-tags": [],
+        "primary-section": "18",
+        "primary-tag": "",
+        "features": [],
+        "apple-news": ["business"],
+        "related": true,
+        "help-primary-tag": " ",
+        "help-sections": "Business, Economy, Latest News, News",
+        "help-primary-section": "Economy",
+        "option-set": "business",
+        "notifications": "business",
+    },
+    "137": {
+        "title": "Tourism",
+        "check-sections": ["15","29","48","39"],
+        "add-tags": [],
+        "primary-section": "29",
+        "primary-tag": "",
+        "features": [],
+        "apple-news": ["business"],
+        "related": true,
+        "help-primary-tag": " ",
+        "help-sections": "Business, Tourism, Latest News, News",
+        "help-primary-section": "Tourism",
+        "option-set": "business",
+        "notifications": "business",
+    },
+    "138": {
+        "title": "Energy",
+        "check-sections": ["15","19","48","39"],
+        "add-tags": [],
+        "primary-section": "19",
+        "primary-tag": "",
+        "features": [],
+        "apple-news": ["business"],
+        "related": true,
+        "help-primary-tag": " ",
+        "help-sections": "Business, Energy, Latest News, News",
+        "help-primary-section": "Energy",
+        "option-set": "business",
+        "notifications": "business",
+    },
+    "139": {
+        "title": "Oil and Gas",
+        "check-sections": ["15","19","48","39"],
+        "add-tags": [],
+        "primary-section": "19",
+        "primary-tag": "318",
+        "features": [],
+        "apple-news": ["business"],
+        "related": true,
+        "help-primary-tag": "oil and gas",
+        "help-sections": "Business, Energy, Latest News, News",
+        "help-primary-section": "Energy",
+        "option-set": "business",
+        "notifications": "business",
+    },
+    "140": {
+        "title": "Jobs",
+        "check-sections": ["15","22","48","39"],
+        "add-tags": [],
+        "primary-section": "22",
+        "primary-tag": "",
+        "features": [],
+        "apple-news": ["business"],
+        "related": true,
+        "help-primary-tag": "employment",
+        "help-sections": "Business, Jobs, Latest News, News",
+        "help-primary-section": "Jobs",
+        "option-set": "business",
+        "notifications": "business",
+    },
+    "141": {
+        "title": "Telecom",
+        "check-sections": ["15","28","48","39"],
+        "add-tags": [],
+        "primary-section": "28",
+        "primary-tag": "",
+        "features": [],
+        "apple-news": ["business"],
+        "related": true,
+        "help-primary-tag": " ",
+        "help-sections": "Business, Telecom, Latest News, News",
+        "help-primary-section": "Telecom",
+        "option-set": "business",
+        "notifications": "business",
+    },
+    "142": {
+        "title": "Colorado Politics",
+        "check-sections": ["48","39","47","75","4302"],
+        "add-tags": [],
+        "primary-section": "4302",
+        "primary-tag": "",
+        "features": [],
+        "apple-news": ["colorado-news","politics"],
+        "related": true,
+        "help-primary-tag": " ",
+        "help-sections": "Latest News, News, Colorado News, Politics, Colorado Politics",
+        "help-primary-section": "Colorado Politics",
+        "option-set": "politics",
+        "notifications": "politics",
+    },
+    "143": {
+        "title": "Local Politics",
+        "check-sections": ["48","39","47","75","80"],
+        "add-tags": [],
+        "primary-section": "80",
+        "primary-tag": "",
+        "features": [],
+        "apple-news": ["colorado-news","politics"],
+        "related": true,
+        "help-primary-tag": " ",
+        "help-sections": "Latest News, News, Colorado News, Politics, Local Politics",
+        "help-primary-section": "Local Politics",
+        "option-set": "politics",
+        "notifications": "politics",
+    },
+    "144": {
+        "title": "Send to news",
+        "check-sections": [],
+        "add-tags": [],
+        "primary-section": "",
+        "primary-tag": "",
+        "features": [],
+        "apple-news": [],
+        "related": false,
+        "help-primary-tag": " ",
+        "help-sections": "",
+        "help-primary-section": "",
+        "option-set": "news",
+        "notifications": "",
+        "sendtonews": true,
+    },
+    "145": {
+        "title": "Transportation",
+        "check-sections": ["48","39","47","52"],
+        "add-tags": [],
+        "primary-section": "52",
+        "primary-tag": "",
+        "features": [],
+        "apple-news": [],
+        "related": false,
+        "help-primary-tag": " ",
+        "help-sections": "Latest News, News, Colorado News, Transportation",
+        "help-primary-section": "Transportation",
+        "option-set": "news",
+        "notifications": "politics",
     },
 };

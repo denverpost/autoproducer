@@ -25,23 +25,16 @@
     function getDPOtip() {
         //return a random DPO production tip
         var tips = Array(
+            'Overnight online shift? Don\'t forget the Front Page PDF! <a href="//denverpostplus.com/frontpages/">Upload it here.</a>',
             'The #justposted-all channel in Slack is a great place to catch up on everything that has been posted recently.',
-            'The #trending channel in Slack is a great place to see what stories are performing well.',
             '7-8 p.m. is a great time to post strong content on Facebook as we have a lot of fans active at that time.',
-            'Bookmark the WordPress pages you use most frequently. It will save you a lot of time!',
+            'When you check a child section in Wordpress, always check the parent, too. Example: If you use <strong>Colorado News</strong>, also use <strong>News</strong>.',
             'Don\'t forget to check partner and sister sites for great content.',
-            'Want to improve your headline? Drop it into the #headlinerodeo channel in Slack!',
-            'Don\'t forget to put your team\'s stories on the Digital Planner to make sure they get some homepage love.',
-            'Ask yourself: Is this story alert-worthy?',
-            'Have you looked at Google Trends lately?',
-            'If you stay positive, you\'ll see opportunities instead of obstacles. Widad Akwari',
-            'You\'re off to great places, today is your day. Your mountain is waiting, so get on your way. Dr. Suess',
-            'Attitude is a little thing that makes a big difference. Winston Churchill',
-            'Believe you can and you\'re halfway there. Teddy Roosevelt',
-            'Make each day your masterpiece. John Wooden',
-            'Success is the sum of small efforts repeated day in and day out. Robert Collier',
-            'Tough times never last, but tough people do. Robert H. Schuller',
-        );
+            'Be sure to put all Entertianment, Lifestyle and Outdoors stories in the <strong>Entertianment / Lifestyle</strong> section so they get fed to The Know.',
+            'Only use the "Slideshow" designation for standalone slideshows (with "PHOTOS" in the headline). Stories with the "Slideshow" designation DO NOT APPEAR in normal zones (only the Video/Photo rotator).',
+            'Reminder: Only use <strong>@channel</strong> in Slack when you really need everyone in the channel to get a notification on their phone. Use <strong>@here</strong> first.',
+            'Don\'t forget about <strong>Don\'t Miss</strong>! Add 1A and other interesting/longreads stories throughout the week.'
+            );
         var ceiling = tips.length;
         var index = Math.floor(Math.random() * ceiling);
         return tips[index];
@@ -336,10 +329,8 @@
 
         function checkSections(tags){
             for (var i=0,len=tags.length;i<len;i++){
-                var category = document.getElementById('in-category-'+tags[i]);
-                if (category != null ){
-                    document.getElementById('in-category-'+tags[i]).checked = true;
-                }
+                console.log("look for this tag: "+tags[i]);
+                document.getElementById('in-category-'+tags[i]).checked = true;
             }
             // uncheck Uncategorized
             document.getElementById('in-category-1').checked = false;
@@ -348,10 +339,7 @@
         function checkTrustSections(tags){
             //trust project selection
             for (var i=0,len=tags.length;i<len;i++){
-                var worktype = document.getElementById('in-type-of-work-'+tags[i]);
-                if (worktype !== null){
-                    document.getElementById('in-type-of-work-'+tags[i]).checked = true;
-                }
+                document.getElementById('in-type-of-work-'+tags[i]).checked = true;
             }
         }
         function setNotification(notify){
@@ -891,7 +879,7 @@
             }
             if (args.virus){
                 var relPlace = (grafsClean.length-4 < 4) ? 3 : ((grafsClean.length > 24) ? grafsClean.length-4 : 11 );
-                var coronavirusContent = '<a href="https://www.denverpost.com/newsletter-signup/checkup-denver"><img class="alignright size-article_inline_half lazyautosizes lazyload" src="https://www.denverpost.com/wp-content/uploads/2020/07/Checkup-Denver-3.gif" /></a>';
+                var coronavirusContent = '<a href="https://www.denverpost.com/newsletter-signup/checkup-denver"><img class="alignright size-article_inline_half lazyautosizes lazyload" src="https://i1.wp.com/www.denverpost.com/wp-content/uploads/2020/03/Checkup-Denver-coronavirus-gif.gif?fit=620%2C9999px&amp;ssl=1" sizes="798px" srcset="https://i1.wp.com/www.denverpost.com/wp-content/uploads/2020/03/Checkup-Denver-coronavirus-gif.gif?fit=620%2C9999px&amp;ssl=1 620w,https://i1.wp.com/www.denverpost.com/wp-content/uploads/2020/03/Checkup-Denver-coronavirus-gif.gif?fit=310%2C9999px&amp;ssl=1 310w,https://i1.wp.com/www.denverpost.com/wp-content/uploads/2020/03/Checkup-Denver-coronavirus-gif.gif?fit=460%2C9999px&amp;ssl=1 460w" data-sizes="auto" data-src="https://i1.wp.com/www.denverpost.com/wp-content/uploads/2020/03/Checkup-Denver-coronavirus-gif.gif?fit=620%2C9999px&amp;ssl=1" data-srcset="https://i1.wp.com/www.denverpost.com/wp-content/uploads/2020/03/Checkup-Denver-coronavirus-gif.gif?fit=620%2C9999px&amp;ssl=1 620w,https://i1.wp.com/www.denverpost.com/wp-content/uploads/2020/03/Checkup-Denver-coronavirus-gif.gif?fit=310%2C9999px&amp;ssl=1 310w,https://i1.wp.com/www.denverpost.com/wp-content/uploads/2020/03/Checkup-Denver-coronavirus-gif.gif?fit=460%2C9999px&amp;ssl=1 460w" /></a>';
                 grafsClean.splice(relPlace, 0, coronavirusContent);
                 var coronavirusFacebook = '<em><a href="https://www.facebook.com/groups/638279553627526/"><strong>Join our Facebook group for the latest updates on coronavirus in Colorado.</strong></a></em>';
                 grafsClean.splice(grafsClean.length, 0, coronavirusFacebook);
